@@ -18,6 +18,7 @@ class RegistrationController extends Controller {
         return back()->with('success','OTP telah dikirim ke email Anda.');
     }
     public function complete(Request $request, RegistrationService $service) {
+        if (!config('app.registration_open')) abort(404);
         $data=$request->validate(['otp'=>'required|digits:6']);
         $id=$request->session()->get('registration_pending');
         abort_unless($id, 404);
