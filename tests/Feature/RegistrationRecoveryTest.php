@@ -8,7 +8,7 @@ use Tests\TestCase;
 class RegistrationRecoveryTest extends TestCase {
  use RefreshDatabase;
  public function test_otp_can_be_resent_from_existing_session(): void {
-  config(['app.registration_open'=>true]); Mail::fake();
+  config(['app.registration_open'=>true,'app.registration_mail_verified'=>true]); Mail::fake();
   $b=Batch::create(['name'=>'Event','active'=>true,'expires_at'=>now()->addDays(7)]);
   $b->coupons()->create(['code'=>'FEB65-RECOVERY']);
   $this->post('/daftar/otp',['email'=>'recovery@example.com','phone'=>'081234567891'])->assertRedirect();

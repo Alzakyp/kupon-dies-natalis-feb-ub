@@ -8,7 +8,7 @@ use Illuminate\Validation\ValidationException;
 class RegistrationController extends Controller {
     public function form() { return view('registration.form', ['available' => RegistrationService::available()]); }
     public function otp(Request $request, RegistrationService $service) {
-        if (!config('app.registration_open')) abort(404);
+        if (!config('app.registration_open') || !config('app.registration_mail_verified')) abort(404);
         $data=$request->validate(['email'=>'required|email','phone'=>'required|string|max:30']);
         $key='otp:'.$request->ip().':'.sha1(strtolower($data['email']));
         if (RateLimiter::tooManyAttempts($key, 5)) throw ValidationException::withMessages(['email'=>'Terlalu banyak permintaan. Coba lagi nanti.']);
@@ -18,13 +18,13 @@ class RegistrationController extends Controller {
         return back()->with('success','OTP telah dikirim ke email Anda.');
     }
     public function resendOtp(Request $request, RegistrationService $service) {
-        if (!config('app.registration_open')) abort(404);
+        if (!config('app.registration_open') || !config('app.registration_mail_verified')) abort(404);
         $pending=\App\Models\PendingRegistration::findOrFail($request->session()->get('registration_pending'));
         $service->requestOtp($pending->email,$pending->phone);
         return back()->with('success','OTP baru telah dikirim ke email Anda.');
     }
     public function complete(Request $request, RegistrationService $service) {
-        if (!config('app.registration_open')) abort(404);
+        if (!config('app.registration_open') || !config('app.registration_mail_verified')) abort(404);
         $data=$request->validate(['otp'=>'required|digits:6']);
         $id=$request->session()->get('registration_pending');
         abort_unless($id, 404);

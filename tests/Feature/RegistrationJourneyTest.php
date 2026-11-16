@@ -17,6 +17,8 @@ class RegistrationJourneyTest extends TestCase {
         $coupon=$batch->coupons()->create(['code'=>'FEB65-LUSTRUM-REG123']);
         $this->post('/daftar/otp',['email'=>'test@example.com','phone'=>'081234567890'])->assertNotFound();
         config(['app.registration_open'=>true]);
+        $this->post('/daftar/otp',['email'=>'test@example.com','phone'=>'081234567890'])->assertNotFound();
+        config(['app.registration_mail_verified'=>true]);
         $this->post('/daftar/otp',['email'=>'test@example.com','phone'=>'081234567890'])->assertRedirect();
         $otp=null; Mail::assertSent(RegistrationOtp::class,function($mail) use (&$otp){$otp=$mail->otp;return true;});
         $this->post('/daftar',['otp'=>'000000' === $otp ? '999999':'000000'])->assertSessionHasErrors();
