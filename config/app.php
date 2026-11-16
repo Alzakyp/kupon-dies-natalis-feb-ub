@@ -67,6 +67,8 @@ return [
 
     'timezone' => 'UTC',
 
+    'registration_open' => (bool) env('REGISTRATION_OPEN', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

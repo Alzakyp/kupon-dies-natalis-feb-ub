@@ -16,9 +16,14 @@
         <img class="logo-lustrum" src="{{ asset('images/logo-lustrum-65-clean.png').'?v=3' }}" alt="Dies Natalis FEB UB ke-65 Lustrum XIII" width="1254" height="1254">
     </div>
     @auth
-    <nav aria-label="Navigasi admin">
+    <nav aria-label="Navigasi pengguna">
+        @if(auth()->user()->role === 'admin')
         <a href="{{ url('/admin/batches') }}">Batch</a>
+        <a href="{{ url('/admin/staff') }}">Petugas</a>
         <a href="{{ url('/admin/settings') }}">Pengaturan</a>
+        @else
+        <a href="{{ url('/staff/scan') }}">Scan tiket</a>
+        @endif
         <form method="post" action="{{ url('/admin/logout') }}">@csrf<button class="link-button">Keluar</button></form>
     </nav>
     @endauth

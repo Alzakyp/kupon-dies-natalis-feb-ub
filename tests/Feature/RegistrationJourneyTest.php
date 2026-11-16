@@ -1,0 +1,38 @@
+<?php
+namespace Tests\Feature;
+use App\Mail\RegistrationOtp;
+use App\Mail\TicketIssued;
+use App\Models\Batch;
+use App\Models\PendingRegistration;
+use App\Models\Ticket;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
+use Tests\TestCase;
+class RegistrationJourneyTest extends TestCase {
+    use RefreshDatabase;
+    public function test_registration_requires_open_gate_and_allocates_one_coupon_after_otp(): void {
+        Mail::fake();
+        $batch=Batch::create(['name'=>'Dies Natalis','active'=>true,'expires_at'=>now()->addDays(7)]);
+        $coupon=$batch->coupons()->create(['code'=>'FEB65-LUSTRUM-REG123']);
+        $this->post('/daftar/otp',['email'=>'test@example.com','phone'=>'081234567890'])->assertNotFound();
+        config(['app.registration_open'=>true]);
+        $this->post('/daftar/otp',['email'=>'test@example.com','phone'=>'081234567890'])->assertRedirect();
+        $otp=null; Mail::assertSent(RegistrationOtp::class,function($mail) use (&$otp){$otp=$mail->otp;return true;});
+        $this->post('/daftar',['otp'=>'000000' === $otp ? '999999':'000000'])->assertSessionHasErrors();
+        $this->assertSame(1,PendingRegistration::firstOrFail()->otp_attempts);
+        $this->post('/daftar',['otp'=>$otp])->assertOk()->assertSee('Tiket Anda siap');
+        $ticket=Ticket::firstOrFail();
+        $this->assertSame($coupon->id,$ticket->coupon_id);
+        $this->assertSame('6281234567890',$ticket->phone);
+        Mail::assertSent(TicketIssued::class);
+        $staff=User::factory()->create(['role'=>'staff']);
+        $this->actingAs($staff)->get('/admin/batches')->assertForbidden();
+        $this->post('/staff/lookup',['barcode'=>$ticket->barcode])->assertRedirect('/staff/tickets/'.$ticket->id);
+        $this->get('/staff/tickets/'.$ticket->id)->assertSee('Belum check-in');
+        $this->post('/staff/tickets/'.$ticket->id.'/check-in')->assertRedirect();
+        $this->assertNotNull($ticket->fresh()->checked_in_at);
+        $this->post('/staff/tickets/'.$ticket->id.'/print')->assertRedirect();
+        $this->assertSame(1,$ticket->fresh()->print_requests);
+    }
+}
