@@ -17,6 +17,12 @@ class RegistrationController extends Controller {
         $request->session()->put('registration_pending',$pending->id);
         return back()->with('success','OTP telah dikirim ke email Anda.');
     }
+    public function resendOtp(Request $request, RegistrationService $service) {
+        if (!config('app.registration_open')) abort(404);
+        $pending=\App\Models\PendingRegistration::findOrFail($request->session()->get('registration_pending'));
+        $service->requestOtp($pending->email,$pending->phone);
+        return back()->with('success','OTP baru telah dikirim ke email Anda.');
+    }
     public function complete(Request $request, RegistrationService $service) {
         if (!config('app.registration_open')) abort(404);
         $data=$request->validate(['otp'=>'required|digits:6']);

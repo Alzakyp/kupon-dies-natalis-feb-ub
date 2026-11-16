@@ -2,5 +2,5 @@
 <p>Nomor tiket: <strong>{{ $ticket->number }}</strong></p>
 <p>Email: {{ $ticket->email }}</p>
 <p>Tunjukkan kode ini kepada petugas di Ruang Kepegawaian Gedung Utama Lt. 2.</p>
-<div>{!! $barcodeSvg !!}</div><p><strong>{{ $ticket->barcode }}</strong></p>
+<img src="data:image/png;base64,{{ base64_encode($barcodePng) }}" width="300" height="300" alt="QR barcode tiket {{ $ticket->number }}"><p><strong>{{ $ticket->barcode }}</strong></p>
 <p>Petugas memindai kode, mengonfirmasi check-in, lalu mencetak kupon Anda.</p>

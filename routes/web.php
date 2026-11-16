@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\{AuthController,BatchController,ExportController,
 Route::fallback(fn () => abort(404));
 Route::get('/daftar',[RegistrationController::class,'form']);
 Route::post('/daftar/otp',[RegistrationController::class,'otp']);
+Route::post('/daftar/otp/resend',[RegistrationController::class,'resendOtp'])->middleware('throttle:5,10');
 Route::post('/daftar',[RegistrationController::class,'complete']);
 Route::get('/c/{code}',[CouponController::class,'show'])->name('coupons.show');
 Route::post('/c/{code}',[CouponController::class,'redeem'])->middleware('throttle:30,15');
