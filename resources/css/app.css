@@ -140,15 +140,17 @@
 }
 .calendar-body {
     display: flex;
-    align-items: baseline;
-    gap: 10px;
+    align-items: center;
+    gap: 12px;
+    padding: 2px 0;
 }
 .cal-day {
-    font-size: 2.25rem;
+    font-size: 2.35rem;
     font-weight: 950;
     line-height: 1;
     color: var(--navy);
     font-family: ui-monospace, 'Arial Black', sans-serif;
+    transform: translateY(4px);
 }
 .cal-details {
     display: flex;

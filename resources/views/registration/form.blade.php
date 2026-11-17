@@ -113,7 +113,7 @@
                         <span class="bar bar-5"></span>
                     </div>
 
-                    <audio id="event-audio" preload="none" src="{{ asset('audio/kotak-beraksi.mp3') }}"></audio>
+                    <audio id="event-audio" preload="auto" loop playsinline autoplay src="{{ asset('audio/kotak-beraksi.mp3') }}"></audio>
                 </div>
             </div>
 
@@ -544,47 +544,95 @@
         var statusPill = document.getElementById('audio-status-pill');
         var btnText = document.getElementById('btn-audio-text');
 
-        if (btnToggle && audio) {
-            btnToggle.addEventListener('click', function () {
+        if (!audio) return;
+
+        function setPlayingUI() {
+            if (playIcon) playIcon.style.display = 'none';
+            if (pauseIcon) pauseIcon.style.display = 'inline-block';
+            if (eqBars) eqBars.classList.add('playing');
+            if (statusPill) {
+                statusPill.textContent = 'Sedang Beraksi 🎵';
+                statusPill.classList.add('playing');
+            }
+            if (btnText) btnText.textContent = 'Jeda Musik';
+        }
+
+        function setPausedUI() {
+            if (playIcon) playIcon.style.display = 'inline-block';
+            if (pauseIcon) pauseIcon.style.display = 'none';
+            if (eqBars) eqBars.classList.remove('playing');
+            if (statusPill) {
+                statusPill.textContent = 'Musik Dijeda';
+                statusPill.classList.remove('playing');
+            }
+            if (btnText) btnText.textContent = 'Lanjut Musik';
+        }
+
+        function seekToLyricalIntro() {
+            if (audio.currentTime < 26 || audio.currentTime > 200) {
+                try {
+                    audio.currentTime = 27;
+                } catch (e) {}
+            }
+        }
+
+        audio.addEventListener('loadedmetadata', seekToLyricalIntro);
+        audio.addEventListener('canplay', function () {
+            if (audio.currentTime < 26) seekToLyricalIntro();
+        });
+
+        audio.addEventListener('play', setPlayingUI);
+        audio.addEventListener('pause', setPausedUI);
+        audio.addEventListener('ended', setPausedUI);
+
+        function attemptPlay() {
+            seekToLyricalIntro();
+            var promise = audio.play();
+            if (promise !== undefined) {
+                promise.then(function () {
+                    seekToLyricalIntro();
+                    setPlayingUI();
+                }).catch(function () {
+                    setupFirstGesture();
+                });
+            }
+        }
+
+        var gestureArmed = true;
+        function onUserGesture() {
+            if (!gestureArmed) return;
+            gestureArmed = false;
+            ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'pointerdown'].forEach(function (evt) {
+                window.removeEventListener(evt, onUserGesture, true);
+                document.removeEventListener(evt, onUserGesture, true);
+            });
+            if (audio.paused) {
+                attemptPlay();
+            }
+        }
+
+        function setupFirstGesture() {
+            ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'pointerdown'].forEach(function (evt) {
+                window.addEventListener(evt, onUserGesture, { once: true, passive: true, capture: true });
+                document.addEventListener(evt, onUserGesture, { once: true, passive: true, capture: true });
+            });
+        }
+
+        // 1. Coba autoplay langsung
+        attemptPlay();
+
+        // 2. Siapkan fallback otomatis saat interaksi pertama jika diblokir browser
+        setupFirstGesture();
+
+        // 3. Tombol manual Play / Pause
+        if (btnToggle) {
+            btnToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
                 if (audio.paused) {
-                    if (audio.currentTime < 1 || audio.currentTime > 200) {
-                        // Lompat langsung ke detik 27 saat Tantri berteriak dan lirik lagu Beraksi dimulai
-                        audio.currentTime = 27;
-                    }
-                    audio.play().then(function () {
-                        if (playIcon) playIcon.style.display = 'none';
-                        if (pauseIcon) pauseIcon.style.display = 'inline-block';
-                        if (eqBars) eqBars.classList.add('playing');
-                        if (statusPill) {
-                            statusPill.textContent = 'Sedang Beraksi 🎵';
-                            statusPill.classList.add('playing');
-                        }
-                        if (btnText) btnText.textContent = 'Jeda Musik';
-                    }).catch(function (e) {
-                        console.log('Audio playback: ', e);
-                    });
+                    attemptPlay();
                 } else {
                     audio.pause();
-                    if (playIcon) playIcon.style.display = 'inline-block';
-                    if (pauseIcon) pauseIcon.style.display = 'none';
-                    if (eqBars) eqBars.classList.remove('playing');
-                    if (statusPill) {
-                        statusPill.textContent = 'Klik untuk memutar';
-                        statusPill.classList.remove('playing');
-                    }
-                    if (btnText) btnText.textContent = 'Putar Backsound';
                 }
-            });
-
-            audio.addEventListener('ended', function () {
-                if (playIcon) playIcon.style.display = 'inline-block';
-                if (pauseIcon) pauseIcon.style.display = 'none';
-                if (eqBars) eqBars.classList.remove('playing');
-                if (statusPill) {
-                    statusPill.textContent = 'Klik untuk memutar';
-                    statusPill.classList.remove('playing');
-                }
-                if (btnText) btnText.textContent = 'Putar Backsound';
             });
         }
     });
