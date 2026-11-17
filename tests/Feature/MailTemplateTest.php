@@ -22,7 +22,7 @@ class MailTemplateTest extends TestCase
         $ticket = new Ticket(['number' => 'FEB65-TEST', 'email' => 'test@example.com', 'barcode' => str_repeat('a', 48)]);
         $html = (new TicketIssued($ticket))->render();
         $this->assertStringContainsString('FEB65-TEST', $html);
-        $this->assertStringContainsString('Ruang Kepegawaian Gedung Utama Lt. 2', $html);
+        $this->assertStringContainsString('Lapangan Rektorat UB', $html);
         $this->assertStringContainsString('Lustrum XIII', $html);
         $this->assertStringContainsString(str_repeat('a', 48), $html);
     }

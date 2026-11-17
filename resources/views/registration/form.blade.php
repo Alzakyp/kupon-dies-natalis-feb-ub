@@ -5,13 +5,15 @@
             <p class="eyebrow">Pendaftaran peserta</p>
             <span class="edition-badge">Lustrum XIII</span>
         </div>
-        <h1 class="auth-title">Dies Natalis FEB UB ke-65</h1>
+        <h1 class="auth-title">Grand Fiesta — Fun Walk &amp; Mega Concert</h1>
+        <img class="event-illustration" src="{{ asset('images/event-illustration.svg') }}" alt="">
+        <div class="event-details"><strong>6 Desember 2026 · 06.00 WIB–selesai</strong><span>Lapangan Rektorat UB</span><span>Fun Walk · Konser · Bazar · Pertunjukan · Doorprize</span><span>Khusus warga FEB UB</span></div>
         <p class="auth-location">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
                 <circle cx="12" cy="10" r="3"/>
             </svg>
-            Ruang Kepegawaian Gedung Utama Lt. 2
+            Pengambilan kupon wajib membawa KTM atau KTP asli.
         </p>
     </div>
 
@@ -142,7 +144,7 @@
             <div class="contact-step-box">
                 <div class="section-title-wrap">
                     <h3 class="section-title">Lengkapi Data Kontak</h3>
-                    <p class="section-sub">Kupon dan tiket kegiatan Dies Natalis FEB UB ke-65 akan dikirimkan langsung ke email Anda setelah verifikasi OTP.</p>
+                    <p class="section-sub">Tiket QR dikirim ke email setelah verifikasi OTP. Saat pengambilan kupon, harap membawa KTM atau KTP asli.</p>
                 </div>
 
                 <form method="post" action="{{ url('/daftar/otp') }}" class="modern-form">

@@ -25,7 +25,7 @@ class RegistrationJourneyTest extends TestCase {
         $otp=null; Mail::assertSent(RegistrationOtp::class,function($mail) use (&$otp){$otp=$mail->otp;return true;});
         $this->post('/daftar',['otp'=>'000000' === $otp ? '999999':'000000'])->assertSessionHasErrors();
         $this->assertSame(1,PendingRegistration::firstOrFail()->otp_attempts);
-        $this->post('/daftar',['otp'=>$otp])->assertOk()->assertSee('Tiket Anda siap');
+        $this->post('/daftar',['otp'=>$otp])->assertOk()->assertSee('Grand Fiesta — Pendaftaran berhasil');
         $ticket=Ticket::firstOrFail();
         $this->assertNull($ticket->coupon_id);
         $this->assertSame('6281234567890',$ticket->phone);
