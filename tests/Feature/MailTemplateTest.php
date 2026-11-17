@@ -4,11 +4,13 @@ namespace Tests\Feature;
 
 use App\Mail\RegistrationOtp;
 use App\Mail\TicketIssued;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Ticket;
 use Tests\TestCase;
 
 class MailTemplateTest extends TestCase
 {
+    use RefreshDatabase;
     public function test_otp_and_ticket_keep_content_with_branded_email_layout(): void
     {
         $otp = (new RegistrationOtp('123456'))->render();
@@ -22,6 +24,6 @@ class MailTemplateTest extends TestCase
         $this->assertStringContainsString('FEB65-TEST', $html);
         $this->assertStringContainsString('Ruang Kepegawaian Gedung Utama Lt. 2', $html);
         $this->assertStringContainsString('Lustrum XIII', $html);
-        $this->assertStringContainsString('data:image/png;base64', $html);
+        $this->assertStringContainsString('cid:', $html);
     }
 }
