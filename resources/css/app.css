@@ -652,3 +652,59 @@
         padding: 20px 16px;
     }
 }
+
+
+/* Navbar & Logout Button Fix */
+nav form,
+.nav-logout-form {
+    display: inline-flex !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    gap: 0 !important;
+}
+nav button.link-button,
+nav .link-button,
+.nav-logout-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 8px 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
+    height: auto !important;
+    width: auto !important;
+    color: #ffffff !important;
+    font-weight: 650 !important;
+    font-size: inherit !important;
+    font-family: inherit !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    line-height: inherit !important;
+    transform: none !important;
+    transition: opacity 0.15s ease, text-decoration 0.15s ease !important;
+}
+nav button.link-button:hover,
+nav .link-button:hover,
+.nav-logout-button:hover {
+    text-decoration: underline !important;
+    text-underline-offset: 5px !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    transform: none !important;
+    box-shadow: none !important;
+    opacity: 0.85 !important;
+}
+nav button.link-button:focus-visible,
+nav .link-button:focus-visible,
+.nav-logout-button:focus-visible {
+    outline: 2px solid var(--gold) !important;
+    outline-offset: 3px !important;
+}

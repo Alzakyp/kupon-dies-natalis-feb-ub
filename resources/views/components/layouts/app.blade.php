@@ -24,7 +24,7 @@
         @else
         <a href="{{ url('/staff/scan') }}">Scan tiket</a>
         @endif
-        <form method="post" action="{{ url('/admin/logout') }}">@csrf<button class="link-button">Keluar</button></form>
+        <form method="post" action="{{ url('/admin/logout') }}" class="nav-logout-form">@csrf<button type="submit" class="link-button nav-logout-button">Keluar</button></form>
     </nav>
     @endauth
 </header>
