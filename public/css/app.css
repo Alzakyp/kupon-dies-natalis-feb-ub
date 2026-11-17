@@ -1008,3 +1008,362 @@ nav .link-button:focus-visible,
         justify-content: center;
     }
 }
+
+
+/* Batch Management Modern UI */
+.batch-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0 32px;
+}
+.metric-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(6, 29, 53, 0.05);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(6, 29, 53, 0.08);
+}
+.metric-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #eef3f8;
+    color: var(--navy);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+.metric-icon-wrap.icon-success {
+    background: #ecf8f1;
+    color: var(--ok);
+}
+.metric-icon-wrap.icon-gold {
+    background: var(--gold-pale);
+    color: #855d08;
+}
+.metric-details {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+.metric-label {
+    font-size: 0.775rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.metric-value {
+    font-size: 1.75rem;
+    font-weight: 850;
+    color: var(--navy);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+/* Create Batch Panel */
+.batch-create-panel {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--gold);
+    border-radius: 12px;
+    padding: 26px 24px;
+    box-shadow: 0 8px 24px rgba(6, 29, 53, 0.05);
+    margin-bottom: 36px;
+}
+.panel-header-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #edf2f7;
+}
+.panel-header-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--gold-pale);
+    color: #855d08;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+.panel-header-row h2 {
+    margin: 0 0 4px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.015em;
+}
+.panel-desc {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.4;
+}
+.modern-inline-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 18px;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    flex-wrap: wrap;
+}
+.modern-inline-form .flex-2 {
+    flex: 2 1 280px;
+}
+.modern-inline-form .flex-1 {
+    flex: 1 1 160px;
+}
+.modern-inline-form .form-action-wrap {
+    flex: 0 0 auto;
+}
+.btn-submit-batch {
+    min-height: 48px;
+    padding: 10px 22px !important;
+}
+
+/* Batch History Section */
+.batch-history-section {
+    margin-top: 24px;
+}
+.section-subtext {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+    color: var(--muted);
+}
+.batch-list-cards {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+}
+.batch-item-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 24px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(6, 29, 53, 0.04);
+    transition: all 0.2s ease;
+}
+.batch-item-card:hover {
+    border-color: #b8c5d1;
+    box-shadow: 0 8px 24px rgba(9, 43, 76, 0.08);
+    transform: translateY(-1px);
+}
+.batch-item-card.batch-active {
+    border-left: 4px solid var(--navy);
+}
+.batch-item-card.batch-inactive {
+    border-left: 4px solid #b8c5d1;
+    background: #fafbfc;
+}
+.batch-item-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.batch-title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.batch-link-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: -0.015em;
+    transition: color 0.15s ease;
+}
+.batch-link-name:hover {
+    color: #114875;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.status-disabled {
+    background: #f1f5f9;
+    color: var(--muted);
+    border: 1px solid #cbd5e1;
+}
+.status-dot-disabled {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+}
+
+/* Progress bar inside batch card */
+.batch-progress-wrap {
+    max-width: 440px;
+}
+.progress-info-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 0.825rem;
+    color: var(--muted);
+    margin-bottom: 5px;
+}
+.progress-info-row strong {
+    color: var(--navy);
+}
+.progress-percent {
+    font-weight: 750;
+    color: var(--navy);
+    font-size: 0.775rem;
+}
+.progress-track {
+    width: 100%;
+    height: 7px;
+    border-radius: 999px;
+    background: #edf2f7;
+    overflow: hidden;
+}
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), #f3c24b);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+}
+.batch-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.775rem;
+    color: #798897;
+    flex-wrap: wrap;
+}
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.meta-separator {
+    color: #cbd5e1;
+}
+
+/* Batch Action Buttons */
+.batch-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+.btn-action-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 38px;
+    padding: 7px 14px;
+    background: #ffffff;
+    color: var(--navy);
+    border: 1.5px solid #b8c5d1;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+.btn-action-outline:hover {
+    background: #f0f4f9;
+    border-color: var(--navy);
+    transform: translateY(-1px);
+}
+.btn-action-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 38px;
+    padding: 7px 15px;
+    background: #eef3f8;
+    color: var(--navy);
+    border: 1.5px solid #c9d8e7;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 750;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+.btn-action-download:hover {
+    background: var(--navy);
+    color: #ffffff;
+    border-color: var(--navy);
+    transform: translateY(-1px);
+}
+.btn-action-deactivate {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    min-height: 38px !important;
+    padding: 7px 14px !important;
+    background: #ffffff !important;
+    color: var(--danger) !important;
+    border: 1.5px solid #f0b6ba !important;
+    border-radius: 6px !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+}
+.btn-action-deactivate:hover {
+    background: #fff0f1 !important;
+    border-color: var(--danger) !important;
+    color: #8b1823 !important;
+    transform: translateY(-1px) !important;
+}
+.empty-batch-state {
+    text-align: center;
+    padding: 44px 24px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+.empty-batch-state h3 {
+    margin: 0 0 6px;
+    color: var(--navy);
+    font-size: 1.15rem;
+}
+
+@media (max-width: 768px) {
+    .batch-metrics-grid {
+        grid-template-columns: 1fr;
+    }
+    .modern-inline-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .modern-inline-form .form-action-wrap button {
+        width: 100%;
+    }
+    .batch-item-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .batch-item-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
