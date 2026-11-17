@@ -7,10 +7,10 @@
 <button>Cek data peserta</button></form>
 @if(isset($ticket))
 <div class="summary-card" role="status">
-<div><small>Nama</small><p>{{ $ticket->studentRegistry?->name ?? '—' }}</p></div>
-<div><small>NIM</small><p>{{ $ticket->studentRegistry?->nim ?? '—' }}</p></div>
+<div><small>Nama</small><p>{{ $ticket->studentRegistry?->name ?? data_get($ticket->manual_identity, 'name', '—') }}</p></div>
+<div><small>NIM</small><p>{{ $ticket->nim ?? $ticket->studentRegistry?->nim ?? '—' }}</p></div>
 <div><small>Status peserta</small><p>{{ $ticket->registration_type === 'alumni' ? 'Alumni' : 'Mahasiswa Aktif' }}</p></div>
-<div><small>Jenjang / Program Studi</small><p>{{ $ticket->studentRegistry?->education_level ?? '—' }} · {{ $ticket->studentRegistry?->study_program ?? '—' }}</p></div>
+<div><small>Jenjang / Program Studi</small><p>{{ $ticket->studentRegistry?->education_level ?? data_get($ticket->manual_identity, 'education_level', '—') }} · {{ $ticket->studentRegistry?->study_program ?? data_get($ticket->manual_identity, 'study_program', '—') }}</p></div>
 <div><small>Email</small><p>{{ $ticket->email }}</p></div>
 <div><small>Nomor HP</small><p>{{ $ticket->phone }}</p></div>
 </div>

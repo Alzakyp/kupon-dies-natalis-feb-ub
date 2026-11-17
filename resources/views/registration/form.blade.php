@@ -237,6 +237,20 @@
             });
         })();
         </script>
+    @elseif($manualAlumni)
+        <div class="flow-step-card verified-card">
+            <div class="step-badge step-badge-success">Data Alumni Manual</div>
+            <h2>Lengkapi data alumni</h2>
+            <p>NIM <strong>{{ $manualAlumni['nim'] }}</strong> belum ditemukan. Isi data sesuai identitas akademik.</p>
+            <form method="post" action="{{ url('/daftar/otp') }}" class="modern-form">@csrf
+                <label>Nama lengkap<input name="name" value="{{ old('name') }}" required maxlength="150"></label>
+                <label>Jenjang<select name="education_level" required><option value="">Pilih jenjang</option>@foreach(['Diploma','Sarjana S1','Magister S2','Doktor S3','Profesi'] as $level)<option value="{{ $level }}">{{ $level }}</option>@endforeach</select></label>
+                <label>Program studi<select name="study_program" required><option value="">Pilih program studi</option>@foreach($studyPrograms as $program)<option value="{{ $program }}">{{ $program }}</option>@endforeach</select></label>
+                <label>Email aktif<input type="email" name="email" value="{{ old('email') }}" required autocomplete="email"></label>
+                <label>Nomor HP<input type="tel" name="phone" value="{{ old('phone') }}" required autocomplete="tel"></label>
+                <button type="submit" class="btn-primary btn-block">Kirim OTP</button>
+            </form>
+        </div>
     @elseif($student)
         <div class="flow-step-card verified-card">
             <div class="step-badge step-badge-success">Data Terverifikasi</div>

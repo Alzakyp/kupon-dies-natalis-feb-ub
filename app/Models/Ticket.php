@@ -9,7 +9,7 @@ class Ticket extends Model
 {
     protected $guarded = ['id'];
     protected $hidden = ['barcode'];
-    protected $casts = ['checked_in_at' => 'datetime', 'emailed_at' => 'datetime'];
+    protected $casts = ['checked_in_at' => 'datetime', 'emailed_at' => 'datetime', 'manual_identity' => 'array'];
 
     public function studentRegistry(): BelongsTo { return $this->belongsTo(StudentRegistry::class); }
     public function coupon(): BelongsTo { return $this->belongsTo(Coupon::class); }

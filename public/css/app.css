@@ -2751,3 +2751,4 @@ nav .link-button:focus-visible,
 
 .hidden { display: none !important; }
 
+select{width:100%;min-height:46px;padding:10px 12px;color:var(--ink);background:#fff;border:1px solid #9aa8b4;border-radius:2px;font:inherit}select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}

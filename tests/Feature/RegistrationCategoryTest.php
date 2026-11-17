@@ -23,7 +23,8 @@ class RegistrationCategoryTest extends TestCase
         $student = StudentRegistry::create(['nim' => '00123456', 'name' => 'Peserta Uji', 'education_level' => 'S1', 'study_program' => 'Akuntansi', 'registration_type' => 'active_student']);
         $this->get('/daftar')->assertSee('Mahasiswa Aktif')->assertSee('Alumni');
         $this->post('/daftar/otp', ['email' => 'category@example.com', 'phone' => '081210820130'])->assertSessionHasErrors('nim');
-        $this->post('/daftar/lookup', ['type' => 'alumni', 'nim' => $student->nim])->assertSessionHasErrors('nim');
+        $this->post('/daftar/lookup', ['type' => 'alumni', 'nim' => $student->nim])->assertRedirect();
+        $this->get('/daftar')->assertSee('Lengkapi data alumni');
         $this->post('/daftar/lookup', ['type' => 'active_student', 'nim' => $student->nim])->assertRedirect();
         $this->get('/daftar')->assertSee('Peserta Uji')->assertSee('Akuntansi');
         $this->post('/daftar/otp', ['email' => 'category@example.com', 'phone' => '081210820130', 'registration_type' => 'alumni', 'student_registry_id' => 999])->assertRedirect();

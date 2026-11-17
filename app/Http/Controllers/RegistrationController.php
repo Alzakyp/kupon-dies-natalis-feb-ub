@@ -21,7 +21,7 @@ class RegistrationController extends Controller
     public function form(Request $request)
     {
         if ($request->query('reset')) {
-            $request->session()->forget(['student_registry_id', 'registration_type', 'registration_pending']);
+            $request->session()->forget(['student_registry_id', 'registration_type', 'registration_pending', 'alumni_nim']);
             return redirect(url('/daftar'));
         }
 
@@ -29,6 +29,8 @@ class RegistrationController extends Controller
         return view('registration.form', [
             'available' => RegistrationService::available(),
             'student' => $registry ? StudentRegistry::find($registry) : null,
+            'manualAlumni' => session('registration_type') === 'alumni' && !$registry ? ['nim' => session('alumni_nim')] : null,
+            'studyPrograms' => StudentRegistry::whereNotNull('study_program')->distinct()->orderBy('study_program')->pluck('study_program'),
             'pending' => ($pendingId = $request->session()->get('registration_pending')) ? PendingRegistration::find($pendingId) : null,
             'hasAlumniData' => StudentRegistry::where('registration_type', 'alumni')->exists(),
         ]);
@@ -46,6 +48,10 @@ class RegistrationController extends Controller
         if (RateLimiter::tooManyAttempts($key, 10)) throw ValidationException::withMessages(['nim' => 'Terlalu banyak percobaan. Coba lagi nanti.']);
         RateLimiter::hit($key, 600);
         $student = StudentRegistry::where('registration_type', $data['type'])->where('nim', $nim)->first();
+        if (!$student && $data['type'] === 'alumni') {
+            $request->session()->put(['student_registry_id' => null, 'registration_type' => 'alumni', 'alumni_nim' => $nim]);
+            return redirect(url('/daftar'))->with('success', 'NIM alumni belum ditemukan. Lengkapi data secara manual.');
+        }
         if (!$student) throw ValidationException::withMessages(['nim' => 'NIM tidak ditemukan untuk kategori pendaftaran ini.']);
         $request->session()->put(['student_registry_id' => $student->id, 'registration_type' => $student->registration_type]);
         return redirect(url('/daftar'))->with('success', 'Data ditemukan. Silakan lanjutkan pendaftaran.');
@@ -56,8 +62,14 @@ class RegistrationController extends Controller
         $this->open();
         $registryId = $request->session()->get('student_registry_id');
         $type = $request->session()->get('registration_type');
-        if (!$registryId || !$type) throw ValidationException::withMessages(['nim' => 'Validasi NIM terlebih dahulu.']);
-        $data = $request->validate(['email' => 'required|email', 'phone' => 'required|string|max:30']);
+        if (!$registryId && $type !== 'alumni') throw ValidationException::withMessages(['nim' => 'Validasi NIM terlebih dahulu.']);
+        $rules = ['email' => 'required|email', 'phone' => 'required|string|max:30'];
+        if (!$registryId && $type === 'alumni') $rules += [
+            'name' => 'required|string|max:150',
+            'education_level' => ['required', Rule::in(['Diploma', 'Sarjana S1', 'Magister S2', 'Doktor S3', 'Profesi'])],
+            'study_program' => ['required', Rule::exists('student_registries', 'study_program')],
+        ];
+        $data = $request->validate($rules);
         $key = 'otp:'.$request->ip().':'.sha1(strtolower($data['email']));
         if (RateLimiter::tooManyAttempts($key, 5)) throw ValidationException::withMessages(['email' => 'Terlalu banyak permintaan. Coba lagi nanti.']);
         RateLimiter::hit($key, 600);
@@ -69,7 +81,8 @@ class RegistrationController extends Controller
             $request->session()->put('registration_pending', $pending->id);
             return redirect(url('/daftar'))->with('success', 'OTP sudah dikirim. Masukkan kode dari email atau tunggu countdown untuk mengirim ulang.');
         }
-        $pending = $service->requestOtp($data['email'], $data['phone'], $registryId, $type);
+        $identity = !$registryId ? ['nim' => session('alumni_nim'), 'name' => $data['name'], 'education_level' => $data['education_level'], 'study_program' => $data['study_program']] : null;
+        $pending = $service->requestOtp($data['email'], $data['phone'], $registryId, $type, $identity);
         $request->session()->put('registration_pending', $pending->id);
         return redirect(url('/daftar'))->with('success', 'OTP telah dikirim ke email Anda.');
     }
@@ -84,7 +97,7 @@ class RegistrationController extends Controller
             $request->session()->forget('registration_pending');
             return redirect(url('/daftar'))->withErrors(['otp' => 'Sesi OTP berakhir. Silakan mulai kembali.']);
         }
-        $pending = $service->requestOtp($pending->email, $pending->phone, $pending->student_registry_id, $pending->registration_type);
+        $pending = $service->requestOtp($pending->email, $pending->phone, $pending->student_registry_id, $pending->registration_type, $pending->manual_identity);
         $request->session()->put('registration_pending', $pending->id);
         return redirect(url('/daftar'))->with('success', 'OTP baru telah dikirim ke email Anda.');
     }
@@ -97,7 +110,7 @@ class RegistrationController extends Controller
         abort_unless($id, 404);
         $ticket = $service->complete($id, $data['otp']);
         try { $service->sendTicket($ticket); } catch (\Throwable $e) { report($e); }
-        $request->session()->forget(['registration_pending', 'student_registry_id', 'registration_type']);
+        $request->session()->forget(['registration_pending', 'student_registry_id', 'registration_type', 'alumni_nim']);
         return view('registration.success', compact('ticket'));
     }
 

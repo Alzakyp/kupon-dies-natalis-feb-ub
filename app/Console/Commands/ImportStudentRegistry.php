@@ -18,12 +18,14 @@ class ImportStudentRegistry extends Command
         $handle = @fopen((string) $this->argument('path'), 'r');
         if (!$handle) return $this->abortImport('CSV cannot be opened.');
         $headers = array_map(fn ($v) => trim((string) $v), fgetcsv($handle) ?: []);
+        $aliases = ['Nama' => ['Nama','NAMA'], 'Program Studi' => ['Program Studi','PRODI']];
+        foreach ($aliases as $target => $choices) foreach ($choices as $choice) if (in_array($choice, $headers, true)) { $headers[array_search($choice, $headers, true)] = $target; break; }
         $required = ['NIM', 'Nama', 'JENJANG', 'Program Studi'];
         foreach ($required as $header) if (!in_array($header, $headers, true)) return $this->abortImport("Missing header: {$header}");
         $rows = []; $skipped = 0;
         while (($values = fgetcsv($handle)) !== false) {
             $row = array_combine($headers, array_pad($values, count($headers), null));
-            $nim = StudentRegistry::normalizeNim((string) $row['NIM']);
+            $nim = StudentRegistry::normalizeNim(ltrim(trim((string) $row['NIM']), "'\"="));
             if ($nim === '') { $skipped++; continue; }
             $rows[] = ['nim' => $nim, 'name' => trim((string) $row['Nama']), 'education_level' => trim((string) $row['JENJANG']), 'study_program' => trim((string) $row['Program Studi']) ?: null, 'registration_type' => $type, 'created_at' => now(), 'updated_at' => now()];
             if (count($rows) === 500) { $this->upsert($rows); $rows = []; }
