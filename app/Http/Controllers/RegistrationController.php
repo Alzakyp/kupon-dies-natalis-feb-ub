@@ -20,10 +20,16 @@ class RegistrationController extends Controller
 
     public function form(Request $request)
     {
+        if ($request->query('reset')) {
+            $request->session()->forget(['student_registry_id', 'registration_type', 'registration_pending']);
+            return redirect(url('/daftar'));
+        }
+
         $registry = $request->session()->get('student_registry_id');
         return view('registration.form', [
             'available' => RegistrationService::available(),
             'student' => $registry ? StudentRegistry::find($registry) : null,
+            'hasAlumniData' => StudentRegistry::where('registration_type', 'alumni')->exists(),
         ]);
     }
 
