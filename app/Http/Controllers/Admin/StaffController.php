@@ -3,10 +3,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 class StaffController extends Controller {
     public function index() { return view('admin.staff',['staff'=>User::where('role','staff')->get()]); }
     public function store(Request $request) {
-        $data=$request->validate(['name'=>'required|string|max:100','email'=>'required|email|unique:users,email','password'=>'required|string|min:12|confirmed']);
+        $data=$request->validate(['name'=>'required|string|max:100','email'=>'required|email|unique:users,email','password'=>['required','confirmed',Password::min(8)->letters()->numbers()->symbols()]]);
         User::create([...$data,'role'=>'staff']);
         return back()->with('success','Akun petugas dibuat.');
     }
