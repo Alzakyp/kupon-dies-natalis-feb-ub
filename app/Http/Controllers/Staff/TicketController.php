@@ -18,7 +18,7 @@ class TicketController extends Controller {
     }
     public function print(Ticket $ticket) {
         abort_unless($ticket->checked_in_at,403);
-        return view('staff.print',['ticket'=>$ticket->load('coupon.batch')]);
+        return view('staff.print',['ticket'=>$ticket->load(['coupon.batch', 'studentRegistry'])]);
     }
     public function recordPrint(Ticket $ticket) {
         abort_unless($ticket->checked_in_at,403);

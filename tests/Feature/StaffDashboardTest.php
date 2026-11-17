@@ -53,4 +53,36 @@ class StaffDashboardTest extends TestCase
         $res->assertSee('2231730129');
         $res->assertSee('Konfirmasi check-in');
     }
+
+    public function test_staff_can_view_thermal_print_template_with_batch_qr_and_lottery_number(): void
+    {
+        $batch = Batch::create(['name' => 'Dies65', 'active' => true, 'expires_at' => now()->addDays(7)]);
+        $coupon = $batch->coupons()->create(['code' => 'TICKET-PRINT-01']);
+        $student = \App\Models\StudentRegistry::create([
+            'nim' => '2231730129',
+            'name' => 'Al Zaky Putra',
+            'education_level' => 'S1',
+            'study_program' => 'Akuntansi',
+            'registration_type' => 'active_student',
+        ]);
+        $ticket = Ticket::create([
+            'number' => 'FEB65-PRINTTEST',
+            'barcode' => str_repeat('z', 48),
+            'email' => 'zaky@example.com',
+            'phone' => '6281210820130',
+            'coupon_id' => $coupon->id,
+            'student_registry_id' => $student->id,
+            'registration_type' => 'active_student',
+            'checked_in_at' => now(),
+        ]);
+        $staff = User::factory()->create(['role' => 'staff']);
+
+        $res = $this->actingAs($staff)->get('/staff/tickets/'.$ticket->id.'/print');
+        $res->assertOk();
+        $res->assertSee('NO. UNDIAN');
+        $res->assertSee('#'.str_pad($coupon->id, 4, '0', STR_PAD_LEFT));
+        $res->assertSee('Al Zaky Putra');
+        $res->assertSee('Akuntansi');
+        $res->assertSee('47 × 31 mm');
+    }
 }
