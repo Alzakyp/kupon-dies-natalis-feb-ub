@@ -15,7 +15,7 @@
         </p>
     </div>
 
-    @if(!config('app.registration_open') || !config('app.registration_mail_verified') || !$available)
+    @if(!config('app.registration_open') || !config('app.registration_mail_verified'))
         <div class="empty-state-notice">
             <div class="empty-icon-wrap" aria-hidden="true">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -24,7 +24,7 @@
                     <line x1="12" x2="12.01" y1="16" y2="16"/>
                 </svg>
             </div>
-            <p class="notice error">Pendaftaran belum dibuka atau kupon acara habis.</p>
+            <p class="notice error">Pendaftaran belum dibuka.</p>
         </div>
     @elseif(session('registration_pending'))
         <div class="flow-step-card otp-step-card">

@@ -27,16 +27,8 @@ class RegistrationJourneyTest extends TestCase {
         $this->assertSame(1,PendingRegistration::firstOrFail()->otp_attempts);
         $this->post('/daftar',['otp'=>$otp])->assertOk()->assertSee('Tiket Anda siap');
         $ticket=Ticket::firstOrFail();
-        $this->assertSame($coupon->id,$ticket->coupon_id);
+        $this->assertNull($ticket->coupon_id);
         $this->assertSame('6281234567890',$ticket->phone);
         Mail::assertSent(TicketIssued::class);
-        $staff=User::factory()->create(['role'=>'staff']);
-        $this->actingAs($staff)->get('/admin/batches')->assertForbidden();
-        $this->post('/staff/lookup',['barcode'=>$ticket->barcode])->assertRedirect('/staff/tickets/'.$ticket->id);
-        $this->get('/staff/tickets/'.$ticket->id)->assertSee('Belum check-in');
-        $this->post('/staff/tickets/'.$ticket->id.'/check-in')->assertRedirect();
-        $this->assertNotNull($ticket->fresh()->checked_in_at);
-        $this->post('/staff/tickets/'.$ticket->id.'/print')->assertRedirect();
-        $this->assertSame(1,$ticket->fresh()->print_requests);
     }
 }

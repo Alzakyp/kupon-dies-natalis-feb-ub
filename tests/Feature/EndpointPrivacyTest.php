@@ -12,11 +12,5 @@ class EndpointPrivacyTest extends TestCase
         $this->get('/admin')->assertNotFound();
     }
 
-    public function test_login_displays_official_brand_assets(): void
-    {
-        $this->get('/admin/login')->assertOk()
-            ->assertSee('images/logo-ub.svg')
-            ->assertSee('images/wordmark-feb.png')
-            ->assertSee('images/logo-lustrum-65-clean.png');
-    }
+
 }

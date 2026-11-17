@@ -27,11 +27,7 @@ class RegistrationService
         return $number;
     }
 
-    public static function available(): bool
-    {
-        return Coupon::whereNull('redeemed_at')->whereDoesntHave('ticket')
-            ->whereHas('batch', fn ($q) => $q->where('active', true)->where('expires_at', '>', now()))->exists();
-    }
+    public static function available(): bool { return true; }
 
     public function requestOtp(string $email, string $phone, ?int $registryId = null, ?string $registrationType = null): PendingRegistration
     {
@@ -42,7 +38,6 @@ class RegistrationService
             throw ValidationException::withMessages(['nim' => 'Data NIM tidak valid.']);
         if (Ticket::where('student_registry_id', $registryId)->exists())
             throw ValidationException::withMessages(['nim' => 'NIM sudah terdaftar.']);
-        if (!self::available()) throw ValidationException::withMessages(['email' => 'Kupon acara habis.']);
         if (Ticket::where('email', $email)->orWhere('phone', $phone)->exists())
             throw ValidationException::withMessages(['email' => 'Pendaftaran tidak dapat diproses. Hubungi petugas.']);
 
@@ -76,14 +71,10 @@ class RegistrationService
             }
             if (Ticket::where('email', $pending->email)->orWhere('phone', $pending->phone)->exists())
                 throw ValidationException::withMessages(['otp' => 'Pendaftaran sudah selesai.']);
-            $coupon = Coupon::whereNull('redeemed_at')->whereDoesntHave('ticket')
-                ->whereHas('batch', fn ($q) => $q->where('active', true)->where('expires_at', '>', now()))
-                ->orderBy('id')->lockForUpdate()->first();
-            if (!$coupon) throw ValidationException::withMessages(['otp' => 'Kupon acara habis.']);
             $ticket = Ticket::create([
                 'number' => 'FEB65-'.strtoupper(Str::random(10)),
                 'barcode' => Str::random(48), 'email' => $pending->email,
-                'phone' => $pending->phone, 'student_registry_id' => $pending->student_registry_id, 'registration_type' => $pending->registration_type, 'coupon_id' => $coupon->id,
+                'phone' => $pending->phone, 'student_registry_id' => $pending->student_registry_id, 'registration_type' => $pending->registration_type,
             ]);
             $pending->delete();
             return $ticket;
