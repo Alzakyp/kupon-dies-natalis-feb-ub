@@ -1,1 +1,322 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-label="Ilustrasi warga kampus berjalan menuju panggung acara"><style>.float{animation:float 3s ease-in-out infinite}.float:nth-child(2){animation-delay:.4s}@keyframes float{50%{transform:translateY(-6px)}}@media(prefers-reduced-motion:reduce){.float{animation:none}}</style><rect width="720" height="300" rx="24" fill="#fbf4df"/><path d="M0 242h720" stroke="#d3a128" stroke-width="6"/><path d="M410 242V92h180v150M435 92V62h130v30M455 130h90v112" fill="#092b4c"/><path d="M480 160h24v28h-24zM530 160h24v28h-24z" fill="#f7f7f4"/><path d="M96 242c20-56 52-82 96-104 42 24 73 49 90 104" fill="#d76b55"/><path d="M120 147l72-42 72 42" fill="#d3a128"/><g class="float"><circle cx="205" cy="204" r="18" fill="#092b4c"/><path d="M205 222v20m-18-5 18-15 18 15M190 270l15-28 15 28" stroke="#092b4c" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="205" cy="183" r="12" fill="#f0b38f"/></g><g class="float"><circle cx="315" cy="203" r="17" fill="#092b4c"/><path d="M315 220v22m-18-3 18-16 20 16M300 270l15-28 16 28" stroke="#092b4c" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="315" cy="182" r="11" fill="#8e5a44"/></g><path d="M330 115q12-18 24 0t24 0" fill="none" stroke="#d76b55" stroke-width="6" stroke-linecap="round"/><circle cx="652" cy="55" r="13" fill="#d3a128"/><path d="M652 33v-12m0 56V65m22-10h12m-56 0h-12" stroke="#d3a128" stroke-width="5" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="100%" height="auto" role="img" aria-label="Ilustrasi festival kartun FEB UB Grand Fiesta Fun Walk dan Konser Musik">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#dbeafe" />
+      <stop offset="60%" stop-color="#fef9c3" />
+      <stop offset="100%" stop-color="#fef08a" />
+    </linearGradient>
+
+    <!-- Stage Spotlight Gradient -->
+    <linearGradient id="spotLight1" x1="0%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#fde047" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#fde047" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="spotLight2" x1="100%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Ground / Turf Gradient -->
+    <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#15803d" />
+      <stop offset="25%" stop-color="#166534" />
+      <stop offset="100%" stop-color="#14532d" />
+    </linearGradient>
+
+    <!-- Track / Path Gradient -->
+    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdba74" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </linearGradient>
+
+    <!-- CSS Keyframe Animations -->
+    <style>
+      .anim-float { animation: floatSlow 3.5s ease-in-out infinite; }
+      .anim-float-lag { animation: floatSlow 4s ease-in-out infinite 0.8s; }
+      .anim-sway { animation: sway 3s ease-in-out infinite alternate; transform-origin: center bottom; }
+      .anim-sparkle { animation: sparkle 2.2s ease-in-out infinite; }
+      .anim-sparkle-lag { animation: sparkle 2.6s ease-in-out infinite 1.1s; }
+      .anim-note { animation: floatNote 3s ease-in-out infinite; }
+      .anim-note-lag { animation: floatNote 3.4s ease-in-out infinite 1.2s; }
+
+      @keyframes floatSlow {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-7px); }
+      }
+      @keyframes sway {
+        0% { transform: rotate(-3deg); }
+        100% { transform: rotate(3deg); }
+      }
+      @keyframes sparkle {
+        0%, 100% { transform: scale(0.9); opacity: 0.75; }
+        50% { transform: scale(1.25); opacity: 1; }
+      }
+      @keyframes floatNote {
+        0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+        50% { transform: translateY(-9px) rotate(8deg); opacity: 1; }
+        100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .anim-float, .anim-float-lag, .anim-sway, .anim-sparkle, .anim-sparkle-lag, .anim-note, .anim-note-lag {
+          animation: none !important;
+        }
+      }
+    </style>
+  </defs>
+
+  <!-- Sky Canvas Box with Rounded Corners -->
+  <rect width="760" height="300" rx="20" fill="url(#skyGrad)" />
+
+  <!-- Background Clouds -->
+  <g fill="#ffffff" opacity="0.85">
+    <path d="M60 70 Q75 50 95 60 Q115 45 135 60 Q155 55 165 70 Z" />
+    <path d="M480 50 Q495 35 515 42 Q535 30 550 45 Q570 40 580 55 Z" />
+    <path d="M640 85 Q655 70 675 78 Q695 68 710 82 Q725 78 735 90 Z" opacity="0.6" />
+  </g>
+
+  <!-- Campus Silhouette & Trees in Background -->
+  <g fill="#0284c7" opacity="0.18">
+    <!-- Building Silhouettes -->
+    <rect x="70" y="110" width="110" height="110" rx="4" />
+    <polygon points="125,75 60,110 190,110" />
+    <rect x="195" y="130" width="75" height="90" rx="3" />
+    <rect x="540" y="115" width="130" height="105" rx="4" />
+    <polygon points="605,80 530,115 680,115" />
+    <!-- Round Campus Trees -->
+    <circle cx="50" cy="180" r="30" />
+    <circle cx="290" cy="185" r="24" />
+    <circle cx="510" cy="180" r="28" />
+    <circle cx="695" cy="185" r="26" />
+  </g>
+
+  <!-- Concert Mega Stage (Center Right Background) -->
+  <g id="concert-stage">
+    <!-- Stage Truss Structure -->
+    <path d="M380 90 L480 90 L480 220 L380 220 Z" fill="#0f172a" opacity="0.88" />
+    <polygon points="370,90 490,90 475,80 385,80" fill="#1e293b" />
+    <!-- LED Screen on Stage -->
+    <rect x="392" y="102" width="76" height="48" rx="3" fill="#0284c7" />
+    <text x="430" y="125" fill="#fef08a" font-family="'Impact', 'Arial Black', sans-serif" font-size="12" font-weight="bold" text-anchor="middle" letter-spacing="1">KOTAK</text>
+    <text x="430" y="140" fill="#ffffff" font-family="sans-serif" font-size="7" font-weight="bold" text-anchor="middle" letter-spacing="0.5">MEGA CONCERT</text>
+    <!-- Stage Spotlights Beams -->
+    <polygon points="390,90 350,220 420,220" fill="url(#spotLight1)" />
+    <polygon points="470,90 440,220 510,220" fill="url(#spotLight2)" />
+    <!-- Stage Speaker Stacks -->
+    <rect x="372" y="145" width="16" height="55" rx="2" fill="#1e293b" />
+    <circle cx="380" cy="160" r="4.5" fill="#334155" />
+    <circle cx="380" cy="180" r="5" fill="#334155" />
+    <rect x="472" y="145" width="16" height="55" rx="2" fill="#1e293b" />
+    <circle cx="480" cy="160" r="4.5" fill="#334155" />
+    <circle cx="480" cy="180" r="5" fill="#334155" />
+    <!-- Performers Silhouette on Stage -->
+    <path d="M424 185 Q430 168 436 185 Z" fill="#f8fafc" />
+    <circle cx="430" cy="164" r="3.5" fill="#f8fafc" />
+    <line x1="430" y1="172" x2="438" y2="167" stroke="#f8fafc" stroke-width="2" />
+    <path d="M414 185 Q418 172 422 185 Z" fill="#94a3b8" />
+    <circle cx="418" cy="169" r="3" fill="#94a3b8" />
+    <path d="M438 185 Q442 172 446 185 Z" fill="#94a3b8" />
+    <circle cx="442" cy="169" r="3" fill="#94a3b8" />
+  </g>
+
+  <!-- Festive Bunting Triangle Party Flags across the Sky -->
+  <g id="bunting-flags">
+    <path d="M-10 40 Q180 85 380 45 Q570 85 770 40" fill="none" stroke="#64748b" stroke-width="1.8" stroke-dasharray="2 1" opacity="0.6" />
+    <!-- Flags Loop -->
+    <polygon points="20,44 42,48 31,68" fill="#ef4444" />
+    <polygon points="55,50 77,54 66,74" fill="#f59e0b" />
+    <polygon points="90,56 112,59 101,79" fill="#0284c7" />
+    <polygon points="125,61 147,63 136,83" fill="#10b981" />
+    <polygon points="160,64 182,65 171,85" fill="#8b5cf6" />
+    <polygon points="195,65 217,64 206,84" fill="#ef4444" />
+    <polygon points="230,63 252,61 241,81" fill="#f59e0b" />
+    <polygon points="265,59 287,56 276,76" fill="#0284c7" />
+    <polygon points="300,54 322,50 311,70" fill="#10b981" />
+    <polygon points="335,48 357,45 346,65" fill="#f59e0b" />
+
+    <polygon points="395,46 417,50 406,70" fill="#0284c7" />
+    <polygon points="430,52 452,56 441,76" fill="#ef4444" />
+    <polygon points="465,58 487,61 476,81" fill="#f59e0b" />
+    <polygon points="500,63 522,65 511,85" fill="#10b981" />
+    <polygon points="535,65 557,65 546,85" fill="#8b5cf6" />
+    <polygon points="570,64 592,62 581,82" fill="#ef4444" />
+    <polygon points="605,60 627,57 616,77" fill="#f59e0b" />
+    <polygon points="640,55 662,51 651,71" fill="#0284c7" />
+    <polygon points="675,49 697,45 686,65" fill="#10b981" />
+    <polygon points="710,43 732,39 721,59" fill="#ef4444" />
+  </g>
+
+  <!-- Green Grass / Festival Turf Ground -->
+  <path d="M0 215 Q180 205 380 215 Q570 205 760 215 L760 300 L0 300 Z" fill="url(#groundGrad)" />
+
+  <!-- Fun Walk Paved Track curving forward -->
+  <path d="M0 250 Q160 225 320 240 Q520 255 760 238 L760 300 L0 300 Z" fill="url(#pathGrad)" opacity="0.95" />
+  <path d="M0 248 Q160 223 320 238 Q520 253 760 236" fill="none" stroke="#ffedd5" stroke-width="4" stroke-dasharray="14 10" opacity="0.8" />
+
+  <!-- Festive Balloons (Animated Floating) -->
+  <g class="anim-float">
+    <!-- Blue Balloon on Left -->
+    <path d="M75 90 C75 75 95 65 105 75 C115 85 110 105 95 110 C85 112 75 100 75 90 Z" fill="#0284c7" />
+    <polygon points="93,110 97,110 95,114" fill="#0284c7" />
+    <path d="M95 114 Q90 128 97 142" fill="none" stroke="#64748b" stroke-width="1.2" />
+    <!-- Yellow Balloon -->
+    <path d="M95 80 C95 68 112 58 122 68 C132 78 126 95 114 98 C104 100 95 90 95 80 Z" fill="#eab308" />
+    <polygon points="112,98 116,98 114,102" fill="#eab308" />
+    <path d="M114 102 Q120 118 112 135" fill="none" stroke="#64748b" stroke-width="1.2" />
+  </g>
+
+  <g class="anim-float-lag">
+    <!-- Red & Gold Balloon on Right -->
+    <path d="M660 75 C660 62 678 52 688 62 C698 72 692 89 680 92 C670 94 660 85 660 75 Z" fill="#ef4444" />
+    <polygon points="678,92 682,92 680,96" fill="#ef4444" />
+    <path d="M680 96 Q675 110 682 125" fill="none" stroke="#64748b" stroke-width="1.2" />
+  </g>
+
+  <!-- Musical Notes floating from Concert Stage (Animated) -->
+  <g class="anim-note" fill="#0284c7">
+    <!-- Music Note 1 -->
+    <path d="M470 65 L470 50 L486 46 L486 61 Z" />
+    <circle cx="466" cy="65" r="5" />
+    <circle cx="482" cy="61" r="5" />
+  </g>
+  <g class="anim-note-lag" fill="#ea580c">
+    <!-- Music Note 2 -->
+    <circle cx="505" cy="72" r="4.5" />
+    <path d="M509 72 L509 52 Q518 50 518 58" fill="none" stroke="#ea580c" stroke-width="2.5" />
+  </g>
+
+  <!-- Golden Confetti / Sparkles (Animated Pulse) -->
+  <g class="anim-sparkle" fill="#eab308">
+    <path d="M220 75 L223 83 L231 85 L223 88 L220 96 L218 88 L210 85 L218 83 Z" />
+    <circle cx="160" cy="110" r="3.5" fill="#f59e0b" />
+    <rect x="290" y="80" width="6" height="6" rx="1.5" transform="rotate(25 290 80)" fill="#ef4444" />
+    <rect x="340" y="105" width="7" height="4" rx="1" transform="rotate(-30 340 105)" fill="#0284c7" />
+  </g>
+  <g class="anim-sparkle-lag" fill="#f59e0b">
+    <path d="M580 85 L582 92 L590 94 L582 97 L580 104 L578 97 L570 94 L578 92 Z" />
+    <circle cx="620" cy="100" r="3" fill="#eab308" />
+    <rect x="530" y="70" width="7" height="4" rx="1" transform="rotate(40 530 70)" fill="#10b981" />
+  </g>
+
+  <!-- ========================================================
+       CARTOON CHARACTERS (FUN WALK PARTICIPANTS)
+       ======================================================== -->
+
+  <!-- CHARACTER 1: Boy Student in FEB Blue Jacket, Jogging/Cheering (Left-Center) -->
+  <g id="char-boy-cheering" class="anim-sway">
+    <!-- Shadow -->
+    <ellipse cx="230" cy="274" rx="22" ry="6" fill="#0f172a" opacity="0.3" />
+
+    <!-- Legs & Shoes (Walking Pose) -->
+    <!-- Back Leg -->
+    <path d="M236 215 L246 250 L242 268" stroke="#1e293b" stroke-width="9" stroke-linecap="round" fill="none" />
+    <ellipse cx="244" cy="270" rx="9" ry="5" fill="#ffffff" />
+    <path d="M239 269 Q246 267 252 271" stroke="#0284c7" stroke-width="2" fill="none" />
+    <!-- Front Leg -->
+    <path d="M224 215 L214 246 L218 269" stroke="#1e293b" stroke-width="9" stroke-linecap="round" fill="none" />
+    <ellipse cx="218" cy="271" rx="9" ry="5" fill="#ffffff" />
+    <path d="M213 270 Q220 268 226 272" stroke="#0284c7" stroke-width="2" fill="none" />
+
+    <!-- Body (FEB Blue Varsity Hoodie) -->
+    <rect x="214" y="172" width="32" height="46" rx="8" fill="#0b2545" />
+    <!-- Gold Zipper & FEB 65 Badge -->
+    <line x1="230" y1="174" x2="230" y2="218" stroke="#f59e0b" stroke-width="2.5" />
+    <circle cx="222" cy="184" r="3.5" fill="#f59e0b" />
+
+    <!-- Left Arm Cheering Upward -->
+    <path d="M214 180 L196 160 L190 144" stroke="#0b2545" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <!-- Hand Glove/Fist -->
+    <circle cx="189" cy="142" r="5.5" fill="#fbcfe8" />
+
+    <!-- Right Arm with Water Bottle -->
+    <path d="M246 180 L256 195 L252 208" stroke="#0b2545" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <circle cx="251" cy="210" r="5" fill="#fbcfe8" />
+    <rect x="249" y="206" width="6" height="12" rx="2" fill="#38bdf8" />
+
+    <!-- Head & Face -->
+    <circle cx="230" cy="154" r="14" fill="#fcd34d" />
+    <!-- Cheerful Eyes & Smile -->
+    <ellipse cx="226" cy="153" rx="1.8" ry="2.2" fill="#0f172a" />
+    <ellipse cx="234" cy="153" rx="1.8" ry="2.2" fill="#0f172a" />
+    <path d="M226 159 Q230 164 234 159" fill="none" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round" />
+    <!-- Rosy Cheeks -->
+    <circle cx="223" cy="157" r="2.2" fill="#f87171" opacity="0.6" />
+    <circle cx="237" cy="157" r="2.2" fill="#f87171" opacity="0.6" />
+
+    <!-- FEB Blue Sports Cap (Turned slightly sideways) -->
+    <path d="M216 150 Q230 136 244 150 Z" fill="#0284c7" />
+    <path d="M236 148 Q252 147 254 152" fill="none" stroke="#f59e0b" stroke-width="4.5" stroke-linecap="round" />
+  </g>
+
+  <!-- CHARACTER 2: Girl Student in Hijab with Sunglasses / Cheerful Walk (Center Right) -->
+  <g id="char-girl-hijab" class="anim-sway" style="animation-delay: 0.5s;">
+    <!-- Shadow -->
+    <ellipse cx="320" cy="276" rx="20" ry="6" fill="#0f172a" opacity="0.3" />
+
+    <!-- Legs & Shoes -->
+    <path d="M314 220 L310 248 L308 270" stroke="#334155" stroke-width="8" stroke-linecap="round" fill="none" />
+    <ellipse cx="308" cy="272" rx="8" ry="4.5" fill="#f43f5e" />
+    <path d="M326 220 L332 248 L334 270" stroke="#334155" stroke-width="8" stroke-linecap="round" fill="none" />
+    <ellipse cx="334" cy="272" rx="8" ry="4.5" fill="#f43f5e" />
+
+    <!-- Casual Pastel Jacket & Top -->
+    <rect x="306" y="174" width="28" height="48" rx="8" fill="#ea580c" />
+    <polygon points="314,174 326,174 323,205 317,205" fill="#ffedd5" />
+
+    <!-- Hijab (Clean Flowing Cartoon Hijab) -->
+    <circle cx="320" cy="152" r="15" fill="#fef08a" />
+    <path d="M308 152 Q306 178 320 180 Q334 178 332 152 Z" fill="#fde047" />
+
+    <!-- Face & Sunglasses -->
+    <circle cx="320" cy="154" r="10" fill="#fcd34d" />
+    <!-- Trendy Cool Sunglasses -->
+    <rect x="313" y="150" width="6.5" height="5.5" rx="1.5" fill="#0f172a" />
+    <rect x="320.5" y="150" width="6.5" height="5.5" rx="1.5" fill="#0f172a" />
+    <line x1="318" y1="152" x2="322" y2="152" stroke="#0f172a" stroke-width="1.5" />
+    <!-- Bright Smile -->
+    <path d="M317 160 Q320 164 323 160" fill="none" stroke="#991b1b" stroke-width="1.8" stroke-linecap="round" />
+
+    <!-- Arm Waving Peace Sign -->
+    <path d="M334 182 L348 168 L354 154" stroke="#ea580c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <circle cx="355" cy="152" r="4.5" fill="#fcd34d" />
+    <!-- Cute Mini Backpack -->
+    <rect x="299" y="180" width="8" height="22" rx="3" fill="#0284c7" />
+  </g>
+
+  <!-- CHARACTER 3: Energetic Mascot / Walker with Dies 65 Banner (Left) -->
+  <g id="char-walker-banner" class="anim-sway" style="animation-delay: 1s;">
+    <!-- Shadow -->
+    <ellipse cx="145" cy="275" rx="18" ry="5.5" fill="#0f172a" opacity="0.3" />
+
+    <!-- Legs -->
+    <path d="M140 222 L136 248 L138 270" stroke="#1e293b" stroke-width="8" stroke-linecap="round" fill="none" />
+    <ellipse cx="138" cy="272" rx="8" ry="4.5" fill="#0284c7" />
+    <path d="M150 222 L154 248 L152 270" stroke="#1e293b" stroke-width="8" stroke-linecap="round" fill="none" />
+    <ellipse cx="152" cy="272" rx="8" ry="4.5" fill="#0284c7" />
+
+    <!-- Yellow T-Shirt with 65 Logo -->
+    <rect x="134" y="178" width="24" height="45" rx="6" fill="#facc15" />
+    <text x="146" y="198" fill="#0b2545" font-family="'Arial Black', sans-serif" font-size="10" font-weight="900" text-anchor="middle">65</text>
+
+    <!-- Head & Headband -->
+    <circle cx="146" cy="156" r="12" fill="#fed7aa" />
+    <rect x="134" y="152" width="24" height="4.5" rx="1" fill="#ef4444" />
+    <!-- Big Happy Eyes & Smile -->
+    <circle cx="142" cy="158" r="1.5" fill="#0f172a" />
+    <circle cx="150" cy="158" r="1.5" fill="#0f172a" />
+    <path d="M143 163 Q146 167 149 163" fill="none" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round" />
+
+    <!-- Arm Holding Mini Pennant Flag -->
+    <path d="M134 185 L120 172 L116 156" stroke="#facc15" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <!-- Pennant Flagpole & Flag -->
+    <line x1="115" y1="140" x2="115" y2="185" stroke="#78350f" stroke-width="2.5" stroke-linecap="round" />
+    <polygon points="115,142 85,152 115,162" fill="#0284c7" />
+    <text x="104" y="155" fill="#ffffff" font-family="sans-serif" font-size="7" font-weight="bold">FEB</text>
+  </g>
+
+  <!-- Bottom Festival Ribbons Overlay -->
+  <g id="bottom-ribbon">
+    <path d="M0 292 Q380 282 760 292 L760 300 L0 300 Z" fill="#0b2545" />
+    <rect x="0" y="290" width="760" height="2.5" fill="#f59e0b" />
+  </g>
+</svg>

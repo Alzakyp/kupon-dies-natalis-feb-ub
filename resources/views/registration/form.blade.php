@@ -1,20 +1,105 @@
 <x-layouts.app>
 <section class="auth-shell">
     <div class="auth-header">
-        <div class="auth-eyebrow-wrap">
-            <p class="eyebrow">Pendaftaran peserta</p>
-            <span class="edition-badge">Lustrum XIII</span>
+        <div class="poster-badge-row">
+            <span class="eyebrow-tag">PENDAFTARAN PESERTA</span>
+            <span class="private-event-stamp" title="Khusus Warga FEB UB">PRIVATE EVENT</span>
         </div>
-        <h1 class="auth-title">Grand Fiesta — Fun Walk &amp; Mega Concert</h1>
-        <img class="event-illustration" src="{{ asset('images/event-illustration.svg') }}" alt="">
-        <div class="event-details"><strong>6 Desember 2026 · 06.00 WIB–selesai</strong><span>Lapangan Rektorat UB</span><span>Fun Walk · Konser · Bazar · Pertunjukan · Doorprize</span><span>Khusus warga FEB UB</span></div>
-        <p class="auth-location">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                <circle cx="12" cy="10" r="3"/>
-            </svg>
-            Pengambilan kupon wajib membawa KTM atau KTP asli.
-        </p>
+
+        <div class="poster-title-box">
+            <span class="event-brand-sub">FAKULTAS EKONOMI DAN BISNIS UNIVERSITAS BRAWIJAYA</span>
+            <h1 class="poster-main-title">
+                <span class="title-sub">FEB UB</span>
+                <span class="title-highlight">GRAND FIESTA</span>
+            </h1>
+            <p class="poster-tagline">Fun Walk &amp; Mega Concert</p>
+        </div>
+
+        <!-- Animated Cartoon Festival Illustration -->
+        <div class="event-illustration-wrap">
+            <img class="event-illustration" src="{{ asset('images/event-illustration.svg').'?v=4' }}" alt="Ilustrasi Festival Kartun FEB UB Grand Fiesta" width="760" height="300">
+        </div>
+
+        <!-- Poster-Style Event Information Showcase -->
+        <div class="event-poster-card">
+            <!-- Top Grid: Tanggal, Waktu & Lokasi -->
+            <div class="poster-meta-grid">
+                <!-- Date Badge (Desain Kalender Gantung ala Poster) -->
+                <div class="meta-item calendar-card">
+                    <div class="calendar-header">TANGGAL</div>
+                    <div class="calendar-body">
+                        <span class="cal-day">6</span>
+                        <div class="cal-details">
+                            <strong class="cal-month">DESEMBER</strong>
+                            <span class="cal-year">2026</span>
+                        </div>
+                    </div>
+                    <div class="calendar-time">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>06.00 WIB – Selesai</span>
+                    </div>
+                </div>
+
+                <!-- Venue Location Badge -->
+                <div class="meta-item venue-card">
+                    <div class="venue-label">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>LOKASI ACARA</span>
+                    </div>
+                    <strong class="venue-name">Lapangan Rektorat</strong>
+                    <span class="venue-sub">Universitas Brawijaya</span>
+                    <div class="target-attendee-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <span>Khusus Warga FEB UB</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle: Clipboard Rundown & Highlights ala Poster -->
+            <div class="poster-highlights-box">
+                <div class="highlights-header">
+                    <div class="clipboard-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+                    </div>
+                    <span class="highlights-title">RANGKAIAN ACARA (EVENT HIGHLIGHTS)</span>
+                </div>
+                <div class="event-chips-grid">
+                    <div class="event-chip chip-walk">
+                        <span class="chip-icon">🚶</span>
+                        <span>Morning Fun Walk &amp; Warm-Up</span>
+                    </div>
+                    <div class="event-chip chip-concert">
+                        <span class="chip-icon">🎸</span>
+                        <span>Mega Concert</span>
+                        <span class="guest-star-pill">Guest Star: KOTAK</span>
+                    </div>
+                    <div class="event-chip chip-bazar">
+                        <span class="chip-icon">🎪</span>
+                        <span>Pop-Up Culinary Market (Bazar)</span>
+                    </div>
+                    <div class="event-chip chip-prize">
+                        <span class="chip-icon">🎁</span>
+                        <span>Art Performance &amp; Lucky Draw (Doorprize)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom: Strict Requirements Banner (Tegas & Jelas) -->
+            <div class="poster-requirement-banner">
+                <div class="req-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <div class="req-content">
+                    <strong>Ketentuan Wajib Peserta:</strong>
+                    <p>Pengambilan kupon fisik di lokasi <u>wajib menunjukkan KTM atau KTP asli</u>. Kupon berlaku eksklusif untuk warga FEB UB (Mahasiswa Aktif, Alumni, Dosen &amp; Tendik).</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     @if(!config('app.registration_open') || !config('app.registration_mail_verified'))
