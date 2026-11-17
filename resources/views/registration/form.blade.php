@@ -95,7 +95,7 @@
         </script>
     @elseif($student)
         <div class="flow-step-card verified-card">
-            <div class="step-badge step-badge-success">Langkah 2 dari 3 • Data Terverifikasi</div>
+            <div class="step-badge step-badge-success">Data Terverifikasi</div>
             
             <div class="verified-identity-box">
                 <div class="verified-banner">

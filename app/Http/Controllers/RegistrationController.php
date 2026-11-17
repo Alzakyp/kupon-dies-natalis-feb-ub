@@ -61,6 +61,14 @@ class RegistrationController extends Controller
         $key = 'otp:'.$request->ip().':'.sha1(strtolower($data['email']));
         if (RateLimiter::tooManyAttempts($key, 5)) throw ValidationException::withMessages(['email' => 'Terlalu banyak permintaan. Coba lagi nanti.']);
         RateLimiter::hit($key, 600);
+        $pending = PendingRegistration::where('email', RegistrationService::email($data['email']))
+            ->where('phone', RegistrationService::phone($data['phone']))
+            ->where('student_registry_id', $registryId)->where('registration_type', $type)
+            ->where('otp_sent_at', '>', now()->subSeconds(60))->first();
+        if ($pending) {
+            $request->session()->put('registration_pending', $pending->id);
+            return redirect(url('/daftar'))->with('success', 'OTP sudah dikirim. Masukkan kode dari email atau tunggu countdown untuk mengirim ulang.');
+        }
         $pending = $service->requestOtp($data['email'], $data['phone'], $registryId, $type);
         $request->session()->put('registration_pending', $pending->id);
         return redirect(url('/daftar'))->with('success', 'OTP telah dikirim ke email Anda.');

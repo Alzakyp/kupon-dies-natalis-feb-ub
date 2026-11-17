@@ -14,6 +14,8 @@ class RegistrationRecoveryTest extends TestCase {
   \App\Models\StudentRegistry::create(['nim'=>'000123','name'=>'Test','education_level'=>'S1','study_program'=>'Akuntansi','registration_type'=>'active_student']);
   $this->post('/daftar/lookup',['type'=>'active_student','nim'=>'000123'])->assertRedirect();
   $this->post('/daftar/otp',['email'=>'recovery@example.com','phone'=>'081234567891'])->assertRedirect();
+  $this->post('/daftar/otp',['email'=>'recovery@example.com','phone'=>'081234567891'])->assertRedirect()->assertSessionHas('success','OTP sudah dikirim. Masukkan kode dari email atau tunggu countdown untuk mengirim ulang.');
+  Mail::assertSent(RegistrationOtp::class, 1);
   $this->travel(61)->seconds();
   $this->post('/daftar/otp/resend')->assertRedirect();
   Mail::assertSent(RegistrationOtp::class,2);
