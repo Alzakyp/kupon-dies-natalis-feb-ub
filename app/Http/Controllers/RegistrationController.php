@@ -29,6 +29,7 @@ class RegistrationController extends Controller
         return view('registration.form', [
             'available' => RegistrationService::available(),
             'student' => $registry ? StudentRegistry::find($registry) : null,
+            'pending' => ($pendingId = $request->session()->get('registration_pending')) ? PendingRegistration::find($pendingId) : null,
             'hasAlumniData' => StudentRegistry::where('registration_type', 'alumni')->exists(),
         ]);
     }
@@ -68,9 +69,16 @@ class RegistrationController extends Controller
     public function resendOtp(Request $request, RegistrationService $service)
     {
         $this->open();
-        $pending = PendingRegistration::findOrFail($request->session()->get('registration_pending'));
-        $service->requestOtp($pending->email, $pending->phone, $pending->student_registry_id, $pending->registration_type);
-        return back()->with('success', 'OTP baru telah dikirim ke email Anda.');
+        $pendingId = $request->session()->get('registration_pending');
+        if (!$pendingId) return redirect(url('/daftar'))->withErrors(['otp' => 'Sesi OTP berakhir. Silakan mulai kembali.']);
+        $pending = PendingRegistration::find($pendingId);
+        if (!$pending) {
+            $request->session()->forget('registration_pending');
+            return redirect(url('/daftar'))->withErrors(['otp' => 'Sesi OTP berakhir. Silakan mulai kembali.']);
+        }
+        $pending = $service->requestOtp($pending->email, $pending->phone, $pending->student_registry_id, $pending->registration_type);
+        $request->session()->put('registration_pending', $pending->id);
+        return redirect(url('/daftar'))->with('success', 'OTP baru telah dikirim ke email Anda.');
     }
 
     public function complete(Request $request, RegistrationService $service)

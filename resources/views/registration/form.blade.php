@@ -56,7 +56,10 @@
             <div class="otp-footer-actions">
                 <form method="post" action="{{ url('/daftar/otp/resend') }}" class="inline-action-form">
                     @csrf
-                    <button type="submit" class="btn-text">Kirim ulang OTP</button>
+                    @php
+                        $resendAt = $pending?->otp_sent_at?->copy()->addSeconds(60)->timestamp ?? now()->timestamp;
+                    @endphp
+                    <button id="resend-otp" type="submit" class="btn-text" data-resend-at="{{ $resendAt }}" disabled>Kirim ulang dalam 60 detik</button>
                 </form>
                 <span class="action-divider" aria-hidden="true">•</span>
                 <a href="{{ url('/daftar?reset=1') }}" class="btn-text text-danger">Ganti Data / Ulangi</a>
@@ -68,7 +71,16 @@
             const form = document.getElementById('otp-form');
             const button = document.getElementById('otp-submit');
             const status = document.getElementById('otp-status');
+            const resend = document.getElementById('resend-otp');
             let submitted = false;
+            const updateResend = () => {
+                if (!resend) return;
+                const remaining = Math.max(0, Number(resend.dataset.resendAt) - Math.floor(Date.now() / 1000));
+                resend.disabled = remaining > 0;
+                resend.textContent = remaining > 0 ? `Kirim ulang dalam ${remaining} detik` : 'Kirim ulang OTP';
+                if (remaining > 0) setTimeout(updateResend, 1000);
+            };
+            updateResend();
             input?.addEventListener('input', () => {
                 input.value = input.value.replace(/\D/g, '').slice(0, 6);
                 if (input.value.length === 6 && !submitted && form.reportValidity()) {
