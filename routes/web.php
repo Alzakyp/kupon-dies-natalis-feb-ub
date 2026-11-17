@@ -2,10 +2,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\TicketCheckController;
 use App\Http\Controllers\Staff\TicketController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\{AuthController,BatchController,ExportController,SettingController};
 Route::fallback(fn () => abort(404));
+Route::get('/cek-tiket',[TicketCheckController::class,'form']);
+Route::post('/cek-tiket',[TicketCheckController::class,'lookup'])->middleware('throttle:20,1');
 Route::get('/daftar',[RegistrationController::class,'form']);
 Route::post('/daftar/lookup',[RegistrationController::class,'lookup']);
 Route::post('/daftar/otp',[RegistrationController::class,'otp']);
