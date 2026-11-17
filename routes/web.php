@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\{AuthController,BatchController,ExportController,SettingController};
 Route::fallback(fn () => abort(404));
 Route::get('/daftar',[RegistrationController::class,'form']);
+Route::post('/daftar/lookup',[RegistrationController::class,'lookup']);
 Route::post('/daftar/otp',[RegistrationController::class,'otp']);
 Route::post('/daftar/otp/resend',[RegistrationController::class,'resendOtp'])->middleware('throttle:5,10');
 Route::post('/daftar',[RegistrationController::class,'complete']);

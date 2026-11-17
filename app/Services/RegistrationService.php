@@ -7,6 +7,7 @@ use App\Mail\TicketIssued;
 use App\Models\Coupon;
 use App\Models\PendingRegistration;
 use App\Models\Ticket;
+use App\Models\StudentRegistry;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -32,10 +33,15 @@ class RegistrationService
             ->whereHas('batch', fn ($q) => $q->where('active', true)->where('expires_at', '>', now()))->exists();
     }
 
-    public function requestOtp(string $email, string $phone): PendingRegistration
+    public function requestOtp(string $email, string $phone, ?int $registryId = null, ?string $registrationType = null): PendingRegistration
     {
         $email = self::email($email);
         $phone = self::phone($phone);
+        if (!$registryId || !$registrationType) throw ValidationException::withMessages(['nim' => 'Validasi NIM terlebih dahulu.']);
+        if (!StudentRegistry::whereKey($registryId)->where('registration_type', $registrationType)->exists())
+            throw ValidationException::withMessages(['nim' => 'Data NIM tidak valid.']);
+        if (Ticket::where('student_registry_id', $registryId)->exists())
+            throw ValidationException::withMessages(['nim' => 'NIM sudah terdaftar.']);
         if (!self::available()) throw ValidationException::withMessages(['email' => 'Kupon acara habis.']);
         if (Ticket::where('email', $email)->orWhere('phone', $phone)->exists())
             throw ValidationException::withMessages(['email' => 'Pendaftaran tidak dapat diproses. Hubungi petugas.']);
@@ -48,7 +54,7 @@ class RegistrationService
 
         $otp = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
         $pending = PendingRegistration::updateOrCreate(['email' => $email], [
-            'phone' => $phone, 'otp_hash' => Hash::make($otp), 'otp_expires_at' => now()->addMinutes(10),
+            'phone' => $phone, 'student_registry_id' => $registryId, 'registration_type' => $registrationType, 'otp_hash' => Hash::make($otp), 'otp_expires_at' => now()->addMinutes(10),
             'otp_attempts' => 0, 'otp_sent_at' => now(),
         ]);
         Mail::to($email)->send(new RegistrationOtp($otp));
@@ -59,6 +65,9 @@ class RegistrationService
     {
         $ticket = DB::transaction(function () use ($pendingId, $otp) {
             $pending = PendingRegistration::lockForUpdate()->findOrFail($pendingId);
+            $registry = StudentRegistry::lockForUpdate()->find($pending->student_registry_id);
+            if (!$registry || $registry->registration_type !== $pending->registration_type || Ticket::where('student_registry_id', $registry->id)->exists())
+                throw ValidationException::withMessages(['nim' => 'NIM tidak valid atau sudah terdaftar.']);
             if ($pending->otp_expires_at->isPast() || $pending->otp_attempts >= 5)
                 throw ValidationException::withMessages(['otp' => 'OTP kedaluwarsa atau terkunci.']);
             if (!Hash::check($otp, $pending->otp_hash)) {
@@ -74,7 +83,7 @@ class RegistrationService
             $ticket = Ticket::create([
                 'number' => 'FEB65-'.strtoupper(Str::random(10)),
                 'barcode' => Str::random(48), 'email' => $pending->email,
-                'phone' => $pending->phone, 'coupon_id' => $coupon->id,
+                'phone' => $pending->phone, 'student_registry_id' => $pending->student_registry_id, 'registration_type' => $pending->registration_type, 'coupon_id' => $coupon->id,
             ]);
             $pending->delete();
             return $ticket;
