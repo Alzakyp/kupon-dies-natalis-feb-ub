@@ -33,6 +33,8 @@
     @if($errors->any())<p class="notice error" role="alert">{{ $errors->first() }}</p>@endif
     {{ $slot }}
 </main>
+<div id="submit-loading" class="submit-loading" hidden role="status" aria-live="polite" aria-label="Permintaan sedang diproses"><div class="submit-loading-box"><span class="submit-spinner" aria-hidden="true"></span><strong>Memproses…</strong><small>Mohon tunggu dan jangan tutup halaman.</small></div></div>
 <footer>Fakultas Ekonomi dan Bisnis Universitas Brawijaya</footer>
+<script src="{{ asset('js/submit-loading.js') }}" defer></script>
 </body>
 </html>
