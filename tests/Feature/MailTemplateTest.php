@@ -24,6 +24,6 @@ class MailTemplateTest extends TestCase
         $this->assertStringContainsString('FEB65-TEST', $html);
         $this->assertStringContainsString('Ruang Kepegawaian Gedung Utama Lt. 2', $html);
         $this->assertStringContainsString('Lustrum XIII', $html);
-        $this->assertStringContainsString('cid:', $html);
+        $this->assertStringContainsString(str_repeat('a', 48), $html);
     }
 }
