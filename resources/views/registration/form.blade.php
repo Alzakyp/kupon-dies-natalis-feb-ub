@@ -55,23 +55,80 @@
                 </div>
             </div>
 
-            <!-- Middle: Clipboard Rundown & Highlights ala Poster -->
+            <!-- Special Guest Star: Band KOTAK Spotlight Showcase -->
+            <div class="guest-star-spotlight-card">
+                <div class="spotlight-top-row">
+                    <span class="spotlight-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        SPECIAL GUEST STAR
+                    </span>
+                    <span class="concert-pill">MEGA CONCERT DIES NATALIS 65</span>
+                </div>
+
+                <div class="band-headline-wrap">
+                    <div class="band-star-group" aria-hidden="true">
+                        <span class="gold-star">⭐</span>
+                    </div>
+                    <div class="band-name-box">
+                        <h2 class="band-rock-title">BAND KOTAK</h2>
+                        <span class="band-lineup">Tantri • Cella • Chua</span>
+                    </div>
+                    <div class="band-star-group" aria-hidden="true">
+                        <span class="gold-star">⭐</span>
+                    </div>
+                </div>
+
+                <p class="band-hits-caption">
+                    🎸 Pelantun Lagu Hits: <strong>Beraksi • Pelan-Pelan Saja • Masih Cinta • Terbang</strong>
+                </p>
+
+                <!-- Interactive Backsound Music Player -->
+                <div class="music-player-widget">
+                    <div class="player-left">
+                        <button type="button" id="btn-toggle-audio" class="btn-audio-play" aria-label="Putar Lagu Beraksi - Band Kotak">
+                            <span class="play-icon" id="play-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            </span>
+                            <span class="pause-icon" id="pause-icon" style="display:none;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                            </span>
+                            <span id="btn-audio-text">Putar Backsound</span>
+                        </button>
+                        <div class="audio-info">
+                            <div class="audio-title-row">
+                                <strong class="audio-song-name">Kotak — Beraksi</strong>
+                                <span class="audio-status-pill" id="audio-status-pill">Klik untuk memutar</span>
+                            </div>
+                            <div class="audio-lyrics" id="audio-lyrics">
+                                <span>🎤 <em>"Yang ada di sana, yang ada di sini... Semua ikut bernyanyi! Kita beraksi!"</em></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="equalizer-bars" id="equalizer-bars" aria-hidden="true">
+                        <span class="bar bar-1"></span>
+                        <span class="bar bar-2"></span>
+                        <span class="bar bar-3"></span>
+                        <span class="bar bar-4"></span>
+                        <span class="bar bar-5"></span>
+                    </div>
+
+                    <audio id="event-audio" preload="none" src="{{ asset('audio/kotak-beraksi.mp3') }}"></audio>
+                </div>
+            </div>
+
+            <!-- Middle: Highlights Acara Lainnya ala Poster -->
             <div class="poster-highlights-box">
                 <div class="highlights-header">
                     <div class="clipboard-icon" aria-hidden="true">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
                     </div>
-                    <span class="highlights-title">RANGKAIAN ACARA (EVENT HIGHLIGHTS)</span>
+                    <span class="highlights-title">RANGKAIAN ACARA LAINNYA</span>
                 </div>
                 <div class="event-chips-grid">
                     <div class="event-chip chip-walk">
                         <span class="chip-icon">🚶</span>
                         <span>Morning Fun Walk &amp; Warm-Up</span>
-                    </div>
-                    <div class="event-chip chip-concert">
-                        <span class="chip-icon">🎸</span>
-                        <span>Mega Concert</span>
-                        <span class="guest-star-pill">Guest Star: KOTAK</span>
                     </div>
                     <div class="event-chip chip-bazar">
                         <span class="chip-icon">🎪</span>
@@ -476,5 +533,61 @@
         });
         </script>
     @endif
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var audio = document.getElementById('event-audio');
+        var btnToggle = document.getElementById('btn-toggle-audio');
+        var playIcon = document.getElementById('play-icon');
+        var pauseIcon = document.getElementById('pause-icon');
+        var eqBars = document.getElementById('equalizer-bars');
+        var statusPill = document.getElementById('audio-status-pill');
+        var btnText = document.getElementById('btn-audio-text');
+
+        if (btnToggle && audio) {
+            btnToggle.addEventListener('click', function () {
+                if (audio.paused) {
+                    if (audio.currentTime < 1 || audio.currentTime > 200) {
+                        // Lompat langsung ke detik 27 saat Tantri berteriak dan lirik lagu Beraksi dimulai
+                        audio.currentTime = 27;
+                    }
+                    audio.play().then(function () {
+                        if (playIcon) playIcon.style.display = 'none';
+                        if (pauseIcon) pauseIcon.style.display = 'inline-block';
+                        if (eqBars) eqBars.classList.add('playing');
+                        if (statusPill) {
+                            statusPill.textContent = 'Sedang Beraksi 🎵';
+                            statusPill.classList.add('playing');
+                        }
+                        if (btnText) btnText.textContent = 'Jeda Musik';
+                    }).catch(function (e) {
+                        console.log('Audio playback: ', e);
+                    });
+                } else {
+                    audio.pause();
+                    if (playIcon) playIcon.style.display = 'inline-block';
+                    if (pauseIcon) pauseIcon.style.display = 'none';
+                    if (eqBars) eqBars.classList.remove('playing');
+                    if (statusPill) {
+                        statusPill.textContent = 'Klik untuk memutar';
+                        statusPill.classList.remove('playing');
+                    }
+                    if (btnText) btnText.textContent = 'Putar Backsound';
+                }
+            });
+
+            audio.addEventListener('ended', function () {
+                if (playIcon) playIcon.style.display = 'inline-block';
+                if (pauseIcon) pauseIcon.style.display = 'none';
+                if (eqBars) eqBars.classList.remove('playing');
+                if (statusPill) {
+                    statusPill.textContent = 'Klik untuk memutar';
+                    statusPill.classList.remove('playing');
+                }
+                if (btnText) btnText.textContent = 'Putar Backsound';
+            });
+        }
+    });
+    </script>
 </section>
 </x-layouts.app>
