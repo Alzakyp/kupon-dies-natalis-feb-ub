@@ -89,7 +89,7 @@
                             <span class="play-icon" id="play-icon">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             </span>
-                            <span class="pause-icon" id="pause-icon" style="display:none;">
+                            <span class="pause-icon hidden" id="pause-icon">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
                             </span>
                             <span id="btn-audio-text">Putar Backsound</span>
@@ -534,108 +534,6 @@
         </script>
     @endif
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var audio = document.getElementById('event-audio');
-        var btnToggle = document.getElementById('btn-toggle-audio');
-        var playIcon = document.getElementById('play-icon');
-        var pauseIcon = document.getElementById('pause-icon');
-        var eqBars = document.getElementById('equalizer-bars');
-        var statusPill = document.getElementById('audio-status-pill');
-        var btnText = document.getElementById('btn-audio-text');
-
-        if (!audio) return;
-
-        function setPlayingUI() {
-            if (playIcon) playIcon.style.display = 'none';
-            if (pauseIcon) pauseIcon.style.display = 'inline-block';
-            if (eqBars) eqBars.classList.add('playing');
-            if (statusPill) {
-                statusPill.textContent = 'Sedang Beraksi 🎵';
-                statusPill.classList.add('playing');
-            }
-            if (btnText) btnText.textContent = 'Jeda Musik';
-        }
-
-        function setPausedUI() {
-            if (playIcon) playIcon.style.display = 'inline-block';
-            if (pauseIcon) pauseIcon.style.display = 'none';
-            if (eqBars) eqBars.classList.remove('playing');
-            if (statusPill) {
-                statusPill.textContent = 'Musik Dijeda';
-                statusPill.classList.remove('playing');
-            }
-            if (btnText) btnText.textContent = 'Lanjut Musik';
-        }
-
-        function seekToLyricalIntro() {
-            if (audio.currentTime < 26 || audio.currentTime > 200) {
-                try {
-                    audio.currentTime = 27;
-                } catch (e) {}
-            }
-        }
-
-        audio.addEventListener('loadedmetadata', seekToLyricalIntro);
-        audio.addEventListener('canplay', function () {
-            if (audio.currentTime < 26) seekToLyricalIntro();
-        });
-
-        audio.addEventListener('play', setPlayingUI);
-        audio.addEventListener('pause', setPausedUI);
-        audio.addEventListener('ended', setPausedUI);
-
-        function attemptPlay() {
-            seekToLyricalIntro();
-            var promise = audio.play();
-            if (promise !== undefined) {
-                promise.then(function () {
-                    seekToLyricalIntro();
-                    setPlayingUI();
-                }).catch(function () {
-                    setupFirstGesture();
-                });
-            }
-        }
-
-        var gestureArmed = true;
-        function onUserGesture() {
-            if (!gestureArmed) return;
-            gestureArmed = false;
-            ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'pointerdown'].forEach(function (evt) {
-                window.removeEventListener(evt, onUserGesture, true);
-                document.removeEventListener(evt, onUserGesture, true);
-            });
-            if (audio.paused) {
-                attemptPlay();
-            }
-        }
-
-        function setupFirstGesture() {
-            ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'pointerdown'].forEach(function (evt) {
-                window.addEventListener(evt, onUserGesture, { once: true, passive: true, capture: true });
-                document.addEventListener(evt, onUserGesture, { once: true, passive: true, capture: true });
-            });
-        }
-
-        // 1. Coba autoplay langsung
-        attemptPlay();
-
-        // 2. Siapkan fallback otomatis saat interaksi pertama jika diblokir browser
-        setupFirstGesture();
-
-        // 3. Tombol manual Play / Pause
-        if (btnToggle) {
-            btnToggle.addEventListener('click', function (e) {
-                e.stopPropagation();
-                if (audio.paused) {
-                    attemptPlay();
-                } else {
-                    audio.pause();
-                }
-            });
-        }
-    });
-    </script>
+    <script src="{{ asset('js/event-audio.js') }}" defer></script>
 </section>
 </x-layouts.app>
