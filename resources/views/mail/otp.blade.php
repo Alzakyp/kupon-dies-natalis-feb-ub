@@ -6,7 +6,7 @@
 <tr><td style="padding:32px;font-family:Arial,sans-serif;">
 <p style="margin:0 0 8px;color:#77500e;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Verifikasi pendaftaran</p>
 <h1 style="margin:0 0 16px;color:#092b4c;font-size:26px;line-height:1.25;">Kode OTP Grand Fiesta</h1>
-<p style="font-size:14px;line-height:1.6;">6 Desember 2026 · 06.00 WIB–selesai · Lapangan Rektorat UB. Pengambilan kupon wajib membawa KTM atau KTP asli.</p>
+<p style="font-size:14px;line-height:1.6;">6 Desember 2026 · 05.30 WIB–selesai · Lapangan Rektorat UB. Pengambilan kupon wajib membawa KTM atau KTP asli.</p>
 <p style="margin:0 0 22px;font-size:16px;line-height:1.6;">Masukkan kode berikut pada halaman pendaftaran:</p>
 <div style="padding:18px;text-align:center;background:#fbf4df;border:1px solid #d3a128;color:#092b4c;font-family:Courier New,monospace;font-size:34px;font-weight:700;letter-spacing:8px;">{{ $otp }}</div>
 <p style="margin:22px 0 0;font-size:15px;line-height:1.6;"><strong>Kode berlaku selama 10 menit.</strong> Jangan berikan kode ini kepada siapa pun.</p>

@@ -6,7 +6,7 @@
 <p style="margin:0 0 8px;color:#77500e;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Tiket peserta</p>
 <h1 style="margin:0 0 16px;color:#092b4c;font-size:26px;line-height:1.25;">Tiket Anda siap</h1>
 
-<p style="margin:0 0 20px;font-size:15px;line-height:1.6;">Grand Fiesta — Fun Walk &amp; Mega Concert<br><strong>6 Desember 2026 · 06.00 WIB–selesai · Lapangan Rektorat UB</strong></p><p style="font-size:15px;line-height:1.6;">Tunjukkan QR kepada petugas. Pengambilan kupon wajib membawa <strong>KTM atau KTP asli</strong>.</p>
+<p style="margin:0 0 20px;font-size:15px;line-height:1.6;">Grand Fiesta — Fun Walk &amp; FEB Unity Concert<br><strong>6 Desember 2026 · 05.30 WIB–selesai · Lapangan Rektorat UB</strong></p><p style="font-size:15px;line-height:1.6;">Tunjukkan QR kepada petugas. Pengambilan kupon wajib membawa <strong>KTM atau KTP asli</strong>.</p>
 <div style="padding:18px;text-align:center;background:#ffffff;border:1px solid #d5dce2;"><img src="{{ $message->embedData($barcodePng, 'ticket-qr.png', 'image/png') }}" width="300" height="300" alt="QR barcode tiket {{ $ticket->number }}" style="display:block;width:300px;height:300px;max-width:100%;margin:0 auto;"></div>
 <p style="margin:18px 0 0;text-align:center;color:#5b6876;font-family:Courier New,monospace;font-size:12px;overflow-wrap:anywhere;">{{ $ticket->barcode }}</p>
 <p style="margin:22px 0 0;font-size:14px;line-height:1.6;">Petugas akan memindai QR untuk memeriksa data peserta. Kupon diserahkan secara manual.</p>
