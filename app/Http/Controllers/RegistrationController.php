@@ -62,7 +62,7 @@ class RegistrationController extends Controller
         RateLimiter::hit($key, 600);
         $pending = $service->requestOtp($data['email'], $data['phone'], $registryId, $type);
         $request->session()->put('registration_pending', $pending->id);
-        return back()->with('success', 'OTP telah dikirim ke email Anda.');
+        return redirect(url('/daftar'))->with('success', 'OTP telah dikirim ke email Anda.');
     }
 
     public function resendOtp(Request $request, RegistrationService $service)

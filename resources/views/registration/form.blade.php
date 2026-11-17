@@ -40,17 +40,17 @@
                 <p class="otp-subtitle">Kode verifikasi 6 digit telah dikirimkan ke email Anda. Silakan masukkan kode untuk mengonfirmasi penerimaan tiket.</p>
             </div>
 
-            <form method="post" action="{{ url('/daftar') }}" class="modern-form">
+            <form id="otp-form" method="post" action="{{ url('/daftar') }}" class="modern-form">
                 @csrf
                 <div class="form-group otp-form-group">
                     <label for="otp-input" class="form-label">
                         <span>Kode OTP email</span>
                         <span class="label-badge">6 Digit Angka</span>
                     </label>
-                    <input id="otp-input" class="otp-input-field" name="otp" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="••••••" required autofocus autocomplete="one-time-code">
-                    <small class="form-hint">Cek folder Inbox atau Spam email Anda.</small>
+                    <input id="otp-input" class="otp-input-field" name="otp" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="••••••" required autofocus autocomplete="one-time-code" aria-describedby="otp-status">
+                    <small id="otp-status" class="form-hint" role="status">Cek folder Inbox atau Spam email Anda. Form otomatis diproses setelah 6 digit terisi.</small>
                 </div>
-                <button type="submit" class="btn-primary btn-block">Daftar & Kirim Tiket</button>
+                <button id="otp-submit" type="submit" class="btn-primary btn-block">Verifikasi & Selesaikan Pendaftaran</button>
             </form>
 
             <div class="otp-footer-actions">
@@ -62,6 +62,25 @@
                 <a href="{{ url('/daftar?reset=1') }}" class="btn-text text-danger">Ganti Data / Ulangi</a>
             </div>
         </div>
+        <script>
+        (() => {
+            const input = document.getElementById('otp-input');
+            const form = document.getElementById('otp-form');
+            const button = document.getElementById('otp-submit');
+            const status = document.getElementById('otp-status');
+            let submitted = false;
+            input?.addEventListener('input', () => {
+                input.value = input.value.replace(/\D/g, '').slice(0, 6);
+                if (input.value.length === 6 && !submitted && form.reportValidity()) {
+                    submitted = true;
+                    button.disabled = true;
+                    button.textContent = 'Memverifikasi…';
+                    status.textContent = 'Kode sedang diverifikasi. Mohon tunggu.';
+                    form.requestSubmit();
+                }
+            });
+        })();
+        </script>
     @elseif($student)
         <div class="flow-step-card verified-card">
             <div class="step-badge step-badge-success">Langkah 2 dari 3 • Data Terverifikasi</div>
