@@ -23,4 +23,34 @@ class StaffDashboardTest extends TestCase
             ->assertOk()->assertSee('Dashboard petugas')->assertSee('Scan QR tiket')
             ->assertSee('Total tiket')->assertSee('Belum check-in');
     }
+
+    public function test_staff_ticket_detail_shows_study_program_and_student_info(): void
+    {
+        $batch = Batch::create(['name' => 'Event', 'active' => true, 'expires_at' => now()->addDays(7)]);
+        $coupon = $batch->coupons()->create(['code' => 'TICKET-INFO-1']);
+        $student = \App\Models\StudentRegistry::create([
+            'nim' => '2231730129',
+            'name' => 'Al Zaky Putra',
+            'education_level' => 'S1',
+            'study_program' => 'Akuntansi',
+            'registration_type' => 'active_student',
+        ]);
+        $ticket = Ticket::create([
+            'number' => 'FEB65-DETAIL',
+            'barcode' => str_repeat('y', 48),
+            'email' => 'zaky@example.com',
+            'phone' => '6281210820130',
+            'coupon_id' => $coupon->id,
+            'student_registry_id' => $student->id,
+            'registration_type' => 'active_student',
+        ]);
+        $staff = User::factory()->create(['role' => 'staff']);
+
+        $res = $this->actingAs($staff)->get('/staff/tickets/'.$ticket->id);
+        $res->assertOk();
+        $res->assertSee('Al Zaky Putra');
+        $res->assertSee('Akuntansi');
+        $res->assertSee('2231730129');
+        $res->assertSee('Konfirmasi check-in');
+    }
 }

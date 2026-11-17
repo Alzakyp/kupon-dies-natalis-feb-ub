@@ -1367,3 +1367,390 @@ nav .link-button:focus-visible,
         justify-content: flex-start;
     }
 }
+
+
+/* Staff Ticket & Scanner Detail UI */
+.ticket-detail-container {
+    max-width: 760px;
+    margin: 0 auto 60px;
+}
+.ticket-header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.btn-back-scanner {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--navy);
+    text-decoration: none;
+    padding: 6px 12px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+.btn-back-scanner:hover {
+    background: #eef3f8;
+    border-color: var(--navy);
+    transform: translateX(-2px);
+}
+.ticket-nav-badge {
+    font-size: 0.725rem;
+    font-weight: 750;
+    color: var(--navy);
+    background: #eef3f8;
+    padding: 3px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.ticket-title-header {
+    margin-bottom: 24px;
+}
+.ticket-num-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+.ticket-num-row h1 {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    letter-spacing: -0.02em;
+}
+
+/* Status Warning Pill */
+.status-warning {
+    background: #fff8e6;
+    color: #855d08;
+    border: 1px solid #fae8a7;
+}
+.status-dot-warning {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d3a128;
+}
+
+/* Check-in Notice Banners */
+.checkin-notice-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+.notice-pending {
+    background: #fffdf5;
+    border: 1.5px solid #fae8a7;
+    color: #694400;
+}
+.notice-pending .notice-icon {
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+.notice-success {
+    background: #ecf8f1;
+    border: 1.5px solid #bce6ce;
+    color: #104a31;
+}
+.notice-success .notice-icon {
+    color: var(--ok);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+.notice-content strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 750;
+    margin-bottom: 3px;
+}
+.notice-content p {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.45;
+}
+
+/* Ticket Cards */
+.ticket-card {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 6px 20px rgba(6, 29, 53, 0.05);
+    margin-bottom: 24px;
+}
+.participant-card {
+    border-top: 4px solid var(--navy);
+}
+.coupon-info-card {
+    border-top: 4px solid var(--gold);
+}
+.ticket-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #edf2f7;
+}
+.card-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.header-icon-bubble {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #eef3f8;
+    color: var(--navy);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+.header-icon-bubble.icon-gold {
+    background: var(--gold-pale);
+    color: #855d08;
+}
+.ticket-card-header h2 {
+    margin: 0 0 2px;
+    font-size: 1.15rem;
+    font-weight: 750;
+    color: var(--navy);
+}
+.card-subtitle {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+.participant-name-banner {
+    padding: 12px 18px;
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+.verified-subcaption {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 3px;
+}
+.participant-fullname {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.015em;
+}
+.participant-details-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.mono-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Coupon info inside card */
+.coupon-code-display {
+    padding: 14px 18px;
+    background: #fafbfc;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+.coupon-code-display small {
+    display: block;
+    font-size: 0.725rem;
+    font-weight: 750;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+}
+.coupon-code-pill {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: 0.03em;
+    word-break: break-all;
+}
+
+/* Ticket Action Box */
+.ticket-action-box {
+    margin-top: 24px;
+}
+.action-submit-form {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.btn-large {
+    min-height: 54px !important;
+    font-size: 1.05rem !important;
+    border-radius: 10px !important;
+}
+.btn-checkin {
+    background: var(--navy) !important;
+}
+.btn-checkin:hover {
+    background: #114875 !important;
+}
+.btn-print {
+    background: #0b6840 !important;
+}
+.btn-print:hover {
+    background: #0e7d4d !important;
+}
+.checkedin-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.btn-view-print {
+    min-height: 54px !important;
+    padding: 0 20px !important;
+    border-radius: 10px !important;
+}
+.scan-next-wrap {
+    text-align: center;
+    margin-top: 20px;
+}
+.link-scan-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--navy);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.link-scan-next:hover {
+    color: #114875;
+}
+
+/* Scanner Page Additional Styles */
+.scanner-panel {
+    border-top: 4px solid var(--navy) !important;
+    border-radius: 12px;
+}
+.scanner-header-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #edf2f7;
+}
+.scanner-header-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #eef3f8;
+    color: var(--navy);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+.scanner-form {
+    display: flex !important;
+    align-items: flex-end !important;
+    gap: 14px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    flex-wrap: wrap;
+}
+.btn-scanner-submit {
+    min-height: 50px;
+    padding: 10px 22px !important;
+}
+.recent-tickets-section {
+    margin-top: 36px;
+}
+.ticket-link {
+    font-weight: 750;
+    color: var(--navy);
+    text-decoration: none;
+}
+.ticket-link:hover {
+    text-decoration: underline;
+}
+.prodi-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--gold-pale);
+    color: #77500e;
+    font-size: 0.775rem;
+    font-weight: 700;
+    border-radius: 4px;
+    border: 1px solid rgba(211, 161, 40, 0.4);
+}
+.btn-sm-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    background: #eef3f8;
+    color: var(--navy);
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+.btn-sm-action:hover {
+    background: var(--navy);
+    color: #ffffff;
+}
+.small-text {
+    font-size: 0.8rem;
+}
+
+@media (max-width: 640px) {
+    .participant-details-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .scanner-form {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+    .btn-scanner-submit {
+        width: 100%;
+    }
+    .checkedin-actions-row {
+        flex-direction: column;
+    }
+    .btn-view-print {
+        width: 100%;
+        justify-content: center;
+    }
+}

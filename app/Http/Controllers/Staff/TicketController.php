@@ -11,7 +11,7 @@ class TicketController extends Controller {
         if (!$ticket) return back()->withErrors(['barcode'=>'Tiket tidak ditemukan.']);
         return redirect(url('/staff/tickets/'.$ticket->id));
     }
-    public function show(Ticket $ticket) { return view('staff.ticket',['ticket'=>$ticket->load('coupon.batch')]); }
+    public function show(Ticket $ticket) { return view('staff.ticket',['ticket'=>$ticket->load(['coupon.batch', 'studentRegistry', 'checkedInBy'])]); }
     public function checkIn(Request $request, Ticket $ticket) {
         Ticket::whereKey($ticket->id)->whereNull('checked_in_at')->update(['checked_in_at'=>now(),'checked_in_by'=>$request->user()->id]);
         return redirect(url('/staff/tickets/'.$ticket->id))->with('success','Check-in tercatat.');
