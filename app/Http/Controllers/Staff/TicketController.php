@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 class TicketController extends Controller {
-    public function index() { return view('staff.scan'); }
+    public function index() { return view('staff.scan', ['total'=>Ticket::count(), 'checkedIn'=>Ticket::whereNotNull('checked_in_at')->count(), 'recent'=>Ticket::with('studentRegistry')->latest()->limit(10)->get()]); }
     public function lookup(Request $request) {
         $data=$request->validate(['barcode'=>'required|string|max:200']);
         $ticket=Ticket::where('barcode',trim($data['barcode']))->first();
