@@ -77,5 +77,20 @@ class RegistrationCategoryTest extends TestCase
         $resetRes = $this->get('/daftar?reset=1');
         $resetRes->assertRedirect('/daftar');
         $this->get('/daftar')->assertDontSee('Budi Santoso')->assertSee('Cek NIM');
+
+        // Test manual alumni back button flow
+        $this->post('/daftar/lookup', ['type' => 'alumni', 'nim' => '2231730129'])->assertRedirect('/daftar');
+        $manualRes = $this->get('/daftar');
+        $manualRes->assertOk();
+        $manualRes->assertSee('Data Alumni Manual');
+        $manualRes->assertSee('Lengkapi data alumni');
+        $manualRes->assertSee('Ganti NIM / Kembali');
+        $manualRes->assertSee('Kembali ke Pencarian NIM');
+        $manualRes->assertSee('daftar?reset=1&amp;type=alumni', false);
+
+        // Clicking reset with type=alumni redirects to /daftar?type=alumni
+        $resetAlumni = $this->get('/daftar?reset=1&type=alumni');
+        $resetAlumni->assertRedirect(url('/daftar?type=alumni'));
+        $this->get('/daftar?type=alumni')->assertDontSee('Lengkapi data alumni')->assertSee('Cek NIM');
     }
 }

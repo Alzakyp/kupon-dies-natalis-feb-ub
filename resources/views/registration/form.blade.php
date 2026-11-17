@@ -239,16 +239,84 @@
         </script>
     @elseif($manualAlumni)
         <div class="flow-step-card verified-card">
-            <div class="step-badge step-badge-success">Data Alumni Manual</div>
+            <div class="step-card-top-nav">
+                <div class="step-badge step-badge-success">Data Alumni Manual</div>
+                <a href="{{ url('/daftar?reset=1&type=alumni') }}" class="btn-change-nim" title="Ganti NIM jika salah input">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    <span>Ganti NIM / Kembali</span>
+                </a>
+            </div>
+
             <h2>Lengkapi data alumni</h2>
             <p>NIM <strong>{{ $manualAlumni['nim'] }}</strong> belum ditemukan. Isi data sesuai identitas akademik.</p>
-            <form method="post" action="{{ url('/daftar/otp') }}" class="modern-form">@csrf
-                <label>Nama lengkap<input name="name" value="{{ old('name') }}" required maxlength="150"></label>
-                <label>Jenjang<select name="education_level" required><option value="">Pilih jenjang</option>@foreach(['Diploma','Sarjana S1','Magister S2','Doktor S3','Profesi'] as $level)<option value="{{ $level }}">{{ $level }}</option>@endforeach</select></label>
-                <label>Program studi<select name="study_program" required><option value="">Pilih program studi</option>@foreach($studyPrograms as $program)<option value="{{ $program }}">{{ $program }}</option>@endforeach</select></label>
-                <label>Email aktif<input type="email" name="email" value="{{ old('email') }}" required autocomplete="email"></label>
-                <label>Nomor HP<input type="tel" name="phone" value="{{ old('phone') }}" required autocomplete="tel"></label>
-                <button type="submit" class="btn-primary btn-block">Kirim OTP</button>
+            <form method="post" action="{{ url('/daftar/otp') }}" class="modern-form">
+                @csrf
+                <div class="form-group">
+                    <label for="manual-name" class="form-label">
+                        <span>Nama lengkap</span>
+                        <span class="label-badge">Sesuai Ijazah/KTP</span>
+                    </label>
+                    <input id="manual-name" name="name" value="{{ old('name') }}" required maxlength="150" placeholder="Masukkan nama lengkap Anda">
+                </div>
+
+                <div class="form-group">
+                    <label for="manual-level" class="form-label">
+                        <span>Jenjang</span>
+                        <span class="label-badge">Wajib</span>
+                    </label>
+                    <select id="manual-level" name="education_level" required>
+                        <option value="">Pilih jenjang</option>
+                        @foreach(['Diploma','Sarjana S1','Magister S2','Doktor S3','Profesi'] as $level)
+                            <option value="{{ $level }}" {{ old('education_level') === $level ? 'selected' : '' }}>{{ $level }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="manual-prodi" class="form-label">
+                        <span>Program studi</span>
+                        <span class="label-badge">Wajib</span>
+                    </label>
+                    <select id="manual-prodi" name="study_program" required>
+                        <option value="">Pilih program studi</option>
+                        @foreach($studyPrograms as $program)
+                            <option value="{{ $program }}" {{ old('study_program') === $program ? 'selected' : '' }}>{{ $program }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="manual-email" class="form-label">
+                        <span>Email aktif</span>
+                        <span class="label-badge">Wajib</span>
+                    </label>
+                    <input type="email" id="manual-email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="nama@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="manual-phone" class="form-label">
+                        <span>Nomor HP</span>
+                        <span class="label-badge">WhatsApp Aktif</span>
+                    </label>
+                    <input type="tel" id="manual-phone" name="phone" value="{{ old('phone') }}" required autocomplete="tel" placeholder="081234567890">
+                </div>
+
+                <div class="form-actions-group">
+                    <button type="submit" class="btn-primary btn-block">
+                        <span>Kirim OTP</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    <a href="{{ url('/daftar?reset=1&type=alumni') }}" class="btn-back-secondary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        <span>Kembali ke Pencarian NIM</span>
+                    </a>
+                </div>
             </form>
         </div>
     @elseif($student)

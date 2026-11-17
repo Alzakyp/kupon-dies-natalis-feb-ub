@@ -914,6 +914,47 @@
     background: #f0f4f8;
     border-color: var(--navy);
 }
+.step-card-top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+.step-card-top-nav .step-badge {
+    margin-bottom: 0;
+}
+.form-actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+}
+.btn-back-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #f8fafc;
+    color: var(--navy);
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+.btn-back-secondary:hover {
+    background: #e2e8f0;
+    border-color: var(--navy);
+    color: var(--navy);
+}
 .verified-header {
     padding: 18px 18px 6px;
 }

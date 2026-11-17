@@ -21,8 +21,9 @@ class RegistrationController extends Controller
     public function form(Request $request)
     {
         if ($request->query('reset')) {
+            $type = $request->query('type');
             $request->session()->forget(['student_registry_id', 'registration_type', 'registration_pending', 'alumni_nim']);
-            return redirect(url('/daftar'));
+            return redirect($type ? url('/daftar?type='.$type) : url('/daftar'));
         }
 
         $registry = $request->session()->get('student_registry_id');
