@@ -128,11 +128,14 @@
                 <div class="event-chips-grid">
                     <div class="event-chip chip-walk">
                         <span class="chip-icon">🚶</span>
-                        <span>Morning Fun Walk &amp; Warm-Up</span>
+                        <span>Morning Fun Walk &amp; Morning Groove Warm-Up</span>
                     </div>
                     <div class="event-chip chip-bazar">
                         <span class="chip-icon">🎪</span>
                         <span>Pop-Up Culinary Market (Bazar)</span>
+                    </div>
+                    <div class="event-chip chip-walk">
+                        <span>Scan for Impact: FEB UB Berbagi</span>
                     </div>
                     <div class="event-chip chip-prize">
                         <span class="chip-icon">🎁</span>
