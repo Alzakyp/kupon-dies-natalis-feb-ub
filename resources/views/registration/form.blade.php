@@ -452,7 +452,7 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title">Mahasiswa Aktif</span>
-                            <span class="card-desc">Civitas Akademika Aktif FEB UB</span>
+                            <span class="card-desc">{{ number_format($activeStudentCount, 0, ',', '.') }} mahasiswa aktif di database</span>
                         </div>
                         <div class="card-radio-indicator" aria-hidden="true">
                             <span class="radio-circle"></span>
@@ -472,7 +472,7 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title">Alumni</span>
-                            <span class="card-desc">Lulusan / Alumni FEB UB</span>
+                            <span class="card-desc">{{ number_format($alumniCount, 0, ',', '.') }} alumni di database</span>
                         </div>
                         <div class="card-radio-indicator" aria-hidden="true">
                             <span class="radio-circle"></span>

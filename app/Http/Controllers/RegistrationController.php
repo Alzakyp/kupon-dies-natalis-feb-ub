@@ -34,6 +34,8 @@ class RegistrationController extends Controller
             'studyPrograms' => StudentRegistry::whereNotNull('study_program')->distinct()->orderBy('study_program')->pluck('study_program'),
             'pending' => ($pendingId = $request->session()->get('registration_pending')) ? PendingRegistration::find($pendingId) : null,
             'hasAlumniData' => StudentRegistry::where('registration_type', 'alumni')->exists(),
+            'activeStudentCount' => StudentRegistry::where('registration_type', 'active_student')->count(),
+            'alumniCount' => StudentRegistry::where('registration_type', 'alumni')->count(),
         ]);
     }
 
