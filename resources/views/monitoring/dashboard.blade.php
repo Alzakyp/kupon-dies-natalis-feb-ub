@@ -3,10 +3,6 @@
     <!-- Header Section -->
     <div class="monitoring-header">
         <div class="header-left">
-            <div class="monitoring-badge">
-                <span class="live-dot"></span>
-                <span>MONITORING PANITIA REAL-TIME</span>
-            </div>
             <h1 class="monitoring-title">Peserta Terdaftar</h1>
             <p class="monitoring-desc">Data pendaftaran peserta Dies Natalis FEB UB ke-65, status verifikasi OTP, dan pengiriman tiket QR.</p>
         </div>
