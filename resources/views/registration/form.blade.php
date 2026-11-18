@@ -141,6 +141,9 @@
                         <span class="chip-icon">🎁</span>
                         <span>Art Performance &amp; Lucky Draw (Doorprize)</span>
                     </div>
+                    <div class="event-chip chip-prize">
+                        <span>Special Performance</span>
+                    </div>
                 </div>
             </div>
 

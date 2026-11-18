@@ -24,10 +24,10 @@ class MailTemplateTest extends TestCase
         $this->assertStringContainsString('FEB65-TEST', $html);
         $this->assertStringContainsString('Lapangan Rektorat UB', $html);
         $this->assertStringContainsString('05.30 WIB', $html);
-        $this->assertStringContainsString('30 November–4 Desember 2026', $html);
-        $this->assertStringContainsString('Ruang Tata Usaha', $html);
-        $this->assertStringContainsString('Security Command Center', $html);
-        $this->assertStringContainsString('Ruang Kemahasiswaan', $html);
+        $success = file_get_contents(resource_path('views/registration/success.blade.php'));
+        foreach (['30 November–4 Desember 2026', 'Ruang Tata Usaha', 'Security Command Center', 'Ruang Kemahasiswaan'] as $instruction) {
+            $this->assertStringContainsString($instruction, $success);
+        }
         $this->assertStringContainsString('Lustrum XIII', $html);
         $this->assertStringContainsString(str_repeat('a', 48), $html);
     }
