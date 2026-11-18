@@ -117,9 +117,9 @@
         </div>
     </div>
 
-    <!-- Filter Card -->
+    <!-- Filter Card: Auto-filter tanpa perlu tombol submit -->
     <div class="monitoring-filter-card">
-        <form method="get" action="{{ url('/monitoring') }}" class="filter-form-grid">
+        <form method="get" action="{{ url('/monitoring') }}" class="filter-form-grid" id="monitoring-filter-form">
             <div class="filter-field search-field">
                 <label for="filter-q" class="filter-label">Cari Peserta</label>
                 <div class="input-with-icon-wrap">
@@ -127,13 +127,13 @@
                         <circle cx="11" cy="11" r="8"/>
                         <path d="m21 21-4.3-4.3"/>
                     </svg>
-                    <input id="filter-q" type="text" name="q" value="{{ request('q') }}" placeholder="Cari nama, NIM, atau email...">
+                    <input id="filter-q" type="search" name="q" value="{{ request('q') }}" placeholder="Ketik nama, NIM, atau email untuk memfilter..." autocomplete="off">
                 </div>
             </div>
 
             <div class="filter-field">
                 <label for="filter-type" class="filter-label">Kategori</label>
-                <select id="filter-type" name="type" class="filter-select">
+                <select id="filter-type" name="type" class="filter-select" onchange="this.form.submit()">
                     <option value="">Semua Kategori</option>
                     <option value="active_student" @selected(request('type') === 'active_student')>Mahasiswa Aktif</option>
                     <option value="alumni" @selected(request('type') === 'alumni')>Alumni</option>
@@ -142,34 +142,28 @@
 
             <div class="filter-field">
                 <label for="filter-mail" class="filter-label">Status Email Tiket</label>
-                <select id="filter-mail" name="mail" class="filter-select">
+                <select id="filter-mail" name="mail" class="filter-select" onchange="this.form.submit()">
                     <option value="">Semua Status</option>
                     <option value="sent" @selected(request('mail') === 'sent')>Terkirim</option>
                     <option value="pending" @selected(request('mail') === 'pending')>Belum/gagal</option>
                 </select>
             </div>
 
-            <div class="filter-actions-wrap">
-                <button type="submit" class="btn-filter-submit">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
-                    </svg>
-                    <span>Filter</span>
-                </button>
-                @if(request('q') || request('type') || request('mail'))
-                    <a href="{{ url('/monitoring') }}" class="btn-filter-reset" title="Reset filter ke awal">
+            @if(request('q') || request('type') || request('mail'))
+                <div class="filter-actions-wrap">
+                    <a href="{{ url('/monitoring') }}" class="btn-filter-reset" title="Hapus semua filter">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <line x1="18" y1="6" x2="6" y2="18"/>
                             <line x1="6" y1="6" x2="18" y2="18"/>
                         </svg>
-                        <span>Reset</span>
+                        <span>Reset Filter</span>
                     </a>
-                @endif
-            </div>
+                </div>
+            @endif
         </form>
     </div>
 
-    <!-- Table Card -->
+    <!-- Table Card: Fit layar tanpa scroll horizontal kanan-kiri -->
     <div class="monitoring-table-card">
         <div class="table-card-header">
             <div class="table-header-left">
@@ -182,14 +176,13 @@
             <table class="modern-table">
                 <thead>
                     <tr>
-                        <th>Peserta</th>
-                        <th>NIM</th>
-                        <th>Kategori</th>
-                        <th>Program Studi</th>
-                        <th>Kontak (Email &amp; HP)</th>
-                        <th>Status OTP</th>
-                        <th>Status Email Tiket</th>
-                        <th>Waktu Daftar</th>
+                        <th style="width: 20%;">Peserta</th>
+                        <th style="width: 12%;">NIM</th>
+                        <th style="width: 13%;">Kategori</th>
+                        <th style="width: 17%;">Program Studi</th>
+                        <th style="width: 18%;">Kontak</th>
+                        <th style="width: 10%;">Status OTP</th>
+                        <th style="width: 10%;">Status Email</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -198,7 +191,7 @@
                             <td>
                                 <div class="participant-col">
                                     <strong class="participant-name-text">{{ $ticket->studentRegistry?->name ?? data_get($ticket->manual_identity, 'name', '—') }}</strong>
-                                    <span class="participant-ticket-no">No. Tiket: {{ $ticket->number }}</span>
+                                    <span class="participant-ticket-no">{{ $ticket->number }}</span>
                                 </div>
                             </td>
                             <td>
@@ -222,7 +215,7 @@
                             </td>
                             <td>
                                 <span class="status-pill-badge pill-verified">
-                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                                     <span>Sudah diverifikasi</span>
                                 </span>
                             </td>
@@ -230,10 +223,10 @@
                                 @if($ticket->emailed_at)
                                     <div class="mail-status-wrap">
                                         <span class="status-pill-badge pill-sent">
-                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                                             <span>Terkirim</span>
                                         </span>
-                                        <small class="mail-date">{{ $ticket->emailed_at->timezone('Asia/Jakarta')->format('d M H:i') }} WIB</small>
+                                        <small class="mail-date">{{ $ticket->emailed_at->timezone('Asia/Jakarta')->format('d M H:i') }}</small>
                                     </div>
                                 @else
                                     <span class="status-pill-badge pill-failed">
@@ -241,13 +234,10 @@
                                     </span>
                                 @endif
                             </td>
-                            <td>
-                                <span class="reg-date">{{ $ticket->created_at->timezone('Asia/Jakarta')->format('d M H:i') }} WIB</span>
-                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="empty-table-state">
+                            <td colspan="7" class="empty-table-state">
                                 <div class="empty-wrap">
                                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                         <circle cx="11" cy="11" r="8"/>
@@ -269,5 +259,23 @@
             </div>
         @endif
     </div>
+
+    <!-- Script auto-filter saat user mengetik di pencarian -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('filter-q');
+        if (!searchInput) return;
+        var timer;
+        searchInput.addEventListener('input', function () {
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                searchInput.form.submit();
+            }, 500);
+        });
+        searchInput.addEventListener('search', function () {
+            searchInput.form.submit();
+        });
+    });
+    </script>
 </section>
 </x-layouts.app>

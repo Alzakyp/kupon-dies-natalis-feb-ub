@@ -3146,30 +3146,33 @@ body:has(.monitoring-container) main {
 }
 
 .modern-table-wrap {
-    overflow-x: auto;
+    overflow-x: hidden;
+    width: 100%;
 }
 .modern-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     text-align: left;
+    table-layout: auto;
 }
 .modern-table th {
     background: #f8fafc !important;
     color: var(--navy) !important;
-    font-size: 0.725rem !important;
+    font-size: 0.72rem !important;
     font-weight: 850 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.06em !important;
-    padding: 14px 18px !important;
+    letter-spacing: 0.05em !important;
+    padding: 12px 14px !important;
     border-bottom: 1.5px solid #e2e8f0 !important;
-    white-space: nowrap;
+    white-space: normal !important;
 }
 .modern-table td {
-    padding: 14px 18px !important;
+    padding: 12px 14px !important;
     border-bottom: 1px solid #f1f5f9 !important;
     vertical-align: middle;
-    white-space: nowrap;
+    white-space: normal !important;
+    overflow-wrap: break-word;
 }
 .modern-table tbody tr:hover {
     background: #f8fafc;
