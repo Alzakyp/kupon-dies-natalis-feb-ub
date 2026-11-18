@@ -6,10 +6,24 @@
 <p style="margin:0 0 8px;color:#77500e;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Tiket peserta</p>
 <h1 style="margin:0 0 16px;color:#092b4c;font-size:26px;line-height:1.25;">Tiket Anda siap</h1>
 
-<p style="margin:0 0 20px;font-size:15px;line-height:1.6;">Grand Fiesta — Fun Walk &amp; FEB Unity Concert<br><strong>6 Desember 2026 · 05.30 WIB–selesai · Lapangan Rektorat UB</strong></p><p style="font-size:15px;line-height:1.6;">Tunjukkan QR kepada petugas dan bawa <strong>KTM atau KTP asli</strong>.</p>
+<p style="margin:0 0 16px;font-size:15px;line-height:1.6;">Grand Fiesta — Fun Walk &amp; FEB Unity Concert<br><strong>6 Desember 2026 · 05.30 WIB–selesai · Lapangan Rektorat UB</strong></p>
+<p style="margin:0 0 20px;font-size:15px;line-height:1.6;">Tunjukkan QR kepada petugas dan bawa <strong>KTM atau KTP asli</strong>.</p>
+
 <div style="padding:18px;text-align:center;background:#ffffff;border:1px solid #d5dce2;"><img src="{{ $message->embedData($barcodePng, 'ticket-qr.png', 'image/png') }}" width="300" height="300" alt="QR barcode tiket {{ $ticket->number }}" style="display:block;width:300px;height:300px;max-width:100%;margin:0 auto;"></div>
 <p style="margin:18px 0 0;text-align:center;color:#5b6876;font-family:Courier New,monospace;font-size:12px;overflow-wrap:anywhere;">{{ $ticket->barcode }}</p>
-<p style="margin:22px 0 0;font-size:14px;line-height:1.6;">Petugas akan memindai QR untuk memeriksa data peserta. Kupon diserahkan secara manual.</p>
+
+<div style="margin-top:24px;padding:18px 20px;background:#fffdf5;border:1px solid #fde68a;border-left:4px solid #d3a128;border-radius:4px;font-family:Arial,sans-serif;">
+<div style="font-size:13px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;">🎟️ Pengambilan kupon undian jalan sehat</div>
+<div style="font-size:15px;font-weight:700;color:#092b4c;margin-bottom:6px;">Lokasi &amp; Jadwal Penukaran Kupon Fisik</div>
+<p style="margin:0 0 12px;font-size:14px;line-height:1.5;color:#334155;"><strong>30 November–4 Desember 2026</strong>. Tunjukkan QR dari email dan bawa <strong>KTM atau KTP asli</strong>.</p>
+<ol style="margin:0;padding:0 0 0 18px;font-size:13px;line-height:1.6;color:#1e293b;">
+<li style="margin-bottom:6px;"><strong>Mahasiswa aktif angkatan 2025 &amp; 2026:</strong><br><span style="color:#475569;">Ruang Tata Usaha (Gedung Utama Lt. 2)</span></li>
+<li style="margin-bottom:6px;"><strong>Mahasiswa aktif angkatan lainnya:</strong><br><span style="color:#475569;">Security Command Center (Gedung Dekanat Lama Lt. 1)</span></li>
+<li><strong>Alumni:</strong><br><span style="color:#475569;">Ruang Kemahasiswaan Lt. 2</span></li>
+</ol>
+</div>
+
+<p style="margin:22px 0 0;font-size:14px;line-height:1.6;color:#475569;">Petugas akan memindai QR untuk memeriksa data peserta. Kupon diserahkan secara manual.</p>
 </td></tr>
 <tr><td style="padding:18px 32px;background:#f7f7f4;color:#5b6876;font-family:Arial,sans-serif;font-size:12px;line-height:1.5;">Pesan otomatis Fakultas Ekonomi dan Bisnis Universitas Brawijaya.</td></tr>
 </table></td></tr></table></body></html>
