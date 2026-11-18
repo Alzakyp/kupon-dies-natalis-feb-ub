@@ -250,7 +250,10 @@
             </div>
 
             <h2>Lengkapi data alumni</h2>
-            <p>NIM <strong>{{ $manualAlumni['nim'] }}</strong> belum ditemukan. Isi data sesuai identitas akademik.</p>
+            <p class="manual-alumni-desc">
+                NIM <strong>{{ $manualAlumni['nim'] }}</strong> belum ditemukan. Isi data sesuai identitas akademik.<br>
+                <span class="manual-alumni-highlight">Bagi Alumni angkatan 2003 ke bawah silahkan untuk mengisi data pendaftaran secara manual.</span>
+            </p>
             <form method="post" action="{{ url('/daftar/otp') }}" class="modern-form">
                 @csrf
                 <div class="form-group">
@@ -546,7 +549,7 @@
                                     </svg>
                                     <input id="nim-input-alumni" name="nim" value="{{ old('nim') }}" maxlength="30" required autocomplete="off" inputmode="numeric" placeholder="Masukkan NIM saat Anda kuliah di FEB UB">
                                 </div>
-                                <small class="form-hint">Sistem akan mencocokkan data Nama, Jenjang, dan Program Studi alumni.</small>
+                                <small class="form-hint">Sistem akan mencocokkan data Nama, Jenjang, dan Program Studi alumni. Bagi Alumni angkatan 2003 ke bawah silahkan untuk mengisi data pendaftaran secara manual jika NIM belum terdaftar.</small>
                             </div>
                             <button type="submit" class="btn-primary btn-block btn-lookup">
                                 <span>Cek NIM</span>

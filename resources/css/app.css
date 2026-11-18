@@ -925,6 +925,23 @@
 .step-card-top-nav .step-badge {
     margin-bottom: 0;
 }
+.manual-alumni-desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 6px 0 20px;
+}
+.manual-alumni-highlight {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 8px 12px;
+    background: #fdf8eb;
+    border-left: 3px solid #d3a128;
+    border-radius: 4px;
+    color: #77500e;
+    font-weight: 700;
+    font-size: 0.88rem;
+}
 .form-actions-group {
     display: flex;
     flex-direction: column;

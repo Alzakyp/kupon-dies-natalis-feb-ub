@@ -51,7 +51,7 @@ class RegistrationController extends Controller
         $student = StudentRegistry::where('registration_type', $data['type'])->where('nim', $nim)->first();
         if (!$student && $data['type'] === 'alumni') {
             $request->session()->put(['student_registry_id' => null, 'registration_type' => 'alumni', 'alumni_nim' => $nim]);
-            return redirect(url('/daftar'))->with('success', 'NIM alumni belum ditemukan. Lengkapi data secara manual.');
+            return redirect(url('/daftar'))->with('success', 'NIM alumni belum ditemukan. Bagi Alumni angkatan 2003 ke bawah silahkan untuk mengisi data pendaftaran secara manual.');
         }
         if (!$student) throw ValidationException::withMessages(['nim' => 'NIM tidak ditemukan untuk kategori pendaftaran ini.']);
         $request->session()->put(['student_registry_id' => $student->id, 'registration_type' => $student->registration_type]);
