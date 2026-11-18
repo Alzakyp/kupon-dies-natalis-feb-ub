@@ -37,8 +37,8 @@ class MonitoringController extends Controller
         if ($request->get('mail') === 'pending') $query->whereNull('emailed_at');
         return view('monitoring.dashboard', [
             'tickets' => $query->paginate(25)->withQueryString(),
-            'total' => Ticket::count(), 'active' => Ticket::where('registration_type', 'active_student')->count(),
-            'alumni' => Ticket::where('registration_type', 'alumni')->count(), 'sent' => Ticket::whereNotNull('emailed_at')->count(),
+            'total' => Ticket::count(), 'active' => \App\Models\StudentRegistry::where('registration_type', 'active_student')->count(),
+            'alumni' => \App\Models\StudentRegistry::where('registration_type', 'alumni')->count(), 'sent' => Ticket::whereNotNull('emailed_at')->count(),
             'pendingOtp' => PendingRegistration::count(),
         ]);
     }

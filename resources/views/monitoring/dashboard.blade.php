@@ -172,7 +172,8 @@
             <table class="modern-table">
                 <thead>
                     <tr>
-                        <th style="width: 20%;">Peserta</th>
+                        <th style="width: 5%;">No.</th>
+                        <th style="width: 15%;">Peserta</th>
                         <th style="width: 12%;">NIM</th>
                         <th style="width: 13%;">Kategori</th>
                         <th style="width: 17%;">Program Studi</th>
@@ -184,6 +185,7 @@
                 <tbody>
                     @forelse($tickets as $ticket)
                         <tr>
+                            <td>{{ $tickets->firstItem() + $loop->index }}</td>
                             <td>
                                 <div class="participant-col">
                                     <strong class="participant-name-text">{{ $ticket->studentRegistry?->name ?? data_get($ticket->manual_identity, 'name', '—') }}</strong>
@@ -233,7 +235,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="empty-table-state">
+                            <td colspan="8" class="empty-table-state">
                                 <div class="empty-wrap">
                                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                         <circle cx="11" cy="11" r="8"/>
@@ -251,7 +253,7 @@
 
         @if($tickets->hasPages())
             <div class="table-pagination-footer">
-                {{ $tickets->links('pagination::default') }}
+                <span class="muted">Halaman {{ $tickets->currentPage() }} dari {{ $tickets->lastPage() }}</span>{{ $tickets->links('pagination::default') }}
             </div>
         @endif
     </div>
