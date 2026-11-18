@@ -75,7 +75,7 @@
                 <div class="guide-step-body">
                     <small>Pengambilan kupon undian jalan sehat</small>
                     <h4>Lokasi &amp; Jadwal Penukaran Kupon Fisik</h4>
-                    <p>30 November–4 Desember 2026. Tunjukkan QR dari email dan bawa KTM atau KTP asli.</p>
+                    <p>30 November–4 Desember 2026 · Pukul 08.00–15.00 WIB. Tunjukkan QR dari email dan bawa KTM atau KTP asli.</p>
                     <ol class="pickup-locations-list">
                         <li><strong>Mahasiswa aktif angkatan 2025 &amp; 2026:</strong> Ruang Tata Usaha (Gedung Utama Lt. 2)</li>
                         <li><strong>Mahasiswa aktif angkatan lainnya:</strong> Security Command Center (Gedung Dekanat Lama Lt. 1)</li>

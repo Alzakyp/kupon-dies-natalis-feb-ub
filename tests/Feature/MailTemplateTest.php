@@ -25,7 +25,7 @@ class MailTemplateTest extends TestCase
         $this->assertStringContainsString('Lapangan Rektorat UB', $html);
         $this->assertStringContainsString('05.30 WIB', $html);
         $success = file_get_contents(resource_path('views/registration/success.blade.php'));
-        foreach (['30 November–4 Desember 2026', 'Ruang Tata Usaha', 'Security Command Center', 'Ruang Kemahasiswaan'] as $instruction) {
+        foreach (['30 November–4 Desember 2026', '08.00–15.00 WIB', 'Ruang Tata Usaha', 'Security Command Center', 'Ruang Kemahasiswaan'] as $instruction) {
             $this->assertStringContainsString($instruction, $success);
             $this->assertStringContainsString($instruction, $html);
         }

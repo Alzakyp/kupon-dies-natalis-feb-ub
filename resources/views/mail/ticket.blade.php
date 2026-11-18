@@ -15,7 +15,7 @@
 <div style="margin-top:24px;padding:18px 20px;background:#fffdf5;border:1px solid #fde68a;border-left:4px solid #d3a128;border-radius:4px;font-family:Arial,sans-serif;">
 <div style="font-size:13px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;">🎟️ Pengambilan kupon undian jalan sehat</div>
 <div style="font-size:15px;font-weight:700;color:#092b4c;margin-bottom:6px;">Lokasi &amp; Jadwal Penukaran Kupon Fisik</div>
-<p style="margin:0 0 12px;font-size:14px;line-height:1.5;color:#334155;"><strong>30 November–4 Desember 2026</strong>. Tunjukkan QR dari email dan bawa <strong>KTM atau KTP asli</strong>.</p>
+<p style="margin:0 0 12px;font-size:14px;line-height:1.5;color:#334155;"><strong>30 November–4 Desember 2026 · Pukul 08.00–15.00 WIB</strong>. Tunjukkan QR dari email dan bawa <strong>KTM atau KTP asli</strong>.</p>
 <ol style="margin:0;padding:0 0 0 18px;font-size:13px;line-height:1.6;color:#1e293b;">
 <li style="margin-bottom:6px;"><strong>Mahasiswa aktif angkatan 2025 &amp; 2026:</strong><br><span style="color:#475569;">Ruang Tata Usaha (Gedung Utama Lt. 2)</span></li>
 <li style="margin-bottom:6px;"><strong>Mahasiswa aktif angkatan lainnya:</strong><br><span style="color:#475569;">Security Command Center (Gedung Dekanat Lama Lt. 1)</span></li>
