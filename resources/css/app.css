@@ -3347,3 +3347,515 @@ body:has(.monitoring-container) main {
         justify-content: center;
     }
 }
+
+
+/* ==========================================================================
+   SUCCESS REGISTRATION PAGE & CELEBRATION ANIMATIONS
+   ========================================================================== */
+
+.confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.success-shell {
+    max-width: 620px;
+    margin: clamp(24px, 4vh, 48px) auto 80px;
+    animation: successFadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes successFadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(24px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.success-hero-header {
+    text-align: center;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Animated Checkmark Badge */
+.success-icon-wrapper {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.success-icon-wrapper:hover {
+    transform: scale(1.08);
+}
+
+.success-icon-wrapper:active {
+    transform: scale(0.95);
+}
+
+.success-pulse-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: rgba(22, 100, 68, 0.15);
+    animation: successPulseRing 2.4s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    z-index: 1;
+}
+
+@keyframes successPulseRing {
+    0% {
+        transform: scale(0.85);
+        opacity: 0.9;
+    }
+    50% {
+        transform: scale(1.22);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1.22);
+        opacity: 0;
+    }
+}
+
+.success-badge-circle {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 10px 25px -4px rgba(16, 185, 129, 0.4), 0 4px 10px -2px rgba(6, 78, 59, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    z-index: 2;
+    animation: successBadgePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes successBadgePop {
+    0% {
+        opacity: 0;
+        transform: scale(0.4) rotate(-20deg);
+    }
+    60% {
+        transform: scale(1.15) rotate(4deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.success-check-svg {
+    width: 44px;
+    height: 44px;
+}
+
+.success-check-path {
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: successCheckDraw 0.5s cubic-bezier(0.65, 0, 0.45, 1) 0.35s forwards;
+}
+
+@keyframes successCheckDraw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Twinkling decorative sparkles around badge */
+.badge-sparkle {
+    position: absolute;
+    font-size: 1.1rem;
+    pointer-events: none;
+    animation: sparkleTwinkle 2.5s ease-in-out infinite alternate;
+}
+.badge-sparkle-1 {
+    top: -4px;
+    right: -6px;
+    animation-delay: 0.2s;
+}
+.badge-sparkle-2 {
+    bottom: 2px;
+    left: -8px;
+    animation-delay: 0.8s;
+}
+
+@keyframes sparkleTwinkle {
+    0% {
+        transform: scale(0.7) rotate(0deg);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1.15) rotate(15deg);
+        opacity: 1;
+    }
+}
+
+.success-eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 999px;
+    color: #065f46;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    animation: successFadeInUp 0.5s ease 0.1s both;
+}
+
+.success-title {
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-size: clamp(1.4rem, 3.5vw, 1.85rem);
+    font-weight: 850;
+    letter-spacing: -0.025em;
+    text-align: center;
+    animation: successFadeInUp 0.5s ease 0.2s both;
+}
+
+.success-subtitle {
+    margin: 0 auto;
+    font-size: 0.95rem;
+    color: var(--muted);
+    text-align: center;
+    max-width: 50ch;
+    animation: successFadeInUp 0.5s ease 0.25s both;
+}
+
+/* Digital Ticket Box with Shimmer */
+.ticket-success-card {
+    position: relative;
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px -5px rgba(6, 29, 53, 0.08);
+    overflow: hidden;
+    margin: 24px 0;
+    animation: successFadeInUp 0.6s ease 0.3s both;
+}
+
+.ticket-header-strip {
+    background: linear-gradient(135deg, var(--navy) 0%, #11426e 100%);
+    color: #ffffff;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.775rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.ticket-header-strip .lustrum-tag {
+    color: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ticket-body-content {
+    padding: 20px 22px;
+}
+
+.ticket-number-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+}
+
+.ticket-code-label {
+    font-size: 0.725rem;
+    font-weight: 750;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.ticket-code-val {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: 0.04em;
+}
+
+.btn-copy-code {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 6px 12px;
+    font-size: 0.775rem;
+    font-weight: 700;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-copy-code:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.copy-feedback-text {
+    font-size: 0.75rem;
+    color: #059669;
+    font-weight: 700;
+    display: none;
+}
+.copy-feedback-text.show {
+    display: inline-block;
+    animation: successFadeInUp 0.2s ease both;
+}
+
+.ticket-participant-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f1f5f9;
+    margin-bottom: 16px;
+}
+
+.participant-item small {
+    display: block;
+    font-size: 0.725rem;
+    font-weight: 750;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+}
+
+.participant-item strong {
+    font-size: 0.95rem;
+    color: var(--navy);
+    font-weight: 800;
+}
+
+.email-dispatch-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    color: #166534;
+    line-height: 1.45;
+}
+
+.email-dispatch-notice .icon-box {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+/* Staggered Event Guide Cards */
+.success-guide-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 20px 0;
+    animation: successFadeInUp 0.6s ease 0.4s both;
+}
+
+.guide-step-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: 0 4px 14px -2px rgba(6, 29, 53, 0.04);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.guide-step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -3px rgba(6, 29, 53, 0.08);
+}
+
+.guide-icon-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.guide-badge-next {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.guide-badge-coupon {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.guide-badge-event {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.guide-step-body {
+    flex: 1;
+}
+
+.guide-step-body small {
+    display: block;
+    font-size: 0.725rem;
+    font-weight: 800;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+}
+
+.guide-step-body h4 {
+    margin: 0 0 6px;
+    font-size: 0.95rem;
+    font-weight: 850;
+    color: var(--navy);
+}
+
+.guide-step-body p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #334155;
+    line-height: 1.5;
+}
+
+.pickup-locations-list {
+    margin: 10px 0 0;
+    padding: 0 0 0 18px;
+    font-size: 0.825rem;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+.pickup-locations-list li {
+    padding: 4px 0;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.pickup-locations-list li:last-child {
+    border-bottom: none;
+}
+
+/* Action Buttons Bar */
+.success-action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 24px 0 16px;
+    animation: successFadeInUp 0.6s ease 0.5s both;
+}
+
+.btn-celebrate-again {
+    background: linear-gradient(135deg, var(--gold) 0%, #b8871b 100%) !important;
+    border-color: var(--gold) !important;
+    color: #ffffff !important;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(211, 161, 40, 0.3);
+    transition: all 0.2s ease;
+}
+
+.btn-celebrate-again:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(211, 161, 40, 0.4);
+}
+
+.btn-print-action {
+    background: #ffffff !important;
+    color: var(--navy) !important;
+    border: 1.5px solid #cbd5e1 !important;
+    gap: 6px;
+}
+
+.btn-print-action:hover {
+    background: #f8fafc !important;
+    border-color: #94a3b8 !important;
+}
+
+.success-help-footer {
+    text-align: center;
+    margin-top: 16px;
+    animation: successFadeInUp 0.6s ease 0.55s both;
+}
+
+@media print {
+    .confetti-canvas,
+    .success-action-buttons,
+    .btn-copy-code,
+    .badge-sparkle,
+    .success-pulse-ring {
+        display: none !important;
+    }
+    .success-shell {
+        margin: 0 !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .confetti-canvas {
+        display: none !important;
+    }
+    .success-shell,
+    .success-badge-circle,
+    .success-check-path,
+    .success-pulse-ring,
+    .badge-sparkle,
+    .ticket-success-card,
+    .success-guide-grid,
+    .success-action-buttons,
+    .success-help-footer {
+        animation: none !important;
+        transform: none !important;
+    }
+    .success-check-path {
+        stroke-dashoffset: 0 !important;
+    }
+}

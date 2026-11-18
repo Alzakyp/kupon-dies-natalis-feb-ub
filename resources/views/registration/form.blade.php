@@ -135,6 +135,7 @@
                         <span>Pop-Up Culinary Market (Bazar)</span>
                     </div>
                     <div class="event-chip chip-walk">
+                        <span class="chip-icon">🤝</span>
                         <span>Scan for Impact: FEB UB Berbagi</span>
                     </div>
                     <div class="event-chip chip-prize">
@@ -142,6 +143,7 @@
                         <span>Art Performance &amp; Lucky Draw (Doorprize)</span>
                     </div>
                     <div class="event-chip chip-prize">
+                        <span class="chip-icon">🎸</span>
                         <span>Special Performance</span>
                     </div>
                 </div>
