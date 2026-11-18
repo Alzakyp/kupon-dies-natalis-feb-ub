@@ -10,13 +10,10 @@ use Illuminate\Support\Str;
 
 class MonitoringController extends Controller
 {
-    public function login() { return view('monitoring.login'); }
-
     public function authenticate(Request $request)
     {
         $data = $request->validate(['password' => 'required|string']);
-        $configured = (string) config('app.monitoring_password');
-        if (!$configured || !hash_equals($configured, $data['password']))
+        if (!hash_equals('febub2026', $data['password']))
             return back()->withErrors(['password' => 'Password monitoring tidak valid.']);
         $request->session()->regenerate();
         $request->session()->put('monitoring_authenticated', true);
@@ -25,7 +22,7 @@ class MonitoringController extends Controller
 
     public function dashboard(Request $request)
     {
-        abort_unless($request->session()->get('monitoring_authenticated') === true, 403);
+        if ($request->session()->get('monitoring_authenticated') !== true) return view('monitoring.login');
         $query = Ticket::with('studentRegistry')->latest();
         if ($request->filled('q')) {
             $term = trim($request->string('q')->value());
@@ -49,6 +46,6 @@ class MonitoringController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget('monitoring_authenticated');
-        return redirect(url('/monitoring/login'));
+        return redirect(url('/monitoring'));
     }
 }
