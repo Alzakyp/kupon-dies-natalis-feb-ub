@@ -11,7 +11,7 @@ class ResetTestRegistration extends Command {
  public function handle(): int {
   if (app()->environment('production') || $this->argument('nim') !== '2231730129') return $this->abortReset('Only local/devel test NIM is allowed.');
   $student=StudentRegistry::where('nim','2231730129')->first(); if(!$student) return $this->abortReset('Test student not found.');
-  DB::transaction(function()use($student){ PendingRegistration::where('student_registry_id',$student->id)->delete(); Ticket::where('student_registry_id',$student->id)->whereHas('coupon',fn($q)=>$q->whereNull('redeemed_at'))->lockForUpdate()->get()->each(fn($ticket)=>$ticket->delete()); });
+  DB::transaction(function()use($student){ PendingRegistration::where('student_registry_id',$student->id)->orWhere('nim','2231730129')->delete(); Ticket::where(fn($q)=>$q->where('student_registry_id',$student->id)->orWhere('nim','2231730129'))->where(fn($q)=>$q->whereNull('coupon_id')->orWhereHas('coupon',fn($c)=>$c->whereNull('redeemed_at')))->lockForUpdate()->get()->each(fn($ticket)=>$ticket->delete()); });
   $this->info('Test registration reset.'); return self::SUCCESS;
  }
  private function abortReset(string $message): int { $this->error($message); return self::FAILURE; }
