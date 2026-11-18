@@ -1,0 +1,1 @@
+<x-layouts.app><section class="auth-shell"><h1>Monitoring peserta</h1><p>Halaman khusus panitia.</p><form method="post" action="{{ url('/monitoring/login') }}">@csrf<label>Password monitoring<input type="password" name="password" required autocomplete="current-password" autofocus></label><button>Masuk</button></form></section></x-layouts.app>

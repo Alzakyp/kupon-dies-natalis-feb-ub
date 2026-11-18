@@ -69,6 +69,7 @@ return [
 
     'registration_open' => (bool) env('REGISTRATION_OPEN', false),
     'registration_mail_verified' => (bool) env('REGISTRATION_MAIL_VERIFIED', false),
+    'monitoring_password' => env('MONITORING_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------
