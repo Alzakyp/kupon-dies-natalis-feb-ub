@@ -3363,9 +3363,105 @@ body:has(.monitoring-container) main {
     color: var(--muted);
 }
 .table-pagination-footer {
-    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 14px 20px;
     border-top: 1px solid #e2e8f0;
     background: #fafbfd;
+}
+
+.table-footer-info {
+    font-size: 0.875rem;
+    color: #64748b;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.table-footer-info strong {
+    color: var(--navy);
+    font-weight: 700;
+}
+
+.table-footer-pagination {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.table-footer-pagination .pagination {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.table-footer-pagination .pagination li {
+    padding: 0;
+    border: 0;
+}
+
+.table-footer-pagination .pagination a,
+.table-footer-pagination .pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--navy);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+.table-footer-pagination .pagination a:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    color: var(--navy);
+}
+
+.table-footer-pagination .pagination .active span {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(9, 43, 76, 0.18);
+}
+
+.table-footer-pagination .pagination .disabled span {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+    .table-pagination-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        text-align: center;
+    }
+    .table-footer-info {
+        justify-content: center;
+    }
+    .table-footer-pagination {
+        margin-left: 0;
+        justify-content: center;
+    }
+    .table-footer-pagination .pagination {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 }
 
 /* Responsive adjustments */

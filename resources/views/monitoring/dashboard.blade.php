@@ -164,7 +164,7 @@
         <div class="table-card-header">
             <div class="table-header-left">
                 <h2 class="table-title">Daftar Peserta</h2>
-                <span class="table-count-badge">Menampilkan {{ $tickets->count() }} dari {{ $tickets->total() }} peserta</span>
+                <span class="table-count-badge">Total {{ number_format($tickets->total()) }} peserta</span>
             </div>
         </div>
 
@@ -251,11 +251,25 @@
             </table>
         </div>
 
-        @if($tickets->hasPages())
-            <div class="table-pagination-footer">
-                <span class="muted">Halaman {{ $tickets->currentPage() }} dari {{ $tickets->lastPage() }}</span>{{ $tickets->links('pagination::default') }}
+        <div class="table-pagination-footer">
+            <div class="table-footer-info">
+                @if($tickets->total() > 0)
+                    @if($tickets->firstItem() === $tickets->lastItem())
+                        Menampilkan <strong>{{ $tickets->firstItem() }}</strong> dari <strong>{{ $tickets->total() }}</strong> data peserta
+                    @else
+                        Menampilkan <strong>{{ $tickets->firstItem() }}–{{ $tickets->lastItem() }}</strong> dari <strong>{{ $tickets->total() }}</strong> data peserta
+                    @endif
+                @else
+                    Menampilkan <strong>0</strong> data peserta
+                @endif
             </div>
-        @endif
+
+            @if($tickets->hasPages())
+                <div class="table-footer-pagination">
+                    {{ $tickets->links('pagination::default') }}
+                </div>
+            @endif
+        </div>
     </div>
 
     <!-- Script auto-filter saat user mengetik di pencarian -->
