@@ -189,7 +189,7 @@
         </div>
     @elseif(session('registration_pending'))
         <div class="flow-step-card otp-step-card">
-            <div class="step-badge">Langkah 3 dari 3 • Verifikasi OTP</div>
+            <div class="step-badge">Verifikasi OTP</div>
             <div class="otp-card-header">
                 <div class="otp-icon-bubble" aria-hidden="true">
                     <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -440,7 +440,6 @@
         <div class="registration-flow-container">
             <div class="category-selection-wrapper">
                 <div class="category-header">
-                    <span class="step-pill">Langkah 1 dari 3</span>
                     <h2 class="category-section-title">Pilih Kategori Kepesertaan</h2>
                     <p class="category-section-subtitle">Silakan pilih status kepesertaan Anda untuk memvalidasi NIM di pangkalan data FEB UB.</p>
                 </div>
