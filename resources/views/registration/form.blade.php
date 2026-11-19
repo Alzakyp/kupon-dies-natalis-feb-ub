@@ -65,6 +65,15 @@
                     <span class="concert-pill">FEB UNITY CONCERT • DIES NATALIS 65</span>
                 </div>
 
+                <!-- Band Kotak Center Stage Hero Visual -->
+                <div class="band-spotlight-visual">
+                    <div class="band-stage-glow" aria-hidden="true"></div>
+                    <picture>
+                        <source srcset="{{ asset('images/band-kotak-hd.webp') }}" type="image/webp">
+                        <img src="{{ asset('images/band-kotak-hd.png') }}" alt="Band Kotak (Tantri, Cella, Chua)" class="band-hero-image" width="1154" height="866" loading="eager">
+                    </picture>
+                </div>
+
                 <div class="band-headline-wrap">
                     <div class="band-star-group" aria-hidden="true">
                         <span class="gold-star">⭐</span>
