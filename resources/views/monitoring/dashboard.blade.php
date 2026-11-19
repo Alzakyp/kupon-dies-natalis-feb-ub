@@ -185,11 +185,10 @@
                 <tbody>
                     @forelse($tickets as $ticket)
                         <tr>
-                            <td>{{ $tickets->firstItem() + $loop->index }}</td>
+                            <td>{{ $loop->iteration + (($tickets->currentPage() - 1) * $tickets->perPage()) }}</td>
                             <td>
                                 <div class="participant-col">
-                                    <strong class="participant-name-text">{{ $ticket->studentRegistry?->name ?? data_get($ticket->manual_identity, 'name', '—') }}</strong>
-                                    <span class="participant-ticket-no">{{ $ticket->number }}</span>
+                                    <strong class="participant-name-text">{{ $ticket->name }}</strong>
                                 </div>
                             </td>
                             <td>
@@ -203,7 +202,7 @@
                                 @endif
                             </td>
                             <td>
-                                <span class="prodi-name">{{ $ticket->studentRegistry?->study_program ?? data_get($ticket->manual_identity, 'study_program', '—') }}</span>
+                                <span class="prodi-name">{{ $ticket->study_program }}</span>
                             </td>
                             <td>
                                 <div class="contact-col">
@@ -212,13 +211,18 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="status-pill-badge pill-verified">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                                    <span>Sudah diverifikasi</span>
-                                </span>
+                                @if($ticket->verified)
+                                    <span class="status-pill-badge pill-verified">Sudah diverifikasi</span>
+                                @elseif($ticket->otp_expires_at->isPast())
+                                    <span class="status-pill-badge pill-failed">OTP kedaluwarsa</span>
+                                @else
+                                    <span class="status-pill-badge">Menunggu OTP</span>
+                                @endif
                             </td>
                             <td>
-                                @if($ticket->emailed_at)
+                                @if(!$ticket->verified)
+                                    <span class="status-pill-badge">Belum diterbitkan</span>
+                                @elseif($ticket->emailed_at)
                                     <div class="mail-status-wrap">
                                         <span class="status-pill-badge pill-sent">
                                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
