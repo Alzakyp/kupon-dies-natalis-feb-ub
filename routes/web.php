@@ -17,5 +17,6 @@ Route::get('/monitoring', [MonitoringController::class, 'dashboard']);
 Route::post('/monitoring', [MonitoringController::class, 'authenticate'])->middleware('throttle:5,1');
 Route::post('/monitoring/logout', [MonitoringController::class, 'logout']);
 Route::get('/monitoring/campaign', [CampaignController::class, 'index']);
+Route::post('/monitoring/campaign', [CampaignController::class, 'authenticate'])->middleware('throttle:5,1');
 Route::get('/monitoring/campaign/preview', [CampaignController::class, 'preview']);
 Route::fallback(fn () => abort(404));
