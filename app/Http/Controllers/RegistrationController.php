@@ -39,7 +39,7 @@ class RegistrationController extends Controller
         ]);
     }
 
-    public function lookup(Request $request)
+    public function lookup(Request $request, RegistrationService $service)
     {
         $this->open();
         $data = $request->validate([
@@ -70,6 +70,16 @@ class RegistrationController extends Controller
         }
         if (!$student) throw ValidationException::withMessages(['nim' => 'NIM tidak ditemukan untuk kategori pendaftaran ini.']);
         $request->session()->put(['student_registry_id' => $student->id, 'registration_type' => $student->registration_type]);
+        $pending = PendingRegistration::where('student_registry_id', $student->id)->latest()->first();
+        if ($pending) {
+            $request->session()->put('registration_pending', $pending->id);
+            if ($pending->otp_expires_at->isPast() && $pending->otp_sent_at->lte(now()->subSeconds(60))) {
+                $pending = $service->requestOtp($pending->email, $pending->phone, $student->id, $student->registration_type);
+                $request->session()->put('registration_pending', $pending->id);
+                return redirect(url('/daftar'))->with('success', 'OTP baru telah dikirim ke email Anda.');
+            }
+            return redirect(url('/daftar'))->with('success', 'OTP masih aktif. Masukkan kode dari email atau tunggu countdown untuk mengirim ulang.');
+        }
         return redirect(url('/daftar'))->with('success', 'Data ditemukan. Silakan lanjutkan pendaftaran.');
     }
 
