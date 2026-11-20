@@ -10,3 +10,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::call(fn () => PendingRegistration::where('created_at', '<', now()->subDay())->delete())->hourly();
+Schedule::call(fn () => app(\App\Services\CampaignDelivery::class)->dispatchBatch())->everyMinute()->name('campaign-dispatch')->withoutOverlapping();
