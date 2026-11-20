@@ -547,7 +547,7 @@
                             <div class="lookup-badge-wrap">
                                 <span class="lookup-badge">Validasi NIM Alumni</span>
                             </div>
-                            <p class="lookup-prompt">Masukkan NIM Anda saat menempuh studi di FEB UB untuk mencocokkan data alumni.</p>
+                            <p class="lookup-prompt">Masukkan NIM yang tertera pada Ijazah FEB UB Anda untuk mencocokkan data alumni.</p>
                         </div>
 
                         <form method="post" action="{{ url('/daftar/lookup') }}" class="modern-form lookup-form">
