@@ -199,7 +199,7 @@
             <div><small>Program Studi</small><p>{{ $registered['program'] }}</p></div>
             <div><small>Email</small><p>{{ $registered['email'] }}</p></div>
             <div><small>Verifikasi OTP</small><p>Sudah diverifikasi</p></div>
-            <div><small>Email QR</small><p>{{ $registered['mail_sent'] ? 'Sudah diserahkan ke SMTP. Periksa Inbox/Spam.' : 'Belum tercatat terkirim. Hubungi PSIK FEB UB.' }}</p></div>
+            <div><small>Email QR</small><p>{{ $registered['mail_sent'] ? 'Sudah dikirim ke email tersebut. Silakan periksa Inbox dan Spam.' : 'Belum tercatat terkirim. Hubungi PSIK FEB UB.' }}</p></div>
         </div>
     @elseif(session('registration_pending'))
         <div class="flow-step-card otp-step-card">
