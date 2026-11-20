@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Mail\RegistrationOtp;
 use App\Mail\TicketIssued;
 use App\Models\Coupon;
+use App\Models\EmailDeliveryLog;
 use App\Models\PendingRegistration;
 use App\Models\Ticket;
 use App\Models\StudentRegistry;
@@ -55,7 +56,13 @@ class RegistrationService
             'phone' => $phone, 'student_registry_id' => $registryId, 'registration_type' => $registrationType, 'nim' => $identity['nim'] ?? StudentRegistry::find($registryId)?->nim, 'manual_identity' => $identity, 'otp_hash' => Hash::make($otp), 'otp_expires_at' => now()->addMinutes(10),
             'otp_attempts' => 0, 'otp_sent_at' => now(),
         ]);
-        Mail::to($email)->send(new RegistrationOtp($otp));
+        try {
+            Mail::to($email)->send(new RegistrationOtp($otp));
+            EmailDeliveryLog::create(['type' => 'otp', 'recipient_email' => $email, 'pending_registration_id' => $pending->id, 'otp_plaintext' => $otp, 'otp_expires_at' => $pending->otp_expires_at, 'status' => 'sent', 'sent_at' => now()]);
+        } catch (\Throwable $e) {
+            EmailDeliveryLog::create(['type' => 'otp', 'recipient_email' => $email, 'pending_registration_id' => $pending->id, 'otp_plaintext' => $otp, 'otp_expires_at' => $pending->otp_expires_at, 'status' => 'failed', 'error_message' => Str::limit($e->getMessage(), 1000)]);
+            throw $e;
+        }
         return $pending;
     }
 
@@ -91,7 +98,13 @@ class RegistrationService
 
     public function sendTicket(Ticket $ticket): void
     {
-        Mail::to($ticket->email)->send(new TicketIssued($ticket));
-        $ticket->forceFill(['emailed_at' => now()])->save();
+        try {
+            Mail::to($ticket->email)->send(new TicketIssued($ticket));
+            $ticket->forceFill(['emailed_at' => now()])->save();
+            EmailDeliveryLog::create(['type' => 'ticket_qr', 'recipient_email' => $ticket->email, 'ticket_id' => $ticket->id, 'status' => 'sent', 'sent_at' => now()]);
+        } catch (\Throwable $e) {
+            EmailDeliveryLog::create(['type' => 'ticket_qr', 'recipient_email' => $ticket->email, 'ticket_id' => $ticket->id, 'status' => 'failed', 'error_message' => Str::limit($e->getMessage(), 1000)]);
+            throw $e;
+        }
     }
 }
