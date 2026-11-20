@@ -51,6 +51,19 @@ class RegistrationController extends Controller
         if (RateLimiter::tooManyAttempts($key, 10)) throw ValidationException::withMessages(['nim' => 'Terlalu banyak percobaan. Coba lagi nanti.']);
         RateLimiter::hit($key, 600);
         $student = StudentRegistry::where('registration_type', $data['type'])->where('nim', $nim)->first();
+        $existing = Ticket::where('nim', $nim)->with('studentRegistry')->first();
+        if ($existing) {
+            [$local, $domain] = explode('@', $existing->email, 2);
+            $request->session()->forget(['registration_pending', 'student_registry_id', 'registration_type', 'alumni_nim']);
+            $request->session()->flash('existing_registration', [
+                'name' => $existing->studentRegistry?->name ?? data_get($existing->manual_identity, 'name', 'Peserta'),
+                'nim' => $nim, 'type' => $existing->registration_type,
+                'program' => $existing->studentRegistry?->study_program ?? data_get($existing->manual_identity, 'study_program', '—'),
+                'email' => mb_substr($local, 0, 2).'***@'.$domain,
+                'mail_sent' => (bool) $existing->emailed_at,
+            ]);
+            return redirect(url('/daftar'))->with('success', 'NIM sudah terdaftar.');
+        }
         if (!$student && $data['type'] === 'alumni') {
             $request->session()->put(['student_registry_id' => null, 'registration_type' => 'alumni', 'alumni_nim' => $nim]);
             return redirect(url('/daftar'))->with('success', 'NIM alumni belum ditemukan. Bagi Alumni angkatan 2003 ke bawah silahkan untuk mengisi data pendaftaran secara manual.');

@@ -187,6 +187,20 @@
             </div>
             <p class="notice error">Pendaftaran belum dibuka.</p>
         </div>
+    @elseif(session('existing_registration'))
+        @php
+            $registered = session('existing_registration');
+        @endphp
+        <div class="summary-card">
+            <h2>Anda sudah terdaftar</h2>
+            <div><small>Nama</small><p>{{ $registered['name'] }}</p></div>
+            <div><small>NIM</small><p>{{ $registered['nim'] }}</p></div>
+            <div><small>Kategori</small><p>{{ $registered['type'] === 'alumni' ? 'Alumni' : 'Mahasiswa Aktif' }}</p></div>
+            <div><small>Program Studi</small><p>{{ $registered['program'] }}</p></div>
+            <div><small>Email</small><p>{{ $registered['email'] }}</p></div>
+            <div><small>Verifikasi OTP</small><p>Sudah diverifikasi</p></div>
+            <div><small>Email QR</small><p>{{ $registered['mail_sent'] ? 'Sudah diserahkan ke SMTP. Periksa Inbox/Spam.' : 'Belum tercatat terkirim. Hubungi PSIK FEB UB.' }}</p></div>
+        </div>
     @elseif(session('registration_pending'))
         <div class="flow-step-card otp-step-card">
             <div class="step-badge">Verifikasi OTP</div>

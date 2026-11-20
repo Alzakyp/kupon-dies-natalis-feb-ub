@@ -34,6 +34,9 @@ class RegistrationCategoryTest extends TestCase
         $ticket = Ticket::firstOrFail();
         $this->assertSame('active_student', $ticket->registration_type);
         $this->assertEquals($student->id, $ticket->student_registry_id);
+        $this->get('/daftar?reset=1')->assertRedirect();
+        $this->post('/daftar/lookup', ['type' => 'active_student', 'nim' => $student->nim])->assertRedirect();
+        $this->get('/daftar')->assertSee('Anda sudah terdaftar')->assertSee('Peserta Uji')->assertSee('ca***@example.com')->assertDontSee('category@example.com');
     }
 
     public function test_registration_ui_ux_flow_and_reset(): void

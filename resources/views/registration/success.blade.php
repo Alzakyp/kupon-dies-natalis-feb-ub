@@ -111,7 +111,7 @@
         </div>
 
         <div class="success-help-footer">
-            <p class="muted">Belum menerima email? Periksa folder Spam atau hubungi petugas.</p>
+            <p class="muted">Belum menerima email? Periksa folder Spam atau hubungi <a href="https://wa.me/6282336691285?text=Halo%20PSIK%20FEB%20UB%2C%20saya%20membutuhkan%20bantuan%20terkait%20pendaftaran%20Grand%20Fiesta." target="_blank" rel="noopener">WhatsApp resmi PSIK FEB UB 0823 3669 1285</a>.</p>
         </div>
     </section>
 

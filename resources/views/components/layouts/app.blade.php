@@ -22,7 +22,7 @@
     {{ $slot }}
 </main>
 <div id="submit-loading" class="submit-loading" hidden role="status" aria-live="polite" aria-label="Permintaan sedang diproses"><div class="submit-loading-box"><span class="submit-spinner" aria-hidden="true"></span><strong>Memproses…</strong><small>Mohon tunggu dan jangan tutup halaman.</small></div></div>
-<footer>Fakultas Ekonomi dan Bisnis Universitas Brawijaya</footer>
+<footer>Fakultas Ekonomi dan Bisnis Universitas Brawijaya · Bantuan pendaftaran: <a href="https://wa.me/6282336691285?text=Halo%20PSIK%20FEB%20UB%2C%20saya%20membutuhkan%20bantuan%20terkait%20pendaftaran%20Grand%20Fiesta." target="_blank" rel="noopener">WhatsApp PSIK FEB UB 0823 3669 1285</a></footer>
 <script src="{{ asset('js/submit-loading.js') }}" defer></script>
 </body>
 </html>
