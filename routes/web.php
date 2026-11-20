@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\MonitoringController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\TicketCheckController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,6 @@ Route::post('/cek-tiket', [TicketCheckController::class, 'lookup'])->middleware(
 Route::get('/monitoring', [MonitoringController::class, 'dashboard']);
 Route::post('/monitoring', [MonitoringController::class, 'authenticate'])->middleware('throttle:5,1');
 Route::post('/monitoring/logout', [MonitoringController::class, 'logout']);
+Route::get('/monitoring/campaign', [CampaignController::class, 'index']);
+Route::get('/monitoring/campaign/preview', [CampaignController::class, 'preview']);
 Route::fallback(fn () => abort(404));
