@@ -97,7 +97,7 @@
                   <tr>
                     <td width="18" valign="top" style="padding:6px 0;font-size:14px;color:#092b4c;font-weight:700;">•</td>
                     <td style="padding:6px 0;font-size:14px;line-height:1.55;color:#1e293b;" valign="top">
-                      <strong>Doorprize: Paket Umroh &amp; Ratusan Hadiah Menarik</strong> (Sepeda Motor, Sepeda Listrik, dan Elektronik)
+                      <strong>Doorprize: Ratusan Hadiah Menarik</strong> (Sepeda Motor, Sepeda Listrik, dan Elektronik)
                     </td>
                   </tr>
                   <tr>

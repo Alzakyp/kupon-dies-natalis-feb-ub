@@ -149,7 +149,7 @@
                     </div>
                     <div class="event-chip chip-prize">
                         <span class="chip-icon">🎁</span>
-                        <span>Doorprize: Paket Umroh &amp; Ratusan Hadiah Menarik</span>
+                        <span>Doorprize: Ratusan Hadiah Menarik</span>
                     </div>
                     <div class="event-chip chip-prize">
                         <span class="chip-icon">🎸</span>
