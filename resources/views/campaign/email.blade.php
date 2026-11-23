@@ -10,7 +10,7 @@
     <tr>
       <td align="center" style="padding:24px 12px;">
         <!-- Email Container Card -->
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;background:#ffffff;border:1px solid #d5dce2;border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(9,43,76,0.06);">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;background:#ffffff;border:1px solid #d5dce2;border-radius:8px;overflow:hidden;box-shadow:0 4px 18px rgba(9,43,76,0.06);">
           
           <!-- Header Bar FEB UB -->
           <tr>
@@ -33,130 +33,135 @@
           <tr>
             <td style="padding:28px 28px 36px;font-family:Arial,Helvetica,sans-serif;">
               
-              <!-- Title & Tagline -->
+              <!-- Title & Tagline (No fake eyebrow badge) -->
               <div style="margin-bottom:18px;">
-                <span style="display:inline-block;padding:3px 10px;background:#fdf8eb;border:1px solid #fde68a;border-radius:4px;font-size:11px;font-weight:800;color:#92400e;letter-spacing:0.06em;text-transform:uppercase;">Undangan Resmi Sivitas &amp; Alumni</span>
-                <h1 style="margin:10px 0 6px;color:#092b4c;font-size:24px;font-weight:850;line-height:1.25;letter-spacing:-0.02em;">FEB UB GRAND FIESTA</h1>
+                <h1 style="margin:0 0 6px;color:#092b4c;font-size:24px;font-weight:800;line-height:1.25;letter-spacing:-0.02em;">FEB UB GRAND FIESTA</h1>
                 <p style="margin:0;color:#475569;font-size:14.5px;line-height:1.5;">Fun Walk, Doorprize Utama &amp; FEB Unity Concert</p>
               </div>
 
               <!-- Flyer Banner -->
-              <div style="margin:0 0 22px;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0;background:#092b4c;">
+              <div style="margin:0 0 22px;border-radius:6px;overflow:hidden;border:1px solid #e2e8f0;background:#092b4c;">
                 <img src="{{ asset('images/campaign-flyer.png') }}" alt="Grand Fiesta FEB UB — Special Guest Star: KOTAK" width="564" style="display:block;width:100%;max-width:564px;height:auto;margin:0 auto;">
               </div>
 
-              <!-- HIGHLIGHT BANNER: GRATIS UNTUK MAHASISWA AKTIF & ALUMNI -->
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;background:#fffdf5;border:1.5px solid #fde68a;border-left:5px solid #dc2626;border-radius:8px;">
+              <!-- HIGHLIGHT BANNER: GRATIS UNTUK MAHASISWA AKTIF & ALUMNI (Clean, unified card) -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;background:#fefefe;border:1.5px solid #e2e8f0;border-radius:6px;">
                 <tr>
-                  <td style="padding:18px 22px;">
-                    <div style="margin-bottom:8px;">
-                      <span style="display:inline-block;background:#dc2626;color:#ffffff;font-size:15px;font-weight:900;font-style:italic;padding:5px 14px;border-radius:4px;letter-spacing:0.04em;text-transform:uppercase;box-shadow:0 2px 6px rgba(220,38,38,0.25);">
+                  <td style="padding:16px 20px;">
+                    <div style="margin-bottom:6px;">
+                      <span style="display:inline-block;background:#dc2626;color:#ffffff;font-size:15px;font-weight:900;font-style:italic;padding:5px 14px;border-radius:4px;letter-spacing:0.04em;text-transform:uppercase;">
                         100% GRATIS
                       </span>
                     </div>
-                    <div style="font-size:18px;font-weight:850;color:#092b4c;line-height:1.35;">
+                    <div style="font-size:18px;font-weight:800;color:#092b4c;line-height:1.35;">
                       Gratis untuk Mahasiswa Aktif dan Alumni FEB UB
                     </div>
                   </td>
                 </tr>
               </table>
 
-              <!-- Intro Paragraph -->
-              <p style="margin:0 0 18px;font-size:15px;line-height:1.6;color:#334155;">
-                Halo Sivitas Akademika &amp; Alumni FEB UB,<br><br>
-                <em>It’s time to celebrate together!</em> Bukan sekadar jalan sehat biasa, ini momen kebersamaan terbesar Lustrum XIII FEB UB untuk seru-seruan, menikmati bazaar kuliner, memenangkan doorprize bernilai puluhan juta rupiah, dan menyaksikan penampilan panggung spektakuler.
+              <!-- Intro Paragraph (Direct, dignified, institutional copy) -->
+              <p style="margin:0 0 20px;font-size:14.5px;line-height:1.6;color:#334155;">
+                Dalam rangka Dies Natalis ke-65 dan Lustrum XIII, Fakultas Ekonomi dan Bisnis Universitas Brawijaya mengundang seluruh sivitas akademika, mahasiswa aktif, dan alumni untuk hadir dalam kegiatan <strong>FEB UB Grand Fiesta</strong>.
               </p>
 
-              <!-- Highlights / What's Waiting for You -->
-              <div style="margin:0 0 24px;padding:20px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;">
-                <div style="font-size:15px;font-weight:800;color:#092b4c;margin-bottom:12px;display:flex;align-items:center;">
-                  <span>Rangkaian Kemeriahan Acara:</span>
+              <!-- Schedule & Venue Information -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 22px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;">
+                <tr>
+                  <td style="padding:16px 20px;font-size:14px;line-height:1.6;color:#1e293b;">
+                    <div style="margin-bottom:6px;">
+                      <strong style="color:#092b4c;display:inline-block;min-width:110px;">Hari, Tanggal:</strong> Minggu, 6 Desember 2026
+                    </div>
+                    <div style="margin-bottom:6px;">
+                      <strong style="color:#092b4c;display:inline-block;min-width:110px;">Waktu:</strong> Pukul 05.30 WIB – Selesai
+                    </div>
+                    <div>
+                      <strong style="color:#092b4c;display:inline-block;min-width:110px;">Lokasi:</strong> Lapangan Rektorat, Universitas Brawijaya
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Event Highlights (Clean typographic structure, no emoji bullets) -->
+              <div style="margin:0 0 24px;">
+                <div style="font-size:15px;font-weight:800;color:#092b4c;margin-bottom:10px;">
+                  Agenda Kegiatan:
                 </div>
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                   <tr>
-                    <td style="padding:5px 0;font-size:14px;line-height:1.5;color:#1e293b;" valign="top">
-                      🎸 <strong>Special Guest Star: KOTAK</strong> (Tantri, Cella, Chua — *Beraksi, Pelan-Pelan Saja, Masih Cinta*)
+                    <td width="18" valign="top" style="padding:6px 0;font-size:14px;color:#092b4c;font-weight:700;">•</td>
+                    <td style="padding:6px 0;font-size:14px;line-height:1.55;color:#1e293b;" valign="top">
+                      <strong>Special Guest Star: KOTAK</strong> (Tantri, Cella, Chua)
                     </td>
                   </tr>
                   <tr>
-                    <td style="padding:5px 0;font-size:14px;line-height:1.5;color:#1e293b;" valign="top">
-                      🎁 <strong>Lucky Draw &amp; Doorprize Utama</strong> (Paket Umroh, Sepeda Motor, &amp; Puluhan Hadiah Elektronik Menarik)
+                    <td width="18" valign="top" style="padding:6px 0;font-size:14px;color:#092b4c;font-weight:700;">•</td>
+                    <td style="padding:6px 0;font-size:14px;line-height:1.55;color:#1e293b;" valign="top">
+                      <strong>Doorprize Utama</strong> (Paket Umroh, Sepeda Motor, Sepeda Listrik, dan Elektronik)
                     </td>
                   </tr>
                   <tr>
-                    <td style="padding:5px 0;font-size:14px;line-height:1.5;color:#1e293b;" valign="top">
-                      🏃 <strong>Morning Groove Warm-Up &amp; Fun Walk</strong> (Jalan santai ceria mengelilingi rute kampus UB)
+                    <td width="18" valign="top" style="padding:6px 0;font-size:14px;color:#092b4c;font-weight:700;">•</td>
+                    <td style="padding:6px 0;font-size:14px;line-height:1.55;color:#1e293b;" valign="top">
+                      <strong>Fun Walk &amp; Senam Pagi Bersama</strong> (Rute area kampus Universitas Brawijaya)
                     </td>
                   </tr>
                   <tr>
-                    <td style="padding:5px 0;font-size:14px;line-height:1.5;color:#1e293b;" valign="top">
-                      🍲 <strong>Pop-Up Culinary Market &amp; Art Performance</strong> (Bazaar kuliner &amp; kreasi seni civitas FEB UB)
+                    <td width="18" valign="top" style="padding:6px 0;font-size:14px;color:#092b4c;font-weight:700;">•</td>
+                    <td style="padding:6px 0;font-size:14px;line-height:1.55;color:#1e293b;" valign="top">
+                      <strong>Bazaar Kuliner &amp; Panggung Seni</strong> Civitas Akademika FEB UB
                     </td>
                   </tr>
                   <tr>
-                    <td style="padding:5px 0;font-size:14px;line-height:1.5;color:#1e293b;" valign="top">
-                      🤝 <strong>Scan for Impact: FEB UB Berbagi</strong> (Donasi kemanusiaan &amp; bakti sosial)
+                    <td width="18" valign="top" style="padding:6px 0;font-size:14px;color:#092b4c;font-weight:700;">•</td>
+                    <td style="padding:6px 0;font-size:14px;line-height:1.55;color:#1e293b;" valign="top">
+                      <strong>Scan for Impact: FEB UB Berbagi</strong>
                     </td>
                   </tr>
                 </table>
               </div>
 
-              <!-- Schedule & Venue Box -->
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;background:#eef4fa;border:1px solid #cbd5e1;border-radius:8px;">
-                <tr>
-                  <td style="padding:16px 20px;">
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-                      <tr>
-                        <td width="30" valign="top" style="font-size:18px;line-height:1;">📅</td>
-                        <td style="font-size:14px;line-height:1.5;color:#092b4c;">
-                          <strong>Minggu, 6 Desember 2026 · Pukul 05.30 WIB – Selesai</strong><br>
-                          <span style="color:#475569;">Lokasi: Lapangan Rektorat, Universitas Brawijaya</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-
-              <!-- Big CTA Button -->
+              <!-- CTA Button (Clean, no decorative arrow) -->
               <div style="text-align:center;margin:28px 0 10px;">
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
                   <tr>
                     <td align="center" style="border-radius:6px;background:#092b4c;">
-                      <a href="{{ url('/daftar') }}" target="_blank" style="display:inline-block;padding:15px 36px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:800;color:#ffffff;text-decoration:none;border-radius:6px;background:#092b4c;border-bottom:3px solid #d3a128;">
-                        Daftar Sekarang (Gratis) &raquo;
+                      <a href="{{ url('/daftar') }}" target="_blank" style="display:inline-block;padding:15px 36px;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:800;color:#ffffff;text-decoration:none;border-radius:6px;background:#092b4c;border-bottom:3px solid #d3a128;">
+                        Daftar Sekarang (Gratis)
                       </a>
                     </td>
                   </tr>
                 </table>
                 <p style="margin:10px 0 0;font-size:13px;color:#64748b;">
-                  Pendaftaran wajib via website untuk alokasi nomor undian dan e-tiket QR.
+                  Pendaftaran wajib melalui website untuk penerbitan tiket QR dan alokasi nomor kupon.
                 </p>
               </div>
 
               <!-- Kupon Info Box -->
-              <div style="margin-top:28px;padding:18px 20px;background:#ffffff;border:1px solid #d5dce2;border-radius:8px;">
-                <div style="font-size:12px;font-weight:800;color:#92400e;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;">
-                  🎟️ Jadwal &amp; Lokasi Pengambilan Kupon Fisik
+              <div style="margin-top:28px;padding:18px 20px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;">
+                <div style="font-size:12px;font-weight:800;color:#77500e;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:4px;">
+                  Pengambilan Kupon Fisik
                 </div>
                 <div style="font-size:14px;font-weight:700;color:#092b4c;margin-bottom:6px;">
                   30 November – 4 Desember 2026 · Pukul 08.00 – 15.00 WIB
                 </div>
                 <p style="margin:0 0 10px;font-size:13.5px;line-height:1.55;color:#475569;">
-                  Tunjukkan e-tiket QR dari email ini dan bawa <strong>KTM atau KTP asli</strong> ke lokasi berikut:
+                  Tunjukkan e-tiket QR dari email dan bawa <strong>KTM atau KTP asli</strong> ke lokasi berikut:
                 </p>
-                <ul style="margin:0;padding:0 0 0 18px;font-size:13px;line-height:1.6;color:#334155;">
-                  <li style="margin-bottom:4px;"><strong>Mahasiswa aktif angkatan 2025 &amp; 2026:</strong> Ruang Tata Usaha (Gedung Utama Lt. 2)</li>
-                  <li style="margin-bottom:4px;"><strong>Mahasiswa aktif angkatan lainnya:</strong> Security Command Center (Gedung Dekanat Lama Lt. 1)</li>
-                  <li><strong>Alumni:</strong> Ruang Kemahasiswaan Lt. 2</li>
-                </ul>
-              </div>
-
-              <!-- Closing Note -->
-              <div style="margin-top:24px;text-align:center;">
-                <p style="margin:0;font-size:14px;font-weight:700;color:#092b4c;">
-                  One Faculty, One Celebration, One Unforgettable Moment!
-                </p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:13px;line-height:1.6;color:#334155;">
+                  <tr>
+                    <td width="16" valign="top" style="padding:3px 0;color:#092b4c;font-weight:700;">•</td>
+                    <td style="padding:3px 0;"><strong>Mahasiswa aktif angkatan 2025 &amp; 2026:</strong> Ruang Tata Usaha (Gedung Utama Lt. 2)</td>
+                  </tr>
+                  <tr>
+                    <td width="16" valign="top" style="padding:3px 0;color:#092b4c;font-weight:700;">•</td>
+                    <td style="padding:3px 0;"><strong>Mahasiswa aktif angkatan lainnya:</strong> Security Command Center (Gedung Dekanat Lama Lt. 1)</td>
+                  </tr>
+                  <tr>
+                    <td width="16" valign="top" style="padding:3px 0;color:#092b4c;font-weight:700;">•</td>
+                    <td style="padding:3px 0;"><strong>Alumni:</strong> Ruang Kemahasiswaan Lt. 2</td>
+                  </tr>
+                </table>
               </div>
 
             </td>
@@ -167,7 +172,7 @@
             <td style="padding:20px 28px;background:#f8fafc;border-top:1px solid #e2e8f0;text-align:center;font-size:12px;line-height:1.5;color:#64748b;">
               <strong>Fakultas Ekonomi dan Bisnis Universitas Brawijaya</strong><br>
               Jl. MT. Haryono No. 165, Malang, Jawa Timur 65145<br>
-              <a href="{{ url('/') }}" style="color:#092b4c;text-decoration:none;font-weight:700;">diesnatalis65.feb.ub.ac.id</a> · Khusus Civitas Akademika &amp; Alumni FEB UB
+              <a href="https://feb.ub.ac.id" style="color:#092b4c;text-decoration:none;font-weight:700;">feb.ub.ac.id</a>
             </td>
           </tr>
 

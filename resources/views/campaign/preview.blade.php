@@ -33,7 +33,7 @@
             </div>
             <div class="email-meta-row">
                 <span class="meta-label">Pengirim</span>
-                <span class="meta-value">Dies Natalis FEB UB 65 &lt;diesnatalis65@feb.ub.ac.id&gt;</span>
+                <span class="meta-value">Fakultas Ekonomi dan Bisnis Universitas Brawijaya</span>
             </div>
             <div class="email-meta-row">
                 <span class="meta-label">Penerima</span>
