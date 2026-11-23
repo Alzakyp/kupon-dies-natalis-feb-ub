@@ -101,7 +101,8 @@ class CampaignDashboardTest extends TestCase
             ->assertSee('FEB UB Grand Fiesta — Fun Walk & FEB Unity Concert')
             ->assertSee('Special Guest Star: KOTAK')
             ->assertSee('Gratis untuk Mahasiswa Aktif dan Alumni FEB UB')
-            ->assertSee('100% GRATIS · TANPA BIAYA')
+            ->assertSee('100% GRATIS')
+            ->assertDontSee('Seluruh rangkaian acara Grand Fiesta')
             ->assertSee('Daftar Sekarang (Gratis)')
             ->assertSee('Kembali ke Dashboard Kampanye');
     }

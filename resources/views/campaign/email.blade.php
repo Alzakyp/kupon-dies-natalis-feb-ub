@@ -46,18 +46,17 @@
               </div>
 
               <!-- HIGHLIGHT BANNER: GRATIS UNTUK MAHASISWA AKTIF & ALUMNI -->
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;background:#fffdf5;border:1.5px solid #fde68a;border-left:5px solid #d3a128;border-radius:8px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;background:#fffdf5;border:1.5px solid #fde68a;border-left:5px solid #dc2626;border-radius:8px;">
                 <tr>
-                  <td style="padding:16px 20px;">
-                    <div style="display:inline-block;padding:2px 8px;background:#d3a128;color:#092b4c;font-size:11px;font-weight:850;letter-spacing:0.08em;text-transform:uppercase;border-radius:4px;margin-bottom:6px;">
-                      100% GRATIS · TANPA BIAYA
+                  <td style="padding:18px 22px;">
+                    <div style="margin-bottom:8px;">
+                      <span style="display:inline-block;background:#dc2626;color:#ffffff;font-size:15px;font-weight:900;font-style:italic;padding:5px 14px;border-radius:4px;letter-spacing:0.04em;text-transform:uppercase;box-shadow:0 2px 6px rgba(220,38,38,0.25);">
+                        100% GRATIS
+                      </span>
                     </div>
-                    <div style="font-size:18px;font-weight:850;color:#092b4c;line-height:1.3;margin-bottom:6px;">
+                    <div style="font-size:18px;font-weight:850;color:#092b4c;line-height:1.35;">
                       Gratis untuk Mahasiswa Aktif dan Alumni FEB UB
                     </div>
-                    <p style="margin:0;font-size:14px;line-height:1.6;color:#334155;">
-                      Seluruh rangkaian acara <strong>Grand Fiesta</strong>, kupon undian jalan sehat (*doorprize* utama), konsumsi, hingga panggung musik <strong>KOTAK</strong> dapat diikuti secara <strong>Gratis</strong> khusus bagi civitas akademika dan alumni Fakultas Ekonomi dan Bisnis Universitas Brawijaya.
-                    </p>
                   </td>
                 </tr>
               </table>
