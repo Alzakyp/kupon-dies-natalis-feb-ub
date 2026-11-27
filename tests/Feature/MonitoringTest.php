@@ -17,7 +17,14 @@ class MonitoringTest extends TestCase
         $this->get('/monitoring')->assertOk()->assertSee('Password monitoring')->assertDontSee('monitor@example.com');
         $this->post('/monitoring', ['password' => 'wrong'])->assertSessionHasErrors();
         $this->post('/monitoring', ['password' => 'febub2026'])->assertRedirect('/monitoring');
-        $this->get('/monitoring')->assertOk()->assertSee('monitor@example.com')->assertSee('Belum/gagal')->assertSee('Menunggu OTP');
+        $this->get('/monitoring')->assertOk()->assertSee('monitor@example.com')->assertSee('Belum/gagal')->assertSee('Menunggu OTP')->assertSee('Civitas UB');
+    }
+
+    public function test_monitoring_shows_civitas_total_separately(): void
+    {
+        Ticket::create(['number'=>'CIV-1','barcode'=>str_repeat('c',48),'email'=>'civ@example.com','phone'=>'6281212345678','registration_type'=>'civitas_ub']);
+        $this->withSession(['monitoring_authenticated'=>true])->get('/monitoring')->assertSee('Total Terdaftar Civitas UB')->assertSee('1');
+        $this->withSession(['monitoring_authenticated'=>true])->get('/monitoring?type=civitas_ub')->assertSee('civ@example.com');
     }
 
     public function test_monitoring_pagination_ten_per_page_and_shows_data_count(): void

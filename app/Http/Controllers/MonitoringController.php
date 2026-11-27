@@ -28,7 +28,7 @@ class MonitoringController extends Controller
         $pending = PendingRegistration::with('studentRegistry')->get()->map(fn ($row) => $this->item($row, false));
         $items = $tickets->concat($pending)->filter(function ($item) use ($term, $type, $mail) {
             if ($term && !str_contains(strtolower($item->name.' '.$item->nim.' '.$item->email), $term)) return false;
-            if (in_array($type, ['alumni', 'active_student'], true) && $item->registration_type !== $type) return false;
+            if (in_array($type, ['alumni', 'active_student', 'civitas_ub'], true) && $item->registration_type !== $type) return false;
             if ($mail === 'sent' && !$item->emailed_at) return false;
             if ($mail === 'pending' && $item->emailed_at) return false;
             return true;
@@ -39,7 +39,7 @@ class MonitoringController extends Controller
             'tickets' => $participants, 'total' => Ticket::count(),
             'active' => StudentRegistry::where('registration_type', 'active_student')->count(),
             'alumni' => StudentRegistry::where('registration_type', 'alumni')->count(),
-            'sent' => Ticket::whereNotNull('emailed_at')->count(), 'pendingOtp' => PendingRegistration::count(),
+            'sent' => Ticket::whereNotNull('emailed_at')->count(), 'civitas' => Ticket::where('registration_type', 'civitas_ub')->count(), 'pendingOtp' => PendingRegistration::count(),
         ]);
     }
 

@@ -101,7 +101,7 @@
             </div>
         </div>
 
-        <!-- 4. Email Tiket Terkirim -->
+        <!-- 4. Total Civitas UB -->
         <div class="stat-card stat-sent">
             <div class="stat-card-icon icon-green">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -111,9 +111,9 @@
                 </svg>
             </div>
             <div class="stat-card-body">
-                <span class="stat-label">Email Tiket Terkirim</span>
-                <strong class="stat-number">{{ number_format($sent) }}</strong>
-                <span class="stat-sub">E-tiket QR terkirim</span>
+                <span class="stat-label">Total Terdaftar Civitas UB</span>
+                <strong class="stat-number">{{ number_format($civitas) }}</strong>
+                <span class="stat-sub">Pendaftaran terverifikasi</span>
             </div>
         </div>
 
@@ -153,6 +153,7 @@
                     <option value="">Semua Kategori</option>
                     <option value="active_student" @selected(request('type') === 'active_student')>Mahasiswa Aktif</option>
                     <option value="alumni" @selected(request('type') === 'alumni')>Alumni</option>
+                    <option value="civitas_ub" @selected(request('type') === 'civitas_ub')>Civitas UB</option>
                 </select>
             </div>
 
