@@ -47,6 +47,9 @@ class TicketCheckController extends Controller
         $data = $request->validate(['barcode' => 'required|string|max:200']);
         $ticket = Ticket::with('studentRegistry')->where('barcode', trim($data['barcode']))->first();
         if (!$ticket) return back()->withErrors(['barcode' => 'Tiket tidak ditemukan.']);
-        return view('tickets.check', ['ticket' => $ticket, 'scannerAuthenticated' => $this->authenticated($request)]);
+        if ($ticket->checked_in_at) return view('tickets.check', ['ticket' => $ticket, 'scannerAuthenticated' => true, 'scanMessage' => 'Tiket sudah dipindai sebelumnya.']);
+        if (!Ticket::whereKey($ticket->id)->whereNull('checked_in_at')->update(['checked_in_at' => now()])) return back()->withErrors(['barcode' => 'Tiket sudah dipindai.']);
+        $ticket->refresh();
+        return view('tickets.check', ['ticket' => $ticket, 'scannerAuthenticated' => true, 'scanMessage' => 'Tiket berhasil dipindai dan ditandai hadir.']);
     }
 }

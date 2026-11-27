@@ -10,9 +10,9 @@ class PublicTicketCheckTest extends TestCase {
   $t=Ticket::create(['number'=>'FEB65-SCAN','barcode'=>str_repeat('s',48),'email'=>'scan@example.com','phone'=>'6281212345679']);
   $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode])->assertRedirect('/cek-tiket');
   $this->post('/cek-tiket/login',['password'=>'febub2026'])->assertRedirect('/cek-tiket');
-  $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode])->assertSessionHas('success');
+  $this->post('/cek-tiket',['barcode'=>$t->barcode])->assertSee('Tiket berhasil dipindai');
   $this->assertNotNull($t->fresh()->checked_in_at);
-  $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode,'password'=>'febub2026'])->assertSessionHasErrors('barcode');
+  $this->post('/cek-tiket',['barcode'=>$t->barcode])->assertSee('Tiket sudah dipindai sebelumnya.');
  }
  public function test_public_ticket_check_is_read_only(): void {
   $b=Batch::create(['name'=>'Check','active'=>true,'expires_at'=>now()->addDay()]);
@@ -21,6 +21,6 @@ class PublicTicketCheckTest extends TestCase {
   $this->get('/cek-tiket')->assertOk()->assertSee('Password petugas')->assertDontSee('id="public-ticket-barcode"', false);
   $this->post('/cek-tiket/login',['password'=>'febub2026'])->assertRedirect('/cek-tiket');
   $this->post('/cek-tiket',['barcode'=>$t->barcode])->assertOk()->assertSee('check@example.com')->assertSee('Mahasiswa Aktif')->assertDontSee('FEB65-CHECK');
-  $this->assertNull($t->fresh()->checked_in_at);
+  $this->assertNotNull($t->fresh()->checked_in_at);
  }
 }

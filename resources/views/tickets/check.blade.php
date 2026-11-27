@@ -7,6 +7,7 @@
 @else
 <p class="notice success">Mode scan aktif selama 6 jam.</p>
 @if(session('success'))<p class="notice success" role="status">{{ session('success') }}</p>@endif
+@if(isset($scanMessage))<p class="notice {{ isset($ticket) && $ticket->wasChanged('checked_in_at') ? 'success' : 'error' }}" role="status">{{ $scanMessage }}</p>@endif
 <form method="post" action="{{ url('/cek-tiket') }}">@csrf<label>Kode QR tiket<input id="public-ticket-barcode" name="barcode" autofocus required autocomplete="off" spellcheck="false"></label><button>Cek data peserta</button></form>
 @endif
 @if(isset($ticket))
@@ -19,7 +20,6 @@
 <div><small>Email</small><p>{{ $ticket->email }}</p></div>
 <div><small>Nomor HP</small><p>{{ $ticket->phone }}</p></div>
 </div>
-@if(!$ticket->checked_in_at)<form method="post" action="{{ url('/cek-tiket/check-in') }}" style="margin-top:16px">@csrf<input type="hidden" name="barcode" value="{{ $ticket->barcode }}"><button>Konfirmasi Scan</button></form>@endif
 @endif
 <script>
 (() => {
