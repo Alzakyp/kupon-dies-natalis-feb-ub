@@ -473,7 +473,7 @@
                             </svg>
                         </div>
                         <div class="card-content">
-                            <span class="card-title">Mahasiswa Aktif</span>
+                            <span class="card-title">Mahasiswa Aktif FEB UB</span>
                         </div>
                         <div class="card-radio-indicator" aria-hidden="true">
                             <span class="radio-circle"></span>
@@ -514,7 +514,7 @@
                             </svg>
                         </div>
                         <div class="card-content">
-                            <span class="card-title">Alumni</span>
+                            <span class="card-title">Alumni FEB UB</span>
                         </div>
                         <div class="card-radio-indicator" aria-hidden="true">
                             <span class="radio-circle"></span>
