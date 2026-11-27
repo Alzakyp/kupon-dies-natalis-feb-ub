@@ -481,6 +481,8 @@
                         </div>
                     </a>
 
+                    <a href="{{ url('/daftar').'?type=civitas_ub' }}" class="category-card {{ $selectedType === 'civitas_ub' ? 'active' : '' }}" data-category="civitas_ub" role="tab" @if($selectedType === 'civitas_ub') aria-current="page" aria-selected="true" @else aria-selected="false" @endif><div class="card-content"><span class="card-title">Civitas UB</span><span class="card-desc">Tiket langsung setelah verifikasi email UB</span></div><div class="card-radio-indicator" aria-hidden="true"><span class="radio-circle"></span></div></a>
+
                     <a href="{{ url('/daftar').'?type=alumni' }}"
                        class="category-card {{ $selectedType === 'alumni' ? 'active' : '' }}"
                        data-category="alumni"
@@ -540,6 +542,8 @@
                 </div>
             </div>
 
+            <div id="panel-civitas_ub" class="category-panel {{ $selectedType === 'civitas_ub' ? 'panel-visible' : 'panel-hidden' }}"><div class="lookup-card"><div class="lookup-card-header"><span class="lookup-badge">Pendaftaran Civitas UB</span><p class="lookup-prompt">Tiket peserta langsung dikirim setelah verifikasi OTP email UB.</p></div><form method="post" action="{{ url('/daftar/civitas/otp') }}" class="modern-form">@csrf<div class="form-group"><label for="civitas-name" class="form-label">Nama lengkap</label><input id="civitas-name" name="name" value="{{ old('name') }}" required maxlength="150" autocomplete="name"></div><div class="form-group"><label for="civitas-email" class="form-label">Email UB</label><input type="email" id="civitas-email" name="email" value="{{ old('email') }}" required placeholder="nama@ub.ac.id atau nama@student.ub.ac.id" autocomplete="email"><small class="form-hint">Hanya @ub.ac.id atau @student.ub.ac.id.</small></div><div class="form-group"><label for="civitas-phone" class="form-label">Nomor HP / WhatsApp</label><input type="tel" id="civitas-phone" name="phone" value="{{ old('phone') }}" required autocomplete="tel" placeholder="081234567890"></div><button type="submit" class="btn-primary btn-block">Kirim OTP</button></form></div></div>
+
             <!-- Panel for Alumni -->
             <div id="panel-alumni" class="category-panel {{ $selectedType === 'alumni' ? 'panel-visible' : 'panel-hidden' }}">
                 @if(!$hasAlumni)
@@ -598,6 +602,7 @@
             var cards = document.querySelectorAll('.category-card[data-category]');
             var panelActive = document.getElementById('panel-active_student');
             var panelAlumni = document.getElementById('panel-alumni');
+            var panelCivitas = document.getElementById('panel-civitas_ub');
 
             cards.forEach(function (card) {
                 card.addEventListener('click', function (e) {
@@ -614,6 +619,9 @@
                     card.setAttribute('aria-current', 'page');
                     card.setAttribute('aria-selected', 'true');
 
+                    [panelActive, panelAlumni, panelCivitas].forEach(function (panel) { if (panel) { panel.classList.remove('panel-visible'); panel.classList.add('panel-hidden'); } });
+                    var target = document.getElementById('panel-' + cat);
+                    if (target) { target.classList.remove('panel-hidden'); target.classList.add('panel-visible'); }
                     if (cat === 'active_student') {
                         if (panelActive) {
                             panelActive.classList.remove('panel-hidden');
@@ -626,16 +634,8 @@
                         var inp = document.getElementById('nim-input-active');
                         if (inp) inp.focus();
                     } else {
-                        if (panelActive) {
-                            panelActive.classList.remove('panel-visible');
-                            panelActive.classList.add('panel-hidden');
-                        }
-                        if (panelAlumni) {
-                            panelAlumni.classList.remove('panel-hidden');
-                            panelAlumni.classList.add('panel-visible');
-                        }
-                        var inpAlumni = document.getElementById('nim-input-alumni');
-                        if (inpAlumni) inpAlumni.focus();
+                        var focusTarget = cat === 'alumni' ? document.getElementById('nim-input-alumni') : document.getElementById('civitas-name');
+                        if (focusTarget) focusTarget.focus();
                     }
 
                     if (window.history && window.history.replaceState) {

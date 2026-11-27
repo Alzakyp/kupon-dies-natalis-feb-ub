@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/daftar', [RegistrationController::class, 'form']);
 Route::post('/daftar/lookup', [RegistrationController::class, 'lookup']);
 Route::post('/daftar/otp', [RegistrationController::class, 'otp']);
+Route::post('/daftar/civitas/otp', [RegistrationController::class, 'civitasOtp']);
 Route::post('/daftar/otp/resend', [RegistrationController::class, 'resendOtp'])->middleware('throttle:5,10');
 Route::post('/daftar', [RegistrationController::class, 'complete']);
 Route::get('/cek-tiket', [TicketCheckController::class, 'form']);

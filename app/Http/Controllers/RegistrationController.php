@@ -83,6 +83,19 @@ class RegistrationController extends Controller
         return redirect(url('/daftar'))->with('success', 'Data ditemukan. Silakan lanjutkan pendaftaran.');
     }
 
+    public function civitasOtp(Request $request, RegistrationService $service)
+    {
+        $this->open();
+        $data = $request->validate(['name' => 'required|string|max:150', 'email' => 'required|email|max:254', 'phone' => 'required|string|max:30']);
+        $key = 'civitas:'.$request->ip();
+        if (RateLimiter::tooManyAttempts($key, 5)) throw ValidationException::withMessages(['email' => 'Terlalu banyak permintaan. Coba lagi nanti.']);
+        RateLimiter::hit($key, 600);
+        $pending = $service->requestOtp($data['email'], $data['phone'], null, 'civitas_ub', ['name' => $data['name']]);
+        $request->session()->forget(['student_registry_id', 'registration_type', 'alumni_nim']);
+        $request->session()->put('registration_pending', $pending->id);
+        return redirect(url('/daftar'))->with('success', 'OTP telah dikirim ke email UB Anda.');
+    }
+
     public function otp(Request $request, RegistrationService $service)
     {
         $this->open();
@@ -137,7 +150,7 @@ class RegistrationController extends Controller
         $ticket = $service->complete($id, $data['otp']);
         try { $service->sendTicket($ticket); } catch (\Throwable $e) { report($e); }
         $request->session()->forget(['registration_pending', 'student_registry_id', 'registration_type', 'alumni_nim']);
-        return view('registration.success', compact('ticket'));
+        return view($ticket->registration_type === 'civitas_ub' ? 'registration.civitas-success' : 'registration.success', compact('ticket'));
     }
 
     public function resend(Ticket $ticket, RegistrationService $service)

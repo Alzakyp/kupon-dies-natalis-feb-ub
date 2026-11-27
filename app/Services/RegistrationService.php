@@ -34,13 +34,15 @@ class RegistrationService
     {
         $email = self::email($email);
         $phone = self::phone($phone);
-        if ((!$registryId && !$identity) || !$registrationType) throw ValidationException::withMessages(['nim' => 'Validasi NIM terlebih dahulu.']);
+        if (!$registrationType || ($registrationType !== 'civitas_ub' && !$registryId && !$identity)) throw ValidationException::withMessages(['nim' => 'Validasi data terlebih dahulu.']);
+        if ($registrationType === 'civitas_ub' && !str_ends_with($email, '@ub.ac.id') && !str_ends_with($email, '@student.ub.ac.id')) throw ValidationException::withMessages(['email' => 'Gunakan email UB (@ub.ac.id atau @student.ub.ac.id).']);
         if ($registryId && !StudentRegistry::whereKey($registryId)->where('registration_type', $registrationType)->exists())
             throw ValidationException::withMessages(['nim' => 'Data NIM tidak valid.']);
         $nim = $identity['nim'] ?? StudentRegistry::find($registryId)?->nim;
-        if (!$nim || (!$registryId && ($registrationType !== 'alumni' || empty($identity['name']) || empty($identity['education_level']) || empty($identity['study_program']))))
+        if ($registrationType === 'civitas_ub') $nim = null;
+        if ($registrationType !== 'civitas_ub' && (!$nim || (!$registryId && ($registrationType !== 'alumni' || empty($identity['name']) || empty($identity['education_level']) || empty($identity['study_program'])))))
             throw ValidationException::withMessages(['nim' => 'Data alumni belum lengkap.']);
-        if (Ticket::where('nim', $nim)->exists() || ($registryId && Ticket::where('student_registry_id', $registryId)->exists()))
+        if (($nim && Ticket::where('nim', $nim)->exists()) || ($registryId && Ticket::where('student_registry_id', $registryId)->exists()))
             throw ValidationException::withMessages(['nim' => 'NIM sudah terdaftar.']);
         if (Ticket::where('email', $email)->orWhere('phone', $phone)->exists())
             throw ValidationException::withMessages(['email' => 'Pendaftaran tidak dapat diproses. Hubungi petugas.']);
@@ -53,7 +55,7 @@ class RegistrationService
 
         $otp = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
         $pending = PendingRegistration::updateOrCreate(['email' => $email], [
-            'phone' => $phone, 'student_registry_id' => $registryId, 'registration_type' => $registrationType, 'nim' => $identity['nim'] ?? StudentRegistry::find($registryId)?->nim, 'manual_identity' => $identity, 'otp_hash' => Hash::make($otp), 'otp_expires_at' => now()->addMinutes(10),
+            'phone' => $phone, 'student_registry_id' => $registryId, 'registration_type' => $registrationType, 'nim' => $nim, 'manual_identity' => $registrationType === 'civitas_ub' ? ['name' => $identity['name']] : $identity, 'otp_hash' => Hash::make($otp), 'otp_expires_at' => now()->addMinutes(10),
             'otp_attempts' => 0, 'otp_sent_at' => now(),
         ]);
         try {
@@ -80,7 +82,7 @@ class RegistrationService
                 $pending->increment('otp_attempts');
                 return null;
             }
-            if (Ticket::where('nim', $pending->nim)->exists())
+            if ($pending->nim && Ticket::where('nim', $pending->nim)->exists())
                 throw ValidationException::withMessages(['nim' => 'NIM sudah terdaftar.']);
             if (Ticket::where('email', $pending->email)->orWhere('phone', $pending->phone)->exists())
                 throw ValidationException::withMessages(['otp' => 'Pendaftaran sudah selesai.']);
