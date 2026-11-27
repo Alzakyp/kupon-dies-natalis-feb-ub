@@ -10,7 +10,7 @@
 <form method="post" action="{{ url('/cek-tiket') }}">@csrf<label>Kode QR tiket<input id="public-ticket-barcode" name="barcode" autofocus required autocomplete="off" spellcheck="false"></label><button>Cek data peserta</button></form>
 @endif
 @if(isset($ticket))
-<div class="summary-card" role="status">
+<div class="summary-card {{ $ticket->checked_in_at ? 'ticket-scanned' : '' }}" role="status">
 <div><small>Nama</small><p>{{ $ticket->studentRegistry?->name ?? data_get($ticket->manual_identity, 'name', '—') }}</p></div>
 <div><small>NIM</small><p>{{ $ticket->nim ?? $ticket->studentRegistry?->nim ?? '—' }}</p></div>
 <div><small>Status peserta</small><p>{{ $ticket->registration_type === 'alumni' ? 'Alumni FEB UB' : ($ticket->registration_type === 'civitas_ub' ? 'Civitas UB' : 'Mahasiswa Aktif FEB UB') }}</p></div>

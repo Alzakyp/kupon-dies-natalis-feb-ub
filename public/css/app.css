@@ -4459,6 +4459,10 @@ body:has(.monitoring-container) main {
     animation: successFadeInUp 0.6s ease 0.55s both;
 }
 
+.ticket-scanned { background:#fee2e2 !important; border-color:#ef4444 !important; }
+.ticket-scanned td { background:#fee2e2 !important; color:#991b1b; }
+.ticket-scanned .status-pill-badge { background:#fecaca; color:#991b1b; border-color:#fca5a5; }
+
 @media print {
     .confetti-canvas,
     .success-action-buttons,

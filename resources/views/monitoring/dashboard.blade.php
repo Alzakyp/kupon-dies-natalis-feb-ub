@@ -206,7 +206,7 @@
                 </thead>
                 <tbody>
                     @forelse($tickets as $ticket)
-                        <tr>
+                        <tr class="{{ $ticket->verified && $ticket->checked_in_at ? 'ticket-scanned' : '' }}">
                             <td>{{ $loop->iteration + (($tickets->currentPage() - 1) * $tickets->perPage()) }}</td>
                             <td>
                                 <div class="participant-col">
