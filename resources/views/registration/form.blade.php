@@ -474,7 +474,6 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title">Mahasiswa Aktif</span>
-                            <span class="card-desc">{{ number_format($activeStudentCount, 0, ',', '.') }} mahasiswa aktif di database</span>
                         </div>
                         <div class="card-radio-indicator" aria-hidden="true">
                             <span class="radio-circle"></span>
@@ -497,7 +496,6 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title">Civitas UB</span>
-                            <span class="card-desc">Tiket langsung setelah verifikasi email UB</span>
                         </div>
                         <div class="card-radio-indicator" aria-hidden="true">
                             <span class="radio-circle"></span>
@@ -517,7 +515,6 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title">Alumni</span>
-                            <span class="card-desc">{{ number_format($alumniCount, 0, ',', '.') }} alumni di database</span>
                         </div>
                         <div class="card-radio-indicator" aria-hidden="true">
                             <span class="radio-circle"></span>
