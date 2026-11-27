@@ -17,7 +17,7 @@ class MonitoringTest extends TestCase
         $this->get('/monitoring')->assertOk()->assertSee('Password monitoring')->assertDontSee('monitor@example.com');
         $this->post('/monitoring', ['password' => 'wrong'])->assertSessionHasErrors();
         $this->post('/monitoring', ['password' => 'febub2026'])->assertRedirect('/monitoring');
-        $this->get('/monitoring')->assertOk()->assertSee('monitor@example.com')->assertSee('Belum/gagal')->assertSee('Menunggu OTP')->assertSee('Civitas UB');
+        $this->get('/monitoring')->assertOk()->assertSee('monitor@example.com')->assertSee('Belum/gagal')->assertSee('Menunggu OTP')->assertSee('Civitas UB')->assertSee('setInterval');
     }
 
     public function test_monitoring_shows_civitas_total_separately(): void

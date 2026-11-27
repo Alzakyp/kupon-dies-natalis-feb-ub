@@ -1,5 +1,5 @@
 <x-layouts.app>
-<section class="monitoring-container">
+<section class="monitoring-container" id="monitoring-content">
     <!-- Navigation Tabs between Monitoring and Campaign -->
     <div class="monitoring-nav-tabs">
         <a href="{{ url('/monitoring') }}" class="nav-tab-item active">
@@ -313,4 +313,30 @@
     });
     </script>
 </section>
+<script>
+(() => {
+    const content = document.getElementById('monitoring-content');
+    if (!content) return;
+    let busy = false;
+    setInterval(async () => {
+        if (busy || document.hidden || document.activeElement?.matches('input,select')) return;
+        busy = true;
+        try {
+            const response = await fetch(window.location.href, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+            if (!response.ok) return;
+            const html = await response.text();
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const fresh = doc.getElementById('monitoring-content');
+            if (!fresh) { window.location.reload(); return; }
+            for (const selector of ['.monitoring-stats-grid', '.monitoring-table-card']) {
+                const current = content.querySelector(selector);
+                const updated = fresh.querySelector(selector);
+                if (current && updated) current.replaceWith(updated);
+            }
+        } catch (error) {
+            console.warn('Monitoring refresh failed', error);
+        } finally { busy = false; }
+    }, 5000);
+})();
+</script>
 </x-layouts.app>
