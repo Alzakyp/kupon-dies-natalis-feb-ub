@@ -626,7 +626,7 @@
 /* Category Cards Grid */
 .category-cards-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 14px !important;
     margin: 16px 0 0 !important;
 }
@@ -1231,6 +1231,12 @@
     display: grid;
     place-items: center;
     margin: 0 auto 14px;
+}
+
+@media (max-width: 720px) {
+    .category-cards-grid {
+        grid-template-columns: 1fr !important;
+    }
 }
 
 @media (max-width: 540px) {

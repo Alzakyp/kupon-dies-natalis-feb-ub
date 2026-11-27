@@ -481,7 +481,28 @@
                         </div>
                     </a>
 
-                    <a href="{{ url('/daftar').'?type=civitas_ub' }}" class="category-card {{ $selectedType === 'civitas_ub' ? 'active' : '' }}" data-category="civitas_ub" role="tab" @if($selectedType === 'civitas_ub') aria-current="page" aria-selected="true" @else aria-selected="false" @endif><div class="card-content"><span class="card-title">Civitas UB</span><span class="card-desc">Tiket langsung setelah verifikasi email UB</span></div><div class="card-radio-indicator" aria-hidden="true"><span class="radio-circle"></span></div></a>
+                    <a href="{{ url('/daftar').'?type=civitas_ub' }}"
+                       class="category-card {{ $selectedType === 'civitas_ub' ? 'active' : '' }}"
+                       data-category="civitas_ub"
+                       role="tab"
+                       @if($selectedType === 'civitas_ub') aria-current="page" aria-selected="true" @else aria-selected="false" @endif>
+                        <div class="card-icon-badge" aria-hidden="true">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="18" height="14" x="3" y="5" rx="2"/>
+                                <circle cx="9" cy="12" r="2"/>
+                                <path d="M15 10h2"/>
+                                <path d="M15 14h2"/>
+                                <path d="M6.5 16.5c.7-1.2 1.6-1.5 2.5-1.5s1.8.3 2.5 1.5"/>
+                            </svg>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">Civitas UB</span>
+                            <span class="card-desc">Tiket langsung setelah verifikasi email UB</span>
+                        </div>
+                        <div class="card-radio-indicator" aria-hidden="true">
+                            <span class="radio-circle"></span>
+                        </div>
+                    </a>
 
                     <a href="{{ url('/daftar').'?type=alumni' }}"
                        class="category-card {{ $selectedType === 'alumni' ? 'active' : '' }}"
@@ -542,7 +563,52 @@
                 </div>
             </div>
 
-            <div id="panel-civitas_ub" class="category-panel {{ $selectedType === 'civitas_ub' ? 'panel-visible' : 'panel-hidden' }}"><div class="lookup-card"><div class="lookup-card-header"><span class="lookup-badge">Pendaftaran Civitas UB</span><p class="lookup-prompt">Tiket peserta langsung dikirim setelah verifikasi OTP email UB.</p></div><form method="post" action="{{ url('/daftar/civitas/otp') }}" class="modern-form">@csrf<div class="form-group"><label for="civitas-name" class="form-label">Nama lengkap</label><input id="civitas-name" name="name" value="{{ old('name') }}" required maxlength="150" autocomplete="name"></div><div class="form-group"><label for="civitas-email" class="form-label">Email UB</label><input type="email" id="civitas-email" name="email" value="{{ old('email') }}" required placeholder="nama@ub.ac.id atau nama@student.ub.ac.id" autocomplete="email"><small class="form-hint">Hanya @ub.ac.id atau @student.ub.ac.id.</small></div><div class="form-group"><label for="civitas-phone" class="form-label">Nomor HP / WhatsApp</label><input type="tel" id="civitas-phone" name="phone" value="{{ old('phone') }}" required autocomplete="tel" placeholder="081234567890"></div><button type="submit" class="btn-primary btn-block">Kirim OTP</button></form></div></div>
+            <!-- Panel for Civitas UB -->
+            <div id="panel-civitas_ub" class="category-panel {{ $selectedType === 'civitas_ub' ? 'panel-visible' : 'panel-hidden' }}">
+                <div class="lookup-card">
+                    <div class="lookup-card-header">
+                        <div class="lookup-badge-wrap">
+                            <span class="lookup-badge">Pendaftaran Civitas UB</span>
+                        </div>
+                        <p class="lookup-prompt">Tiket peserta langsung dikirim ke email Anda setelah verifikasi kode OTP email UB.</p>
+                    </div>
+
+                    <form method="post" action="{{ url('/daftar/civitas/otp') }}" class="modern-form lookup-form">
+                        @csrf
+                        <div class="form-group">
+                            <label for="civitas-name" class="form-label">
+                                <span>Nama lengkap</span>
+                                <span class="label-badge">Wajib</span>
+                            </label>
+                            <input id="civitas-name" name="name" value="{{ old('name') }}" required maxlength="150" autocomplete="name" placeholder="Masukkan nama lengkap Anda">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="civitas-email" class="form-label">
+                                <span>Email UB</span>
+                                <span class="label-badge">@ub.ac.id / @student.ub.ac.id</span>
+                            </label>
+                            <input type="email" id="civitas-email" name="email" value="{{ old('email') }}" required placeholder="nama@ub.ac.id atau nama@student.ub.ac.id" autocomplete="email">
+                            <small class="form-hint">Khusus email resmi Universitas Brawijaya (@ub.ac.id atau @student.ub.ac.id).</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="civitas-phone" class="form-label">
+                                <span>Nomor HP / WhatsApp</span>
+                                <span class="label-badge">Aktif</span>
+                            </label>
+                            <input type="tel" id="civitas-phone" name="phone" value="{{ old('phone') }}" required autocomplete="tel" placeholder="081234567890">
+                        </div>
+
+                        <button type="submit" class="btn-primary btn-block btn-lookup">
+                            <span>Kirim OTP</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
 
             <!-- Panel for Alumni -->
             <div id="panel-alumni" class="category-panel {{ $selectedType === 'alumni' ? 'panel-visible' : 'panel-hidden' }}">
