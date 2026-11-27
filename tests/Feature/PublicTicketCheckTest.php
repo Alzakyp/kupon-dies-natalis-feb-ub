@@ -18,7 +18,7 @@ class PublicTicketCheckTest extends TestCase {
   $b=Batch::create(['name'=>'Check','active'=>true,'expires_at'=>now()->addDay()]);
   $c=$b->coupons()->create(['code'=>'CHECK-1']);
   $t=Ticket::create(['number'=>'FEB65-CHECK','barcode'=>str_repeat('q',48),'email'=>'check@example.com','phone'=>'6281212345678','coupon_id'=>$c->id]);
-  $this->get('/cek-tiket')->assertOk()->assertSee('Cek QR tiket');
+  $this->get('/cek-tiket')->assertOk()->assertSee('Password petugas')->assertDontSee('id="public-ticket-barcode"', false);
   $this->post('/cek-tiket/login',['password'=>'febub2026'])->assertRedirect('/cek-tiket');
   $this->post('/cek-tiket',['barcode'=>$t->barcode])->assertOk()->assertSee('check@example.com')->assertSee('Mahasiswa Aktif')->assertDontSee('FEB65-CHECK');
   $this->assertNull($t->fresh()->checked_in_at);

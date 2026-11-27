@@ -2,11 +2,13 @@
 <section class="auth-shell">
 <p class="eyebrow">Validasi peserta</p><h1>Cek QR tiket</h1>
 <p>Scan QR dari email peserta. Kolom akan tetap fokus untuk pemindaian berikutnya.</p>
-@if(!$scannerAuthenticated)<form method="post" action="{{ url('/cek-tiket/login') }}">@csrf<label>Password petugas<input type="password" name="password" required autofocus></label><button>Masuk</button></form>@else<p class="notice success">Mode scan aktif selama 6 jam.</p>@endif
+@if(!$scannerAuthenticated)
+<form method="post" action="{{ url('/cek-tiket/login') }}">@csrf<label>Password petugas<input type="password" name="password" required autofocus></label><button>Masuk</button></form>
+@else
+<p class="notice success">Mode scan aktif selama 6 jam.</p>
 @if(session('success'))<p class="notice success" role="status">{{ session('success') }}</p>@endif
-<form method="post" action="{{ url('/cek-tiket') }}">@csrf
-<label>Kode QR tiket<input id="public-ticket-barcode" name="barcode" autofocus required autocomplete="off" spellcheck="false"></label>
-<button>Cek data peserta</button></form>
+<form method="post" action="{{ url('/cek-tiket') }}">@csrf<label>Kode QR tiket<input id="public-ticket-barcode" name="barcode" autofocus required autocomplete="off" spellcheck="false"></label><button>Cek data peserta</button></form>
+@endif
 @if(isset($ticket))
 <div class="summary-card" role="status">
 <div><small>Nama</small><p>{{ $ticket->studentRegistry?->name ?? data_get($ticket->manual_identity, 'name', '—') }}</p></div>
