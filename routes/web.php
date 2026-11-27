@@ -14,6 +14,7 @@ Route::post('/daftar/otp/resend', [RegistrationController::class, 'resendOtp'])-
 Route::post('/daftar', [RegistrationController::class, 'complete']);
 Route::get('/cek-tiket', [TicketCheckController::class, 'form']);
 Route::post('/cek-tiket', [TicketCheckController::class, 'lookup'])->middleware('throttle:20,1');
+Route::post('/cek-tiket/check-in', [TicketCheckController::class, 'checkIn'])->middleware('throttle:20,1');
 Route::get('/monitoring', [MonitoringController::class, 'dashboard']);
 Route::post('/monitoring', [MonitoringController::class, 'authenticate'])->middleware('throttle:5,1');
 Route::post('/monitoring/logout', [MonitoringController::class, 'logout']);

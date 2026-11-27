@@ -200,6 +200,7 @@
                         <th style="width: 18%;">Kontak</th>
                         <th style="width: 10%;">Status OTP</th>
                         <th style="width: 10%;">Status Email</th>
+                        <th>Status Scan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -215,11 +216,7 @@
                                 <span class="nim-pill">{{ $ticket->nim }}</span>
                             </td>
                             <td>
-                                @if($ticket->registration_type === 'alumni')
-                                    <span class="category-pill pill-alumni">Alumni</span>
-                                @else
-                                    <span class="category-pill pill-student">Mahasiswa Aktif</span>
-                                @endif
+                                @if($ticket->registration_type === 'alumni')<span class="category-pill pill-alumni">Alumni FEB UB</span>@elseif($ticket->registration_type === 'civitas_ub')<span class="category-pill pill-student">Civitas UB</span>@else<span class="category-pill pill-student">Mahasiswa Aktif FEB UB</span>@endif
                             </td>
                             <td>
                                 <span class="prodi-name">{{ $ticket->study_program }}</span>
@@ -256,10 +253,11 @@
                                     </span>
                                 @endif
                             </td>
+                            <td>@if(!$ticket->verified)<span>—</span>@elseif($ticket->checked_in_at)<span class="status-pill-badge pill-verified">Sudah dipindai</span><small class="mail-date">{{ $ticket->checked_in_at->timezone('Asia/Jakarta')->format('d M H:i') }}</small>@else<span class="status-pill-badge">Belum dipindai</span>@endif</td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="empty-table-state">
+                            <td colspan="9" class="empty-table-state">
                                 <div class="empty-wrap">
                                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                         <circle cx="11" cy="11" r="8"/>

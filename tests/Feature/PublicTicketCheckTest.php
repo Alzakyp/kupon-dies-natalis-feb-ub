@@ -6,6 +6,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 class PublicTicketCheckTest extends TestCase {
  use RefreshDatabase;
+ public function test_check_in_requires_password_and_marks_ticket_once(): void {
+  $t=Ticket::create(['number'=>'FEB65-SCAN','barcode'=>str_repeat('s',48),'email'=>'scan@example.com','phone'=>'6281212345679']);
+  $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode])->assertForbidden();
+  $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode,'password'=>'febub2026'])->assertSessionHas('success');
+  $this->assertNotNull($t->fresh()->checked_in_at);
+  $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode,'password'=>'febub2026'])->assertSessionHasErrors('barcode');
+ }
  public function test_public_ticket_check_is_read_only(): void {
   $b=Batch::create(['name'=>'Check','active'=>true,'expires_at'=>now()->addDay()]);
   $c=$b->coupons()->create(['code'=>'CHECK-1']);

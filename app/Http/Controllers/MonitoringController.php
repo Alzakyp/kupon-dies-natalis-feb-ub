@@ -51,7 +51,7 @@ class MonitoringController extends Controller
             'study_program' => $row->studentRegistry?->study_program ?? data_get($row->manual_identity, 'study_program', '—'),
             'email' => $row->email, 'phone' => $row->phone, 'verified' => $verified,
             'emailed_at' => $verified ? $row->emailed_at : null, 'otp_expires_at' => $verified ? null : $row->otp_expires_at,
-            'created_at' => $row->created_at,
+            'checked_in_at' => $verified ? $row->checked_in_at : null, 'created_at' => $row->created_at,
         ];
     }
 
