@@ -87,6 +87,10 @@ class RegistrationController extends Controller
     {
         $this->open();
         $data = $request->validate(['name' => 'required|string|max:150', 'email' => 'required|email|max:254', 'phone' => 'required|string|max:30']);
+        $email = RegistrationService::email($data['email']);
+        if (Ticket::where('email', $email)->exists() || PendingRegistration::where('email', $email)->exists()) {
+            throw ValidationException::withMessages(['email' => 'Email sudah digunakan untuk pendaftaran. Jika menunggu OTP, gunakan halaman OTP atau hubungi PSIK FEB UB.']);
+        }
         $key = 'civitas:'.$request->ip();
         if (RateLimiter::tooManyAttempts($key, 5)) throw ValidationException::withMessages(['email' => 'Terlalu banyak permintaan. Coba lagi nanti.']);
         RateLimiter::hit($key, 600);

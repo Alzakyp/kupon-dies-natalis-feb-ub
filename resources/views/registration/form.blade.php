@@ -187,6 +187,8 @@
             </div>
             <p class="notice error">Pendaftaran belum dibuka.</p>
         </div>
+    @elseif(!$available)
+        <div class="empty-state-notice"><p class="notice error">Kuota pendaftaran 6.000 peserta telah penuh.</p></div>
     @elseif(session('existing_registration'))
         @php
             $registered = session('existing_registration');

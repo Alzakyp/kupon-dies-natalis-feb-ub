@@ -17,6 +17,7 @@ use Illuminate\Validation\ValidationException;
 
 class RegistrationService
 {
+    public const MAX_TICKETS = 6000;
     public static function email(string $email): string { return Str::lower(trim($email)); }
 
     public static function phone(string $phone): string
@@ -28,10 +29,11 @@ class RegistrationService
         return $number;
     }
 
-    public static function available(): bool { return true; }
+    public static function available(): bool { return Ticket::count() < self::MAX_TICKETS; }
 
     public function requestOtp(string $email, string $phone, ?int $registryId = null, ?string $registrationType = null, ?array $identity = null): PendingRegistration
     {
+        if (!self::available()) throw ValidationException::withMessages(['email' => 'Kuota pendaftaran telah penuh.']);
         $email = self::email($email);
         $phone = self::phone($phone);
         if (!$registrationType || ($registrationType !== 'civitas_ub' && !$registryId && !$identity)) throw ValidationException::withMessages(['nim' => 'Validasi data terlebih dahulu.']);
@@ -72,6 +74,8 @@ class RegistrationService
     {
         $ticket = DB::transaction(function () use ($pendingId, $otp) {
             $pending = PendingRegistration::lockForUpdate()->findOrFail($pendingId);
+            DB::table('registration_quota_controls')->where('id', 1)->lockForUpdate()->first();
+            if (Ticket::count() >= self::MAX_TICKETS) throw ValidationException::withMessages(['otp' => 'Kuota pendaftaran telah penuh.']);
             $registry = $pending->student_registry_id ? StudentRegistry::lockForUpdate()->find($pending->student_registry_id) : null;
             if (!$registry && !$pending->manual_identity) throw ValidationException::withMessages(['nim' => 'Data identitas tidak valid.']);
             if ($registry && ($registry->registration_type !== $pending->registration_type || Ticket::where('student_registry_id', $registry->id)->exists()))
