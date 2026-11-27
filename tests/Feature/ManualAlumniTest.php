@@ -35,6 +35,7 @@ class ManualAlumniTest extends TestCase
         $ticket=Ticket::firstOrFail();
         $this->assertSame('999123',$ticket->nim);
         $this->assertNull($ticket->student_registry_id);
+        $this->post('/cek-tiket/login',['password'=>'febub2026']);
         $this->post('/cek-tiket',['barcode'=>$ticket->barcode])->assertSee('Alumni Manual')->assertSee('Akuntansi');
         $this->post('/daftar/lookup',['type'=>'alumni','nim'=>'999123'])->assertRedirect();
         $this->post('/daftar/otp',array_replace($contact,['email'=>'other@example.com','phone'=>'081234567892']))->assertSessionHasErrors('nim');

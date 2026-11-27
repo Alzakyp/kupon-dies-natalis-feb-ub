@@ -8,8 +8,9 @@ class PublicTicketCheckTest extends TestCase {
  use RefreshDatabase;
  public function test_check_in_requires_password_and_marks_ticket_once(): void {
   $t=Ticket::create(['number'=>'FEB65-SCAN','barcode'=>str_repeat('s',48),'email'=>'scan@example.com','phone'=>'6281212345679']);
-  $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode])->assertForbidden();
-  $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode,'password'=>'febub2026'])->assertSessionHas('success');
+  $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode])->assertRedirect('/cek-tiket');
+  $this->post('/cek-tiket/login',['password'=>'febub2026'])->assertRedirect('/cek-tiket');
+  $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode])->assertSessionHas('success');
   $this->assertNotNull($t->fresh()->checked_in_at);
   $this->post('/cek-tiket/check-in',['barcode'=>$t->barcode,'password'=>'febub2026'])->assertSessionHasErrors('barcode');
  }
@@ -18,7 +19,8 @@ class PublicTicketCheckTest extends TestCase {
   $c=$b->coupons()->create(['code'=>'CHECK-1']);
   $t=Ticket::create(['number'=>'FEB65-CHECK','barcode'=>str_repeat('q',48),'email'=>'check@example.com','phone'=>'6281212345678','coupon_id'=>$c->id]);
   $this->get('/cek-tiket')->assertOk()->assertSee('Cek QR tiket');
-  $this->post('/cek-tiket',['barcode'=>$t->barcode])->assertOk()->assertSee('check@example.com')->assertSee('Mahasiswa Aktif')->assertDontSee('FEB65-CHECK')->assertDontSee('Status check-in');
+  $this->post('/cek-tiket/login',['password'=>'febub2026'])->assertRedirect('/cek-tiket');
+  $this->post('/cek-tiket',['barcode'=>$t->barcode])->assertOk()->assertSee('check@example.com')->assertSee('Mahasiswa Aktif')->assertDontSee('FEB65-CHECK');
   $this->assertNull($t->fresh()->checked_in_at);
  }
 }
